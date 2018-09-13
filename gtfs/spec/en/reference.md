@@ -28,9 +28,28 @@ This document explains the types of files that comprise a GTFS transit feed and 
 
 This section defines terms that are used throughout this document.
 
-* **Field required** - The field column must be included in your feed, and a value must be provided for each record. Some required fields permit an empty string as a value. To enter an empty string, just omit any text between the commas for that field. Note that 0 is interpreted as "a string of value 0", and is not an empty string. Please see the field definition for details.
-* **Field optional** - The field column may be omitted from your feed. If you choose to include an optional column, each record in your feed must have a value for that column. You may include an empty string as a value for records that do not have values for the column. Some optional fields permit an empty string as a value. To enter an empty string, just omit any text between the commas for that field. Note that 0 is interpreted as "a string of value 0", and is not an empty string.
-* **Dataset unique** - The field contains a value that maps to a single distinct entity within the column. For example, if a route is assigned the ID **1A**, then no other route may use that route ID. However, you may assign the ID **1A** to a location because locations are a different type of entity than routes.
+* **Field designations**
+    -   **Field required** - The field column must be included, and a value must be provided for each row. Some required fields permit an empty string (see below) as a value.
+	-	**Conditionally required** - The field must be provided and defined in specified circumstances in order to support consuming application features.
+	- 	**Field optional** - The field column may be omitted. If you choose to include an optional column, each row must have a value for that column. You may include an empty string as a value for rows that do not have values for the column. Some optional fields permit an empty string (see below) as a value.
+	- 	**Dataset unique** - The field contains a value that maps to a single distinct row within the column. For example, if a route is assigned the ID **1A**, then no other route may use that route ID. However, you may assign the ID **1A** to a location because locations are a different type of row than routes.
+	- 	**Primary key** - The field contains a value that uniquely identifies rows within a table. These fields can contain any allowed unicode characters (see file requirements). These values are not intended to be shown in customer-facing applications.
+* **Empty string** - To enter an empty string, just omit any text between the commas for that field. Note that 0 is interpreted as "a string of value 0", and is not an empty string.
+* **Foreign key** - The field references a **primary key** from another file. References are denoted as _filename.fieldname_
+* **Data types**
+	-	**Boolean** - A value that must be either 0 (False) or 1 (True)
+	-	**Integer** - A whole number, including 0.
+	-	**Float (Decimal)** - A number that may also include decimal values.
+	-	**Text string** - A string of UTF-8 Unicode characters. 
+	-	**Enum** - A set of predefined constants (i.e., enumerations) for a specific field.
+	-	**Date** - A value formatted as YYYYMMDD.
+	-	**Time** -  A value formatted as HH:MM:SS (H:MM:SS is also accepted, if the hour begins with 0.) Time is measured from "noon minus 12h" (effectively midnight, except for days on which daylight savings time changes occur) at the beginning of the service day. For times occurring after midnight on the service day, enter the time as a value greater than 24:00:00 in HH:MM:SS local time for the day on which the trip schedule begins.
+	-	**Timezone** - Refer to http://en.wikipedia.org/wiki/List_of_tz_zones for a list of valid values. Timezone names never contain the space character but may contain an underscore. 
+	-	**URL** - A URL provided in a GTFS dataset must be fully qualified URL that includes http:// or https://, and any special characters in the URL must be correctly escaped. See http://www.w3.org/Addressing/URL/4_URI_Recommentations.html for a description of how to create fully qualified URL values.
+	-	**Hexadecimal number** - A six character string used to represent color. No leading "#" is used. Refer to https://htmlcolorcodes.com/ to generate a valid value.
+	-	**Language** - 	Refer to https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers for a list of valid values. As specified by IETF BCP 47.
+	-	**Currency value** - A **Float (Decimal)** value with no more than four digits after the decimal.
+	-	**Currency code** - Refer to https://en.wikipedia.org/wiki/ISO_4217 for a list of valid values. Must be three letters long with no space characters or special characters.
 
 ## Feed Files
 
