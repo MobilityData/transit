@@ -29,11 +29,11 @@ Delay values (including both a [`StopTimeEvent.delay`](reference.md#message-stop
 
 Delay values less than `0` (i.e., vehicles running early) must be propagated across trips in the same block if there is no layover between Trip A and Trip B. If there is difference between the Trip A final stop `arrival_time` and the Trip B first stop `departure_time`, then consumers must assume that the vehicle will hold after finishing Trip A and will start Trip B on time. Producers must indicate if a vehicles is departing early on Trip B by explicitly providing a [StopTimeEvent](reference.md#StopTimeEvent) for Trip B while Trip A is being served by the vehicle.
 
-**Example 1**
+**Example 1 - Simple propagation within trip**
 
 For a trip with 20 stops, a [StopTimeUpdate](reference.md#StopTimeUpdate) with arrival delay and departure delay of 0 ([StopTimeEvents](reference.md#StopTimeEvent)) for stop_sequence of the current stop means that the trip is exactly on time.
 
-**Example 2**
+**Example 2 - Propagating multiple predictions within a trip**
 
 For the same trip instance, three [StopTimeUpdates](reference.md#StopTimeUpdate) are provided:
 
@@ -48,7 +48,7 @@ This will be interpreted as:
 *   stop_sequences 8,9 have delay of 60 seconds.
 *   stop_sequences 10,..,20 have unknown delay.
 
-**Example 3**
+**Example 3 - Propagating delays across trips in same block - No layover**
 
 Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
 
@@ -64,7 +64,7 @@ This will be interpreted as:
 
 * Trip B stop_sequence 1 has a delay of 300 seconds
 
-**Example 4**
+**Example 4 - Propagating delays across trips in same block - 5 min layover with matching delay**
 
 Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
 
@@ -80,7 +80,7 @@ This will be interpreted as:
 
 * Trip B stop_sequence 1 has a delay of 0 seconds (trip is on time, as the layover time will be entirely skipped)
 
-**Example 5**
+**Example 5 - Propagating delays across trips in same block - Layover less than delay**
 
 Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
 
@@ -96,7 +96,7 @@ This will be interpreted as:
 
 * Trip B stop_sequence 1 has a delay of 100 seconds (trip is still late, but the layover absorbed 200 seconds of the delay)
 
-**Example 6**
+**Example 6 - Propagating delays across trips in same block - Layover greater than delay**
 
 Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
 
@@ -112,7 +112,7 @@ This will be interpreted as:
 
 * Trip B stop_sequence 1 has a delay of 0 seconds (trip is on time, as the layover time will absorb the delay and the vehicle will still have 100 seconds of the scheduled layover time remaining)
 
-**Example 7**
+**Example 7 - Propagating delays across trips in same block - Trip B delay provided**
 
 Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
 
@@ -129,6 +129,56 @@ Trip A final stop `arrival_time` and the Trip B first stop `departure_time` diff
 This will be interpreted as:
 
 * Trip B stop_sequence 1 has a delay of 300 seconds (layover time will not be skipped because the producer explicitly provided the delay for Trip B)
+
+**Example 8 - Propagating early arrivals across trips in same block - No layover**
+
+Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
+
+Trip A has a single [StopTimeUpdates](reference.md#StopTimeUpdate):
+
+*   delay of -300 seconds (5 min early)
+
+Trip B has no [StopTimeUpdates](reference.md#StopTimeUpdate).
+
+Trip A final stop `arrival_time` and the Trip B first stop `departure_time` are the same.
+
+This will be interpreted as:
+
+* Trip B stop_sequence 1 has a delay of -300 seconds (assume vehicle will *not* hold to re-align with schedule)
+
+**Example 9 - Propagating early arrivals across trips in same block - Layover**
+
+Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
+
+Trip A has a single [StopTimeUpdates](reference.md#StopTimeUpdate):
+
+*   delay of -300 seconds (5 min early)
+
+Trip B has no [StopTimeUpdates](reference.md#StopTimeUpdate).
+
+Trip A final stop `arrival_time` and the Trip B first stop `departure_time` differ by 200 seconds.
+
+This will be interpreted as:
+
+* Trip B stop_sequence 1 has a delay of 0 seconds, or on time (assumed vehicle will hold to re-align with schedule)
+
+**Example 10 - Propagating early arrivals across trips in same block - Layover, but Trip B delay provided**
+
+Trip A and Trip B belong to the same block (specified in [GTFS trips.txt](/gtfs/spec/en/reference.md#tripstxt) via `block_id`).
+
+Trip A has a single [StopTimeUpdates](reference.md#StopTimeUpdate):
+
+*   delay of -300 seconds (5 min early)
+
+Trip B has a single [StopTimeUpdates](reference.md#StopTimeUpdate):
+
+*   delay of -300 seconds  (5 min early)
+
+Trip A final stop `arrival_time` and the Trip B first stop `departure_time` differ by 200 seconds.
+
+This will be interpreted as:
+
+* Trip B stop_sequence 1 has a delay of -300 seconds (an explicit Trip B delay always overrides any propagation from a previous trip in the block)
 
 ### Trip Descriptor
 
