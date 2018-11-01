@@ -35,7 +35,7 @@ For the same trip instance, three [StopTimeUpdates](reference.md#StopTimeUpdate)
 
 *   delay of 300 seconds for stop_sequence 3
 *   delay of 60 seconds for stop_sequence 8
-*   delay of unspecified duration for stop_sequence 10
+*   delay of unspecified duration for stop_sequence 10 (this is done by setting [schedule_relationship](https://github.com/MobilityData/transit/blob/master/gtfs-realtime/spec/en/reference.md#enum-schedulerelationship):NO_DATA
 
 This will be interpreted as:
 
