@@ -14,7 +14,7 @@ If no time is given, we will display the alert for as long as it is in the feed.
 
 ### Entity Selector
 
-Entity selector allows you specify exactly which parts of the network this alert affects, so that we can display only the most appropriate alerts to the user.
+Entity selector allows you specify exactly which parts of the network this alert affects, so that we can display only the most appropriate alerts to the user. You may include multiple entity selectors for alerts which affect multiple entities.
 
 Entities are selected using their GTFS identifiers, and you can select any of the following:
 
