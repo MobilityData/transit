@@ -54,3 +54,4 @@ What effect does this problem have on the specified entity? You may specify one 
 *   Stop moved
 *   Other effect (not represented by any of these options)
 *   Unknown effect
+*   No effect: the alert provides information to consumers but does not affect the operation.
