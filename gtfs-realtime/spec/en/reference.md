@@ -60,8 +60,6 @@ Fields labeled as **experimental** are subject to change and not yet formally ad
         *   [Alert](#message-alert)
             *   [TimeRange](#message-timerange)
             *   [EntitySelector](#message-entityselector)
-                *   [TripDescriptor](#message-tripdescriptor)
-                    *   [ScheduleRelationship](#enum-schedulerelationship-1)
             *   [Cause](#enum-cause)
             *   [Effect](#enum-effect)
             *   [TranslatedString](#message-translatedstring)
@@ -381,7 +379,8 @@ A selector for an entity in a GTFS feed. The values of the fields should corresp
 | **agency_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.   
 | **route_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
 | **route_type** | [int32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
-| **trip** | [TripDescriptor](#message-tripdescriptor) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
+| **direction_id** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
+| **trip_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
 | **stop_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
 
 ## _message_ TranslatedString

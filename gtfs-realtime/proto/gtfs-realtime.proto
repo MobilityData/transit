@@ -594,8 +594,9 @@ message EntitySelector {
   optional string route_id = 2;
   // corresponds to route_type in GTFS.
   optional int32 route_type = 3;
-  optional TripDescriptor trip = 4;
-  optional string stop_id = 5;
+  optional uint32 direction_id = 4;
+  optional string trip_id = 5;
+  optional string stop_id = 6;
 
   // The extensions namespace allows 3rd-party developers to extend the
   // GTFS Realtime Specification in order to add and evaluate new features and
