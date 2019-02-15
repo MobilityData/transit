@@ -372,16 +372,20 @@ Identification information for the vehicle performing the trip.
 
 A selector for an entity in a GTFS feed. The values of the fields should correspond to the appropriate fields in the GTFS feed. At least one specifier must be given. If several are given, they should be interpreted as being joined by the logical `AND` operator.  Additionally, the combination of specifiers must match the corresponding information in the GTFS feed.  In other words, in order for an alert to apply to an entity in GTFS it must match all of the provided EntitySelector fields.  For example, an EntitySelector that includes the fields `route_id: "5"` and `route_type: "3"` applies only to the `route_id: "5"` bus - it does not apply to any other routes of `route_type: "3"`.  If a producer wants an alert to apply to `route_id: "5"` as well as `route_type: "3"`, it should provide two separate EntitySelectors, one referencing `route_id: "5"` and another referencing `route_type: "3"`.
 
+At least one specifier must be given - all fields in an EntitySelector cannot be empty.
+
 #### Fields
 
 | _**Field Name**_ | _**Type**_ | _**Required**_ | _**Cardinality**_ | _**Description**_ |
 |------------------|------------|----------------|-------------------|-------------------|
-| **agency_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.   
-| **route_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
-| **route_type** | [int32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
-| **direction_id** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
-| **trip_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
-| **stop_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | At least one specifier must be given - all fields in an EntitySelector cannot be empty.
+| **agency_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The agency_id from the GTFS feed that this selector refers to.
+| **route_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The route_id from the GTFS that this selector refers to.
+| **route_type** | [int32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The route_type from the GTFS that this selector refers to.
+| **trip_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The trip_id from the GTFS feed that this selector refers to. For non frequency-based trips (trips not defined in GTFS frequencies.txt), this field is enough to uniquely identify the trip. For frequency-based trips defined in GTFS frequencies.txt, trip_id, start_time, and start_date are all required. For scheduled-based trips (trips not defined in GTFS frequencies.txt).
+| **stop_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The stop_id from the GTFS feed that this selector refers to.
+| **trip_direction_id** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | The direction_id from the GTFS feed trips.txt file, indicating the direction of travel for trips this selector refers to.
+| **trip_start_time** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | The initially scheduled start time of this trip instance. When the trip_id correponds to a frequency-based trip defined in GTFS frequencies.txt, trip_start_time should be specified in order to identify a trip.
+| **trip_start_date** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The start date of this trip instance in YYYYMMDD format. For scheduled trips (trips not defined in GTFS frequencies.txt), this field must be provided to disambiguate trips that are so late as to collide with a scheduled trip on a next day. For example, for a train that departs 8:00 and 20:00 every day, and is 12 hours late, there would be two distinct trips on the same time. This field can be provided but is not mandatory for schedules in which such collisions are impossible - for example, a service running on hourly schedule where a vehicle that is one hour late is not considered to be related to schedule anymore. This field is required for frequency-based trips defined in GTFS frequencies.txt. 
 
 ## _message_ TranslatedString
 
