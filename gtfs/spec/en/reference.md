@@ -54,7 +54,7 @@ This section defines terms that are used throughout this document.
 - **Non-negative Integer** - A integer greater than or equal to 0.
 - **Phone number** - A phone number.
 - **Time** - Time in the HH:MM:SS format (H:MM:SS is also accepted). The time is measured from "noon minus 12h" of the service day (effectively midnight except for days on which daylight savings time changes occur). For times occurring after midnight, enter the time as a value greater than 24:00:00 in HH:MM:SS local time for the day on which the trip schedule begins. <br> *Example: `14:30:00` for 2:30PM or `25:35:00` for 1:35AM on the next day.*
-- **Text** - A string of UTF-8 characters, which is aimed to be displayed and which must therefore be human readable.
+- **Text** - A string of UTF-8 characters, which is aimed to be displayed and which must therefore be human readable. All customer-facing text (including stop names, route names, and headsigns) should use Mixed Case (not ALL CAPS), following local conventions for capitalization of place names on displays capable of displaying lower case characters. Avoid use of abbreviations throughout the feed for names and other text (e.g. St. for Street) unless a location is called by its abbreviated name (e.g. “JFK Airport”).
 - **Timezone** - TZ timezone from the [https://www.iana.org/time-zones](https://www.iana.org/time-zones). Timezone names never contain the space character but may contain an underscore. Refer to [http://en.wikipedia.org/wiki/List\_of\_tz\_zones](http://en.wikipedia.org/wiki/List\_of\_tz\_zones) for a list of valid values. <br> *Example: `Asia/Tokyo`, `America/Los_Angeles` or `Africa/Cairo`.*
 - **URL** - A fully qualified URL that includes http:// or https://, and any special characters in the URL must be correctly escaped. See the following [http://www.w3.org/Addressing/URL/4\_URI\_Recommentations.html](http://www.w3.org/Addressing/URL/4\_URI\_Recommentations.html) for a description of how to create fully qualified URL values.
 
@@ -104,7 +104,7 @@ File: **Required**
 
 |  Field Name | Type | Required | Description |
 |  ------ | ------ | ------ | ------ |
-|  `agency_id` | ID | **Conditionally Required** | Identifies a transit brand which is often synonymous with a transit agency. Note that in some cases, such as when a single agency operates multiple separate services, agencies and brands are distinct. This document uses the term "agency" in place of "brand". A dataset may contain data from multiple agencies. This field is required when the dataset contains data for multiple transit agencies, otherwise it is optional. |
+|  `agency_id` | ID | **Conditionally Required** | Identifies a transit brand which is often synonymous with a transit agency. Note that in some cases, such as when a single agency operates multiple separate services, agencies and brands are distinct. This document uses the term "agency" in place of "brand". A dataset may contain data from multiple agencies. This field is required when the dataset contains data for multiple transit agencies, otherwise it is optional. <br><br> Maintain persistent identifiers for `agency_id` across data iterations whenever possible.|
 |  `agency_name` | Text | **Required** | Full name of the transit agency. |
 |  `agency_url` | URL | **Required** | URL of the transit agency. |
 |  `agency_timezone` | Timezone | **Required** | Timezone where the transit agency is located. If multiple agencies are specified in the dataset, each must have the same `agency_timezone`. |
@@ -119,18 +119,29 @@ File: **Required**
 
 |  Field Name | Type | Required | Description | 
 |  ------ | ------ | ------ | ------ |
-|  `stop_id` | ID | **Required** | Identifies a stop, station, or station entrance. The term "station entrance" refers to both station entrances and station exits. Stops, stations or station entrances are collectively referred to as locations. Multiple routes may use the same stop. | 
-|  `stop_code` | Text | Optional | Short text or a number that identifies the location for riders. These codes are often used in phone-based transit information systems or printed on signage to make it easier for riders to get information for a particular location. The `stop_code` can be the same as `stop_id` if it is public facing. This field should be left empty for locations without a code presented to riders. | 
-|  `stop_name` | Text | **Required** | Name of the location. Use a name that people will understand in the local and tourist vernacular. | 
+|  `stop_id` | ID | **Required** | Identifies a stop, station, or station entrance. `stop_id` is an internal ID, not intended to be shown to passengers. The term "station entrance" refers to both station entrances and station exits. Stops, stations or station entrances are collectively referred to as locations. Multiple routes may use the same stop. <br><br> Maintain persistent identifiers for `stop_id` across data iterations whenever possible. Stops that are in different physical locations (i.e., different designated precise locations for vehicles on designated routes to stop, potentially distinguished by signs, shelters, or other such public information, located on different street corners or representing different boarding facility such as a platform or bus bay, even if nearby each other) should have different `stop_id` values. | 
+|  `stop_code` | Text | Optional | Short text or a number that identifies the location for riders. These codes are often used in phone-based transit information systems or printed on signage to make it easier for riders to get information for a particular location. The `stop_code` can be the same as `stop_id` if it is public facing. This field should be included if there are passenger-facing stop numbers or short identifiers. Otherwise it should not be included. | 
+|  `stop_name` | Text | **Required** | Name of the location.  Use a name that people will understand in the local and tourist vernacular. The name should match the agency's public name for the stop. | 
 |  `stop_desc` | Text | Optional | Description of the location that provides useful, quality information. Do not simply duplicate the name of the location. | 
-|  `stop_lat` | Latitude | **Required** | Latitude of the location. | 
-|  `stop_lon` | Longitude | **Required** | Longitude of the location. |  
+|  `stop_lat` | Latitude | **Required** | Latitude of the location. If a stop location is shared across separate data feeds (i.e. two agencies use exactly the same stop/boarding facility), indicate the stop is shared by using the exact same `stop_lat` and `stop_lon` for both stops| 
+|  `stop_lon` | Longitude | **Required** | Longitude of the location. See `stop_lat` for more details. |  
 |  `zone_id` | ID | **Conditionally Required** | Identifies the fare zone for a stop. This field is required if providing fare information using [fare_rules.txt](#fare_rulestxt), otherwise it is optional. If this record represents a station or station entrance, the `zone_id` is ignored. |  
 |  `stop_url` | URL | Optional | URL of a web page about the location. This should be different from the `agency.agency_url` and the `routes.route_url` field values. | 
 |  `location_type` | Enum | Optional | Indicates whether this `stop_id` represents a stop, station, or station entrance/exit (denoted as station entrance in this document). If `location_type` is omitted, all locations are treated as stops. Valid options are: <br><br>`0` or empty - Stop. A location where riders board or disembark from a transit vehicle.<br>`1` - Station. A physical structure or area that contains one or more stop.<br>`2` - Station entrance. A point where riders can enter or exit a station from the street. The record must also specify a parent station by setting `parent_station` equal to the relevant `stop_id`. | 
-|  `parent_station` | ID referencing `stops.stop_id` | Optional | Identifies the station that a stop or station entrance is part of. This station-stop relationship, called a parent-child relationship, can only exist between a station (as the parent) and a stop or station entrance (as the child). These types are defined by location_type. If the stop or station identified in this record does not have a parent, leave `parent_station` empty. A station can never have a parent and a station entrance must always have a parent. |  
+|  `parent_station` | ID referencing `stops.stop_id` | Optional | Identifies the station that a stop or station entrance is part of. This station-stop relationship, called a parent-child relationship, can only exist between a station (as the parent) and a stop or station entrance (as the child). These types are defined by `location_type`. If the stop or station identified in this record does not have a parent, leave `parent_station` empty. A station can never have a parent and a station entrance must always have a parent. |  
 |  `stop_timezone` | Timezone | Optional | Timezone of the location. If the location has a parent station, it inherits the parent station’s timezone instead of applying its own. Stations and parentless stops with empty `stop_timezone` inherit the timezone specified by `agency.agency_timezone`. If `stop_timezone` values are provided, the times in [stop_times.txt](#stop_timetxt) should be entered as the time since midnight in the timezone specified by `agency.agency_timezone`. This ensures that the time values in a trip always increase over the course of a trip, regardless of which timezones the trip crosses. |
 |  `wheelchair_boarding` | Enum | Optional | Indicates whether wheelchair boardings are possible from the location. Valid options are: <br><br>For parentless stops:<br>`0` or empty - No accessibility information for the stop.<br>`1` - Some vehicles at this stop can be boarded by a rider in a wheelchair.<br>`2` - Wheelchair boarding is not possible at this stop. <br><br>For child stops: <br>`0` or empty - Stop will inherit its `wheelchair_boarding` behavior from the parent station, if specified in the parent.<br>`1` - There exists some accessible path from outside the station to the specific stop/platform.<br>`2` - There exists no accessible path from outside the station to the specific stop/platform.<br><br> For station entrances/exits: <br>`0` or empty - Station entrance will inherit its `wheelchair_boarding` behavior from the parent station, if specified for the parent.<br>`1` - Station entrance is wheelchair accessible.<br>`2` - No accessible path from station entrance to stops/platforms. |  
+
+####Example: Parent Station and Child Stop Naming
+
+Parent station and corresponding child stop names should be easily recognizable to riders. The table below gives examples: 
+
+| Parent Station Name | Child Stop Name |
+|----|----|
+| Chicago Union Station | Chicago Union Station Platform 19 |
+| San Francisco Ferry Building Terminal | San Francisco Ferry Building Terminal Gate E |
+| Downtown Transit Center | Downtown Transit Center Bay B |
+
 
 ### routes.txt
 
@@ -138,16 +149,39 @@ File: **Required**
 
 |  Field Name | Type | Required | Description |
 |  ------ | ------ | ------ | ------ |
-|  `route_id` | ID | **Required** | Identifies a route. |
-|  `agency_id` | ID referencing `agency.agency_id` | **Conditionally required** | Agency for the specified route. This field is required when the dataset provides data for routes from more than one agency in [agency.txt](#agency), otherwise it is optional.  |
+|  `route_id` | ID | **Required** | Identifies a route. <br><br> Maintain persistent identifiers for `route_id` across data iterations whenever possible. All trips on a given named route should reference the same `route_id`. Different directions of a route should not be separated into different `route_id` values. |
+|  `agency_id` | ID referencing `agency.agency_id`. | **Conditionally required** | Agency for the specified route. This field is required when the dataset provides data for routes from more than one agency in [agency.txt](#agency), otherwise it is optional. Should be included if the relevant agency is defined in [agency.txt](#agency). |
 |  `route_short_name` | Text | **Conditionally required** | Short name of a route. This will often be a short, abstract identifier like "32", "100X", or "Green" that riders use to identify a route, but which doesn't give any indication of what places the route serves. Either `route_short_name` or `route_long_name` must be specified, or potentially both if appropriate. |
-|  `route_long_name` | Text | **Conditionally required** | Full name of a route. This name is generally more descriptive than the `route_short_name` and often includes the route's destination or stop. Either `route_short_name` or `route_long_name` must be specified, or potentially both if appropriate. |
+|  `route_long_name` | Text | **Conditionally required** | Full name of a route. This name is generally more descriptive than the `route_short_name` and often includes the route's destination or stop. Either `route_short_name` or `route_long_name` must be specified, or potentially both if appropriate. `route_long_name` should not contain the `route_short_name`. |
 |  `route_desc` | Text | Optional | Description of a route that provides useful, quality information. Do not simply duplicate the name of the route. <hr> _Example: "A" trains operate between Inwood-207 St, Manhattan and Far Rockaway-Mott Avenue, Queens at all times. Also from about 6AM until about midnight, additional "A" trains operate between Inwood-207 St and Lefferts Boulevard (trains typically alternate between Lefferts Blvd and Far Rockaway)._ |
 |  `route_type` | Enum | **Required** | Indicates the type of transportation used on a route. Valid options are: <br><br>`0` - Tram, Streetcar, Light rail. Any light rail or street level system within a metropolitan area.<br>`1` - Subway, Metro. Any underground rail system within a metropolitan area.<br>`2` - Rail. Used for intercity or long-distance travel.<br>`3` - Bus. Used for short- and long-distance bus routes.<br>`4` - Ferry. Used for short- and long-distance boat service.<br>`5` - Cable car. Used for street-level cable cars where the cable runs beneath the car.<br>`6` - Gondola, Suspended cable car. Typically used for aerial cable cars where the car is suspended from the cable.<br>`7` - Funicular. Any rail system designed for steep inclines. |
 |  `route_url` | URL | Optional | URL of a web page about the particular route. Should be different from the `agency.agency_url` value. |
 |  `route_color` | Color | Optional | Route color designation that matches public facing material. Defaults to white (`FFFFFF`) when omitted or left empty. The color difference between `route_color` and `route_text_color` should provide sufficient contrast when viewed on a black and white screen. |
 |  `route_text_color` | Color | Optional | Legible color to use for text drawn against a background of `route_color`. Defaults to black (`000000`) when omitted or left empty. The color difference between `route_color` and `route_text_color` should provide sufficient contrast when viewed on a black and white screen. |
 |  `route_sort_order` | Non-negative integer | Optional | Orders the routes in a way which is ideal for presentation to customers. Routes with smaller `route_sort_order` values should be displayed first. |
+
+####Example: Route short name and Route long name
+
+The table below contains real-world examples of `route_short_name` and corresponding `route_long_name`. 
+
+| `route_short_name` | `route_long_name` | Agency |
+|----|----|----|
+| N | Judah | Muni, in San Fransisco|
+| 6 | ML King Jr Blvd | TriMet, in Portland, Or.|
+| 6 | Nation - Étoile | RATP, in Paris France |
+| U2 | Pankow-Ruhleben | BVG, in Berlin, Germany |
+
+
+####Example: Route long name and Service Identity
+
+`route_long_name` should include the full name designation including service identity. The table below has several real-world examples.
+
+|Service Identity | Recommendation | Example |
+|----|----|----|
+| "MAX Light Rail" TriMet, in Portland, Oregon | The `route_long_name` should include the brand (MAX) and the specific route designation | "MAX Red Line" "MAX Blue Line" |
+|"Rapid Ride" ABQ Ride, in Albuquerque, New Mexico | The `route_long_name` should include the brand (Rapid Ride) and the specific route designation | "Rapid Ride Red Line""Rapid Ride Blue Line" |
+ 
+
 
 ### trips.txt
 
@@ -158,9 +192,9 @@ File: **Required**
 |  `route_id` | ID referencing `routes.route_id` | **Required** | Identifies a route. |
 |  `service_id` | ID referencing `calendar.service_id` or `calendar_dates.service_id` | **Required** | Identifies a set of dates when service is available for one or more routes. |
 |  `trip_id` | ID | **Required** | Identifies a trip. |
-|  `trip_headsign` | Text | Optional | Text that appears on signage identifying the trip's destination to riders. Use this field to distinguish between different patterns of service on the same route. If the headsign changes during a trip, `trip_headsign` can be overridden by specifying values for the `stop_times.stop_headsign`. |
+|  `trip_headsign` | Text | Optional | Text that appears on signage identifying the trip's destination to riders. Use this field to distinguish between different patterns of service on the same route. If the headsign changes during a trip, `trip_headsign` can be overridden by specifying values for the `stop_times.stop_headsign`. <br><br> This field should contain destination, direction, and/or other trip designation text shown on the headsign of the vehicle which may be used to distinguish amongst trips in a route. Do not begin a headsign with the words “To” or “Towards”. Do not provide route names (matching `route_short_name` and `route_long_name`) in the `trip_headsign` field. |
 |  `trip_short_name` | Text | Optional | Public facing text used to identify the trip to riders, for instance, to identify train numbers for commuter rail trips. If riders do not commonly rely on trip names, leave this field empty.  A `trip_short_name` value, if provided, should uniquely identify a trip within a service day; it should not be used for destination names or limited/express designations. |
-|  `direction_id` | Enum | Optional | Indicates the direction of travel for a trip. This field is not used in routing; it provides a way to separate trips by direction when publishing time tables. Valid options are: <br><br>`0` - Travel in one direction (e.g. outbound travel).<br>`1` - Travel in the opposite direction (e.g. inbound travel).<hr>*Example: The `trip_headsign` and `direction_id` fields could be used together to assign a name to travel in each direction for a set of trips. A [trips.txt](#tripstxt) file could contain these records for use in time tables:* <br> `trip_id,...,trip_headsign,direction_id` <br> `1234,...,Airport,0` <br> `1505,...,Downtown,1` |
+|  `direction_id` | Enum | Optional | Indicates the direction of travel for a trip. This field is not used in routing; it provides a way to separate trips by direction when publishing time tables. Use values `0` and `1` consistently throughout the dataset. In other words, if `1` is northbound, outbound or counterclockwise on a route, all routes should follow the same convention. Valid options are: <br><br>`0` - Travel in one direction (e.g. outbound travel).<br>`1` - Travel in the opposite direction (e.g. inbound travel).<hr>*Example: The `trip_headsign` and `direction_id` fields could be used together to assign a name to travel in each direction for a set of trips. A [trips.txt](#tripstxt) file could contain these records for use in time tables:* <br> `trip_id,...,trip_headsign,direction_id` <br> `1234,...,Airport,0` <br> `1505,...,Downtown,1` |
 |  `block_id` | ID | Optional | Identifies the block to which the trip belongs. A block consists of a single trip or many sequential trips made using the same vehicle, defined by shared service days and `block_id`. A `block_id` can have trips with different service days, making distinct blocks. See the [example below](#example-showing-blocks-and-service-day) |
 |  `shape_id` | ID referencing `shapes.shape_id` | Optional | Identifies a geospatial shape describing the vehicle travel path for a trip. |
 |  `wheelchair_accessible` | Enum | Optional | Indicates wheelchair accessibility. Valid options are:<br><br>`0` or empty - No accessibility information for the trip.<br>`1` - Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.<br>`2` - No riders in wheelchairs can be accommodated on this trip. |
@@ -183,6 +217,22 @@ Notes on above table:
 * On Friday into Saturday morning, for example, a single vehicle operates `trip_1`, `trip_2`, and `trip_3` (10:00 PM through 12:55 AM). Note that the last trip occurs on Saturday, 12:00 AM to 12:55 AM, but is part of the Friday “service day” because the times are 24:00:00 to 24:55:00.
 * On Monday, Tuesday, Wednesday, and Thursday, a single vehicle operates `trip_1`, `trip_4`, and `trip_5` in a block from 8:00 PM to 10:55 PM.
 
+####Example: Headsigns
+
+Headsign text can follow a number of different conventions. The table below contains examples. 
+
+| Route Description | Recommendation |
+| ---- | ---- |
+| 2A. Destination-only | Provide the terminus destination. e.g. "Transit Center", “Portland City Center”, or “Jantzen Beach” |
+| 2B. Destinations with waypoints	 | \<destination> via \<waypoint> “Highgate via Charing Cross”. If waypoint(s) are removed from the headsign show to passengers after the vehicle passes those waypoints, use `stop_times.stop_headsign` to set an updated headsign. |
+| 2C. Regional placename with local stops | If there will be multiple stops inside the city or borough of destination, use `stop_times.stop_headsign` once reaching the destination city. |
+| 2D. Direction-only | Indicate using terms such as “Northbound”, “Inbound”, “Clockwise,” or similar directions. | 
+| 2E. Direction with destination | \<direction> to \<terminus name> e.g. “Southbound to San Jose” |
+| 2F. Direction with destination and waypoints | \<direction> via \<waypoint> to \<destination> (“Northbound via Charing Cross to Highgate”). | 
+
+
+
+
 ### stop_times.txt
 
 File: **Required**
@@ -190,14 +240,14 @@ File: **Required**
 |  Field Name | Type | Required | Description | 
 |  ------ | ------ | ------ | ------ |
 |  `trip_id` | ID referencing `trips.trip_id` | **Required** | Identifies a trip.  | 
-|  `arrival_time` | Time | **Conditionally required** | Arrival time at a specific stop for a specific trip on a route. If there are not separate times for arrival and departure at a stop, enter the same value for `arrival_time` and `departure_time`. For times occurring after midnight on the service day, enter the time as a value greater than 24:00:00 in HH:MM:SS local time for the day on which the trip schedule begins.<br/><br/>Scheduled stops where the vehicle strictly adheres to the specified arrival and departure times are timepoints. If this stop is not a timepoint, use leave `arrival_time` empty or provide an interpolated time. Further, indicate that interpolated times are provided with `timepoint`=`0`. If interpolated times are indicated with `timepoint`=`0`, then time points must be indicated with `timepoint`=`1`. Provide arrival times for all stops that are time points. An arrival time must be specified for the first and the last stop in a trip. |  
+|  `arrival_time` | Time | **Conditionally required** | Arrival time at a specific stop for a specific trip on a route. If there are not separate times for arrival and departure at a stop, enter the same value for `arrival_time` and `departure_time`. For times occurring after midnight on the service day, enter the time as a value greater than 24:00:00 in HH:MM:SS local time for the day on which the trip schedule begins.<br/><br/>Scheduled stops where the vehicle strictly adheres to the specified arrival and departure times are timepoints. If this stop is not a timepoint, use leave `arrival_time` empty or provide an interpolated time. Further, indicate that interpolated times are provided with `timepoint`=`0`. If interpolated times are indicated with `timepoint`=`0`, then time points must be indicated with `timepoint`=`1`. Provide arrival times for all stops that are time points. An arrival time must be specified for the first and the last stop in a trip. <br><br> If the trip is defined in [frequencies.txt](#frequenciestxt) the `arrival_time` for the first stop should be `00:00:00` |  
 |  `departure_time` | Time | **Conditionally required** | Departure time from a specific stop for a specific trip on a route. For times occurring after midnight on the service day, enter the time as a value greater than 24:00:00 in HH:MM:SS local time for the day on which the trip schedule begins. If there are not separate times for arrival and departure at a stop, enter the same value for `arrival_time` and `departure_time`. See the `arrival_time` description for more details about using timepoints correctly. |  
 |  `stop_id` | ID referencing `stops.stop_id` | **Required** | Identifies the serviced stop. All stops serviced during a trip must have a record in [stop_times.txt](#stop_timestxt). Referenced locations must be stops, not stations or station entrances. A stop may be serviced multiple times in the same trip, and multiple trips and routes may service the same stop. |  
-|  `stop_sequence` | Non-negative integer | **Required** | Order of stops for a particular trip. The values must increase along the trip but do not need to be consecutive.<hr>*Example: The first location on the trip could have a `stop_sequence`=`1`, the second location on the trip could have a `stop_sequence`=`23`, the third location could have a `stop_sequence`=`40`, and so on.* |  
+|  `stop_sequence` | Non-negative integer | **Required** | Order of stops for a particular trip. The values must increase along the trip but do not need to be consecutive. For a trip that is a loop (i.e. starts and ends at the same location), include the first/last stop twice in [stop_times.txt](#stop_timestxt) <hr>*Example: The first location on the trip could have a `stop_sequence`=`1`, the second location on the trip could have a `stop_sequence`=`23`, the third location could have a `stop_sequence`=`40`, and so on.* |  
 |  `stop_headsign` | Text | Optional | Text that appears on signage identifying the trip's destination to riders. This field overrides the default `trips.trip_headsign` when the headsign changes between stops. If the headsign is displayed for an entire trip, use `trips.trip_headsign` instead. |  
-|  `pickup_type` | Enum | Optional | Indicates drop off method. Valid options are:<br><br>`0` or empty - Regularly scheduled pickup. <br>`1` - No pickup available.<br>`2` - Must phone agency to arrange pickup.<br>`3` - Must coordinate with driver to arrange pickup. |  
+|  `pickup_type` | Enum | Optional | Indicates drop off method. Non-revenue (deadhead) trips that do not provide passenger service should be marked with `pickup_type` and `drop_off_type` value of `1` for all [stop_times.txt](#stop_timestxt) rows. Valid options are:<br><br>`0` or empty - Regularly scheduled pickup. <br>`1` - No pickup available.<br>`2` - Must phone agency to arrange pickup.<br>`3` - Must coordinate with driver to arrange pickup. |  
 |  `drop_off_type` | Enum | Optional | Indicates pick up method. Valid options are:<br><br>`0` or empty - Regularly scheduled drop off.<br>`1` - No drop off available.<br>`2` - Must phone agency to arrange drop off.<br>`3` - Must coordinate with driver to arrange drop off. |    
-|  `shape_dist_traveled` | Non-negative float | Optional | Actual distance traveled along the associated shape, from the first stop to the stop specified in this record. This field specifies how much of the shape to draw between any two stops during a trip. Must be in the same units used in [shapes.txt](#shapestxt). Values used for `shape_dist_traveled` must increase along with `stop_sequence`; they cannot be used to show reverse travel along a route.<hr>*Example: If a bus travels a distance of 5.25 kilometers from the start of the shape to the stop,`shape_dist_traveled`=`5.25`.*|  
+|  `shape_dist_traveled` | Non-negative float | Optional | Actual distance traveled along the associated shape, from the first stop to the stop specified in this record. This field specifies how much of the shape to draw between any two stops during a trip. Must be in the same units used in [shapes.txt](#shapestxt). Values used for `shape_dist_traveled` must increase along with `stop_sequence`; they cannot be used to show reverse travel along a route. Must be provided for routes that have looping or inlining. <hr>*Example: If a bus travels a distance of 5.25 kilometers from the start of the shape to the stop,`shape_dist_traveled`=`5.25`.*|  
 |  `timepoint` | Enum | Optional | Indicates if arrival and departure times for a stop are strictly adhered to by the vehicle or if they are instead approximate and/or interpolated times. This field allows a GTFS producer to provide interpolated stop-times, while indicating that the times are approximate. Valid options are:<br><br>`0` - Times are considered approximate.<br>`1` or empty - Times are considered exact. |  
 
 
@@ -244,7 +294,7 @@ File: **Optional**
 |  `currency_type` | Currency code | **Required** | Currency used to pay the fare. |
 |  `payment_method` | Enum | **Required** | Indicates when the fare must be paid. Valid options are:<br><br>`0` - Fare is paid on board.<br>`1` - Fare must be paid before boarding. |
 |  `transfers` | Enum | **Required** | Indicates the number of transfers permitted on this fare. The fact that this field can be left empty is an exception to the requirement that a Required field must not be empty. Valid options are:<br><br>`0` - No transfers permitted on this fare.<br>`1` - Riders may transfer once.<br>`2` - Riders may transfer twice.<br>empty - Unlimited transfers are permitted. |
-|  `agency_id` | ID referencing `agency.agency_id` | **Conditionally Required** | Identifies the relevant agency for a fare. This field is required for datasets with multiple agencies defined in [agency.txt](#agencytxt), otherwise it is optional. |
+|  `agency_id` | ID referencing `agency.agency_id` | **Conditionally Required** | Identifies the relevant agency for a fare. This field is required for datasets with multiple agencies defined in [agency.txt](#agencytxt), otherwise it is optional. Should be included if it the relevant agency is defined in [agency.txt](#agencytxt). |
 |  `transfer_duration` | Non-negative integer | Optional | Length of time in seconds before a transfer expires. When `transfers`=`0` this field can be used to indicate how long a ticket is valid for or it can can be left empty. |
 
 ### fare_rules.txt
@@ -273,13 +323,17 @@ File: **Optional**
 
 Shapes describe the physical path that a vehicle takes as a set of ordered latitude and longitude coordinates.  Tracing the coordinates in order provides the vehicle's path. Coordinates do not need to match stop locations.
 
+Alignments should follow the centerline of the right of way on which the vehicle travels. This could be either the centerline of the street if there are no designated lanes, or the centerline of the side of the roadway that travels in the direction the vehicle moves. Alignments should not “jag” to a curb stop, platform, or boarding location. 
+
+Ideally, for alignments that are shared (i.e. in a case where Routes 1 and 2 operate on the same segment of roadway or track), the shared portion of alignment should match exactly. 
+
 |  Field Name | Type | Required | Description |
 |  ------ | ------ | ------ | ------ |
 |  `shape_id` | ID | **Required** | Identifies a shape. |
 |  `shape_pt_lat` | Latitude | **Required** | Latitude of a shape point. Each record in [shapes.txt](#shapestxt) represents a shape point used to define the shape. |
 |  `shape_pt_lon` | Longitude | **Required** | Longitude of a shape point. |
 |  `shape_pt_sequence` | Non-negative integer | **Required** | Sequence in which the shape points connect to form the shape. Values must increase along the trip but do not need to be consecutive.<hr>*Example: If the shape "A_shp" has three points in its definition, the [shapes.txt](#shapestxt) file might contain these records to define the shape:* <br> `shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence` <br> `A_shp,37.61956,-122.48161,0` <br> `A_shp,37.64430,-122.41070,6` <br> `A_shp,37.65863,-122.30839,11` |
-|  `shape_dist_traveled` | Non-negative float | Optional | Actual distance traveled along the shape from the first shape point to the point specified in this record. Used by trip planners to show the correct portion of the shape on a map. Values must increase along with `shape_pt_sequence`; they cannot be used to show reverse travel along a route. Distance units must be consistent with those used in [stop_times.txt](#stop_timestxt).<hr>*Example: If a bus travels along the three points defined above for A_shp, the additional `shape_dist_traveled` values (shown here in kilometers) would look like this:* <br> `shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence,shape_dist_traveled` <br> `A_shp,37.61956,-122.48161,0,0`<br>`A_shp,37.64430,-122.41070,6,6.8310` <br> `A_shp,37.65863,-122.30839,11,15.8765` |
+|  `shape_dist_traveled` | Non-negative float | Optional | Actual distance traveled along the shape from the first shape point to the point specified in this record. Used by trip planners to show the correct portion of the shape on a map. Values must increase along with `shape_pt_sequence`; they cannot be used to show reverse travel along a route. Distance units must be consistent with those used in [stop_times.txt](#stop_timestxt). Must be provided in both [shapes.txt](#shapestxt) and [stop_times.txt](#stop_timestxt) if an alignment includes looping or inlining. <hr>*Example: If a bus travels along the three points defined above for A_shp, the additional `shape_dist_traveled` values (shown here in kilometers) would look like this:* <br> `shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence,shape_dist_traveled` <br> `A_shp,37.61956,-122.48161,0,0`<br>`A_shp,37.64430,-122.41070,6,6.8310` <br> `A_shp,37.65863,-122.30839,11,15.8765` |
 
 ### frequencies.txt
 
