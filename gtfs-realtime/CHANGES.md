@@ -47,6 +47,7 @@ When a producer or consumer is interested in adding a new field to the GTFS Real
   	- Google is committed to timely updating https://github.com/google/gtfs-realtime-bindings repository. Commits to gtfs-realtime-bindigs that are a result of a proposal, should reference the pull request of the proposal.
   	- Translations must not be included into the original pull request.
     Google is responsible for eventually updating relevant translations into supported languages, but pure translation pull requests from the community are welcome and will be accepted as soon as all editorial comments are addressed.
+1. The final result of the pull request (accepted or abandoned) should be announced on the same Google Groups thread where the pull request was originally announced.
 
 ### Guiding Principles
 In order to preserve the original vision of GTFS Realtime, a number of guiding principles have been established to take into consideration when extending the spec:
