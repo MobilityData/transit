@@ -351,15 +351,20 @@ A geographic position of a vehicle.
 
 ## _message_ TripDescriptor
 
-A descriptor that identifies a single instance of a GTFS trip. 
+A descriptor that identifies a single instance of a GTFS trip.
 
-To specify a single trip instance, the trip_id (and if necessary, start_time and start_date - see field documentation below for when these fields are required) is set. If route_id is also set, then it should be same as one that the given trip corresponds to. 
+To specify a single trip instance, in many cases a `trip_id` by itself is sufficient.  However, the following cases require additional information to resolve to a single trip instance:
+* For trips defined in frequencies.txt, `start_date` and `start_time` are required in addition to `trip_id`
+* If the trip lasts for more than 24 hours, or is delayed such that it would collide with a scheduled trip on the following day, then `start_date` is required in addition to `trip_id`
+* If the `trip_id` field can't be provided, then `route_id`, `direction_id`, `start_date`, and `start_time` must all be provided
 
-The `trip_id` field cannot, by itself or in combination with other TripDescriptor fields, be used to identify multiple trip instances.  For example, a TripDescriptor should never specify trip_id by itself for GTFS frequencies.txt exact_times=0 trips because start_time is also required to resolve to a single trip instance starting at a specific time of the day.
+In all cases, if `route_id` is provided in addition to `trip_id`, then the `route_id` must be the same `route_id` as assigned to the given trip in GTFS trips.txt. 
+
+The `trip_id` field cannot, by itself or in combination with other TripDescriptor fields, be used to identify multiple trip instances.  For example, a TripDescriptor should never specify trip_id by itself for GTFS frequencies.txt exact_times=0 trips because start_time is also required to resolve to a single trip instance starting at a specific time of the day.  If the TripDescriptor does not resolve to a single trip instance (i.e., it resolves to zero or multiple trip instances), it is considered an error and the entity containing the erroneous TripDescriptor may be discarded by consumers.
 
 Note that if the trip_id is not known, then station sequence ids in TripUpdate are not sufficient, and stop_ids must be provided as well. In addition, absolute arrival/departure times must be provided.
 
-TripDescriptor.route_id should not be used within an Alert EntitySelector to specify a route-wide alert that affects all trips for a route - use EntitySelector.route_id instead.
+TripDescriptor.route_id cannot be used within an Alert EntitySelector to specify a route-wide alert that affects all trips for a route - use EntitySelector.route_id instead.
 
 #### Fields
 
