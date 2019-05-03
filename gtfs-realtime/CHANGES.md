@@ -19,7 +19,7 @@ When a producer or consumer is interested in adding a new field to the GTFS Real
 ### Specification amendment process
 1. Create a git branch with update of all relevant parts of protocol definition, specification and documentation files (except for translations).
 1. Create pull request on https://github.com/google/transit. Pull request must contain an extended description of the patch. The creator of the pull request becomes the _advocate_.
-1. Once pull request is registered, it must be announced by its advocate in the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime). Once announced, the pull request is considered a proposal.
+1. Once pull request is registered, it must be announced by its advocate in the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime). Once announced, the pull request is considered a proposal. The pull request should also be edited to contain a link to the Google Groups announcement so they can easily be cross-referenced.
   	- Since the advocate is a contributor, they must sign the [Contributor License Agreement](../CONTRIBUTING.md) before pull request can be accepted.
 1. The discussion of the proposal follows. Pull request comments should be used as the sole discussion forum.
   	- The discussion lasts for as long as the advocate feels necessary, but must be at least 7 calendar days.
@@ -27,7 +27,7 @@ When a producer or consumer is interested in adding a new field to the GTFS Real
   	- At any point in time the advocate can claim proposal abandoned.
 1. The advocate can call for a vote on a version of the proposal at any point in time following the initial 7-day interval required for discussion.
     - Before calling for a vote, at least one GTFS-realtime producer and one GTFS-realtime consumer should implement the proposed change. It is expected that the GTFS-realtime producer(s) include the change in a public-facing GTFS-realtime feed and provide a link to that data within the pull request comments, and that the GTFS-realtime consumer(s) provides a link in the pull request comments to an application that is utilizing the change in a non-trivial manner (i.e, it is supporting new or improved functionality).
-    - When calling for a vote, the advocate should clearly state whether the vote is for official adoption of the field into the spec or for an experimental field.
+    - The advocate should announce the start of the vote on both the pull request and the Google Groups announcement. When calling for a vote, the advocate should clearly state whether the vote is for official adoption of the field into the spec or for an experimental field.
 1. Vote lasts the minimum period sufficient to cover 7 full calendar days and 5 full Swiss business days. Vote ends at 23:59:59 UTC.
   	- The advocate should announce the specific end time at the start of the vote.
   	- During voting period only editorial changes to the proposal are allowed (typos, wording may change as long as it does not change the meaning).
