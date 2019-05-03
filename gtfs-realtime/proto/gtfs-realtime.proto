@@ -361,7 +361,7 @@ message VehiclePosition {
     FULL = 5;
 
     // The vehicle is not accepting additional passengers.
-    NOT_ACCEPTING_PASSENGERS = 6;
+    NOT_ACCEPTING_PASSENGERS = 6 [deprecated=true];
 
   }
   optional OccupancyStatus occupancy_status = 9;
