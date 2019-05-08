@@ -204,7 +204,8 @@ message TripUpdate {
       // stops, although not necessarily according to the times of the schedule.
       // At least one of arrival and departure must be provided. If the schedule
       // for this stop contains both arrival and departure times then so must
-      // this update.
+      // this update. Frequency-based trips (GTFS frequencies.txt with exact_times = 0)
+      // should not have SCHEDULED value and should have UNSCHEDULED value.
       SCHEDULED = 0;
 
       // The stop is skipped, i.e., the vehicle will not stop at this stop.
@@ -217,6 +218,11 @@ message TripUpdate {
       // stops in the trip are considered to be unspecified as well.
       // Neither arrival nor departure should be supplied.
       NO_DATA = 2;
+      
+      // The vehicle is operating a frequency-based trip (GTFS frequencies.txt with exact_times = 0).
+      // This value should not be used for trips not defined in GTFS frequencies.txt, 
+      // or trips in GTFS frequencies.txt with exact_times = 1
+      UNSCHEDULED = 3;
     }
     optional ScheduleRelationship schedule_relationship = 5
         [default = SCHEDULED];
