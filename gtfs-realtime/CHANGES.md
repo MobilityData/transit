@@ -85,6 +85,20 @@ extend transit_realtime.TripDescriptor {
 }
 ```
 
+When developing extensions, developers should follow the [Protocol Buffers Language Guide](https://developers.google.com/protocol-buffers/docs/proto). A common mistake that developers may make is changing the field number for an extension field that has been in use. In the [Assigning Field Numbers section](https://developers.google.com/protocol-buffers/docs/proto#assigning-field-numbers), the Language Guide says:
+
+> Each field in the message definition has a unique number. These numbers are used to identify your fields in the message binary format, and should not be changed once your message type is in use.
+
+For example, in the example above, `some_string` was assigned field number 1. When the developer no longer wish to use `some_string` or when `some_string` has been adopted in the official GTFS Realtime spec and there is no need for the extension, the developer still cannot use field number 1. In this case, the developer should deprecate the field:
+```
+message MyTripDescriptorExtension {
+  optional string some_string = 1 [deprecated=true];
+  optional bool some_bool = 2;
+  ...
+}
+```
+
+
 ### Extension Registry
 
 |Extension ID|Developer|Contact|Details|
