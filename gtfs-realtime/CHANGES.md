@@ -29,11 +29,12 @@ When a producer or consumer is interested in adding a new field to the GTFS Real
     - Before calling for a vote, at least one GTFS-realtime producer and one GTFS-realtime consumer should implement the proposed change. It is expected that the GTFS-realtime producer(s) include the change in a public-facing GTFS-realtime feed and provide a link to that data within the pull request comments, and that the GTFS-realtime consumer(s) provides a link in the pull request comments to an application that is utilizing the change in a non-trivial manner (i.e, it is supporting new or improved functionality).
     - When calling for a vote, the advocate should clearly state whether the vote is for official adoption of the field into the spec or for an experimental field.
 1. Vote lasts the minimum period sufficient to cover 7 full calendar days and 5 full Swiss business days. Vote ends at 23:59:59 UTC.
-  	- The advocate should announce the specific end time at the start of the vote - both on the pull request and on the [GTFS Changes mailing list](https://groups.google.com/forum/#!forum/gtfs-changes).
+  	- The advocate should announce the specific end time at the start of the vote - both on the pull request and on the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime).
   	- During voting period only editorial changes to the proposal are allowed (typos, wording may change as long as it does not change the meaning).
   	- Anyone is allowed to vote yes/no in a form of comment to the pull request, and votes can be changed until the end of the voting period.
     If a voter changes her vote, it is recommended to do it by updating the original vote comment by striking through the vote and writing the new vote.
   	- Votes before the start of the voting period are not considered.
+  	- At the end of the voting period, the advocate should announce the results of the vote on the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime).
 1. The proposal is accepted if there is a unanimous consensus yes with at least 3 votes.
   	- The proposer's vote does not count towards the 3 vote total. For example, if Proposer X creates a pull request and votes yes, and User Y and Z vote yes, this is counted as 2 total yes votes.
   	- Votes against shall be motivated, and ideally provide actionable feedback.
