@@ -19,6 +19,7 @@ The official specification, reference and documentation are written in English. 
   	- Anyone is allowed to vote yes/no in a form of comment to the pull request, and votes can be changed until the end of the voting period.
     If a voter changes her vote, it is recommended to do it by updating the original vote comment by striking through the vote and writing the new vote.
   	- Votes before the start of the voting period are not considered.
+    - At the end of the voting period, the advocate should announce the results of the vote on the [GTFS Changes mailing list](https://groups.google.com/forum/#!forum/gtfs-changes).
 1. The proposal is accepted if there is a unanimous consensus yes with at least 3 votes.
   	- The proposer's vote does not count towards the 3 vote total. For example, if Proposer X creates a pull request and votes yes, and User Y and Z vote yes, this is counted as 2 total yes votes.
   	- Votes against shall be motivated, and ideally provide actionable feedback.
