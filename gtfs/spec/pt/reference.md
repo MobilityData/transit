@@ -1,8 +1,9 @@
 ## Referência para Especificação Geral do Feed de Transporte Público
 
 **Revisado em 17 de Janeiro de 2019. Ver [Histórico de Revisão] (../../CHANGES.md) para mais detalhes.**
+(Traduzido do inglês por Everton Meneghini. Revisados pela Murilo Brehm.)
 
-Este documento define o formato e estruura dos arquivos que constituem um conjunto de dados GTFS.
+Este documento define o formato e estrutura dos arquivos que constituem um conjunto de dados GTFS.
 
 ## Tabela de Conteúdos
 
@@ -214,7 +215,7 @@ Arquivo: **Facultativo**
 |  Nome do campo | Tipo | Requisito | Descrição |
 |  ------ | ------ | ------ |------ |
 |  `service_id` | ID | **Obrigatório** | Identifica exclusivamente um conjunto de datas em que o serviço estará disponível para uma ou mais rotas. Cada valor `service_id` pode aparecer no máximo uma vez no arquivo [calendar.txt](#calendartxt). |
-|  `monday` | Enum | **Obrigatório** | Indica se a linha opera todas as segundas-feiras do intervalo definido nos campos `start_date` e `end_date`. Exceções devem informadas em  [calendar_dates.txt](#calendar_datestxt). Opções válidas são:<br><br>`1` - A linha opera todas as segundas-feiras deste intervalo. <br>`0` - A linha não opera nas segundas-feiras deste intervalo. |
+|  `monday` | Enum | **Obrigatório** | Indica se a linha opera todas as segundas-feiras do intervalo definido nos campos `start_date` e `end_date`. Exceções devem ser informadas em  [calendar_dates.txt](#calendar_datestxt). Opções válidas são:<br><br>`1` - A linha opera todas as segundas-feiras deste intervalo. <br>`0` - A linha não opera nas segundas-feiras deste intervalo. |
 |  `tuesday` | Enum | **Obrigatório** | Mesmas funcionalidades do `monday`, porém aplicadas às terças-feiras. |
 |  `wednesday` | Enum | **Obrigatório** | Mesmas funcionalidades do `monday`, porém aplicadas às quartas-feiras.  |
 |  `thursday` | Enum | **Obrigatório** | Mesmas funcionalidades do `monday`, porém aplicadas às quintas-feiras.  |
@@ -222,7 +223,7 @@ Arquivo: **Facultativo**
 |  `saturday` | Enum | **Obrigatório** | Mesmas funcionalidades do `monday`, porém aplicadas aos sábados. |
 |  `sunday` | Enum | **Obrigatório** | Mesmas funcionalidades do `monday`, porém aplicadas aos domingos. |
 |  `start_date` | Data | **Obrigatório** | Data de início do expediente para o intervalo. |
-|  `end_date` | Data | **Obrigatório** | Data de término do expediente para o intervalo. Esta data também é incluída no intervalo do serviço. |
+|  `end_date` | Data | **Obrigatório** | Data de término do expediente para o intervalo. Esta data também é inclusa no intervalo do serviço. |
 
 ### calendar_dates.txt
 
@@ -283,8 +284,8 @@ Descreve o caminho físico que um veículo percorre como um conjunto de latitude
 |  ------ | ------ | ------ | ------ |
 |  `shape_id` | ID | **Obrigatório** | Identifica um formato. |
 |  `shape_pt_lat` | Latitude | **Obrigatório** | Latitude de um ponto no trajeto. Cada registro em [shapes.txt](#shapestxt) representa um ponto no trajeto para definir o formato. |
-|  `shape_pt_lon` | Longitude | **Obrigatório** | Latitude de um ponto no trajeto. |
-|  `shape_pt_sequence` | Inteiro não negativo | **Obrigatório** | Sequência na qual os pontos do trajeto se conctam para definir o formato. Os valores devem crescer ao decorrer da viagem, não obrigatoriamente de forma consecutiva.<hr>*Exemplo: Se o mapa "A_shp"  possuir três pontos nesta definição, o arquivo [shapes.txt](#shapestxt) deve conter os seguintes registros para definir o mapa do trajeto:*<br>`shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence`<br> `A_shp,37.61956,-122.48161,0` <br>`A_shp,37.64430,-122.41070,6` <br>`A_shp,37.65863,-122.30839,11` |
+|  `shape_pt_lon` | Longitude | **Obrigatório** | Longitude de um ponto no trajeto. |
+|  `shape_pt_sequence` | Inteiro não negativo | **Obrigatório** | Sequência na qual os pontos do trajeto se conectam para definir o formato. Os valores devem crescer ao decorrer da viagem, não obrigatoriamente de forma consecutiva.<hr>*Exemplo: Se o mapa "A_shp"  possuir três pontos nesta definição, o arquivo [shapes.txt](#shapestxt) deve conter os seguintes registros para definir o mapa do trajeto:*<br>`shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence`<br> `A_shp,37.61956,-122.48161,0` <br>`A_shp,37.64430,-122.41070,6` <br>`A_shp,37.65863,-122.30839,11` |
 |  `shape_dist_traveled` | Flutuante não negativo | Opcional | Distância total percorrida no mapa, calculada desde o início da viagem até ponto especificado neste registro. O valor deve crescer ao decorrer do `shape_pt_sequence` e não pode ser usado em um trajeto de retorno de uma rota. A unidade de medida deve ser consistente com a usada em  [stop_times.txt](#stop_timestxt).<hr>*Exemplo: Se um ônibus percorre os três pontos definidos no trajeto  A_shp acima descrito,  os valores `shape_dist_traveled` (aqui exibidos em quilômetros) devem parecer com estes:* <br>`shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence,shape_dist_traveled` <br> `A_shp,37.61956,-122.48161,0,0`<br>`A_shp,37.64430,-122.41070,6,6.8310` <br> `A_shp,37.65863,-122.30839,11,15.8765` |
 
 ### frequencies.txt
@@ -309,7 +310,7 @@ Arquivo: **Opcional**
 
 Arquivo: **Opcional**
 
-Ao calcular um itinerário, os aplicativos de GTFS baseiam as regras de reembarque considerando o tempo e a proximidade das paradas. O arquivo [Transfers.txt](#transferstxt) especifica regras adicinais e anula reembarques selecionados.
+Ao calcular um itinerário, os aplicativos de GTFS baseiam as regras de reembarque considerando o tempo e a proximidade das paradas. O arquivo [Transfers.txt](#transferstxt) especifica regras adicionais e anula reembarques selecionados.
 
 |  Nome do campo | Tipo | Requisito | Descrição |
 |  ------ | ------ | ------ | ------ |
@@ -340,7 +341,7 @@ Para ir de uma entrada (marcação representando um local em location_type=2) at
 |  `is_bidirectional` | Enum | **Obrigatório** | Indica a direção do caminho:<br>• 0: unidirecional, apenas de `from_stop_id` para `to_stop_id`.<br>• 1: bidirecional, pode ser usado para ambos os sentidos.<br><br>guichês tarifários (`pathway_mode=6`) e portões de saída (`pathway_mode=7`) serão sempre em sentido único.|
 | `length` | Flutuante não negativo | Opcional | Comprimento horizontal, em metros, do caminho desde o local de origem (definido em `from_stop_id`) até o local de destino (definido em`to_stop_id`).<br><br> Este campo é recomendado para passarelas (`pathway_mode=1`), guichês tarifários (`pathway_mode=6`)  e portões de saída (`pathway_mode=7`).|
 | `traversal_time` | Inteiro Positivo | Opcional | Tempo médio, em segundos, necessário para ir da origem (definido em `from_stop_id`)  até o destino (definido em `to_stop_id`).<br><br> Este campo é recomendado para passageiros que usam esteiras rolantes (`pathway_mode=3`), escadas rolantes (`pathway_mode=4`) e elevadores (`pathway_mode=5`).|
-| `stair_count` | Inteiro não nulo | Opcional | Quantidade de escadas no caminho.<br><br>Boas práticas: para gerar valoes aproxímados, podemos definir que 1 andar equivale a 15 degarus.<br><br> `stair_count` positivo indica que o passageiro deve subir do `from_stop_id` para`to_stop_id`. E `stair_count` negativo indica que o passageiro deve descer do `from_stop_id` para `to_stop_id`.<br><br>Este campo é recomendado para escadas (`pathway_mode=2`).|
+| `stair_count` | Inteiro não nulo | Opcional | Quantidade de escadas no caminho.<br><br>Boas práticas: para gerar valores aproxímados, podemos definir que 1 andar equivale a 15 degarus.<br><br> `stair_count` positivo indica que o passageiro deve subir do `from_stop_id` para`to_stop_id`. E `stair_count` negativo indica que o passageiro deve descer do `from_stop_id` para `to_stop_id`.<br><br>Este campo é recomendado para escadas (`pathway_mode=2`).|
 | `max_slope` | Racional | Opcional | Relação de inclinação máxima da via. Valores válidos são:<br>• 0 or (vazio): sem inclinação.<br>• Variação: relação de inclinação do caminho, positivo para elevação, negativo para declive.<br><br>Esse campo deve ser usado somente para passarelas (`pathway_type=1`) e esteiras rolantes (`pathway_type=3`).<br><br> Exemplo: Nos EUA, 0,083 (ou 8,3%) é a relação máxima de inclinação para cadeira de rodas, o que significa um aumento de 0,083m (ou 8,3cm) para cada metro.|
 | `min_width` | Racional Positivo | Opcional | Largura mínima do caminho em metros.<br><br>Este campo é altamente recomendado quando a largura for menor que 1 metro.|
 | `signposted_as` | Texto | Opcional | Sinalização em texto visível para os passageiros. A sinalização pode ser usada para fornecer instruções aos usuários, como "siga a sinalização para". O idioma deve aparecer neste campo exatamente como é publicado nas sinalizações - não deve ser traduzido.|
@@ -348,7 +349,7 @@ Para ir de uma entrada (marcação representando um local em location_type=2) at
 
 ### levels.txt
 
-Arquivo: **Opional**
+Arquivo: **Opcional**
 
 Descreve os diferentes níveis de uma estação. É mais útil quando usado em conjunto com `pathways.txt`, e é obrigatório para elevadores (`pathway_mode=5`),  ao solicitar ao usuário que pegue o elevador até o nível "Mezanino" ou "Plataforma".
 
@@ -372,6 +373,6 @@ O arquivo contém informações sobre o próprio conjunto de dados, ao invés do
 |  `feed_lang` | Código do Idioma | **Obrigatório** | Idioma padrão usado para o texto neste conjunto de dados. Essa configuração ajuda os consumidores do GTFS a escolher regras de capitalização (maiúsculas) e outras configurações específicas de idioma para o conjunto de dados. |
 |  `feed_start_date` | Data | Opcional | O conjunto de dados fornece informações de programação completas e confiáveis para o serviço no período que inicia em `feed_start_date` e vai até `feed_end_date`. Ambas as datas podem ser deixadas em branco se indisponíveis. A data do `feed_end_date` não pode preceder `feed_start_date` quando ambos forem informados. Recomenda-se que os provedores do conjunto de dados forneçam também dados do cronograma fora desse período, a fim de informar sobre possíveis serviços futuros, mas os consumidores do conjunto de dados devem tratá-lo com atenção ao seu status mutável. Se `feed_start_date` ou `feed_end_date` se estenderem além das datas definidas em [calendar.txt](#calendartxt) e [calendar_dates.txt](#calendar_datestxt), o conjunto de dados está explicitamente declarando que não há expediente para datas contidas no intervalo entre `feed_start_date` e `feed_end_date`, exceto as inclusas nas datas ativas do calendário. |
 |  `feed_end_date` | Data | Opcional | (Veja acima) |
-|  `feed_version` | Texto | Opcional | Intervalo de texto que indica a versão atual do conjunto de dados do GTFS. Os aplicativos consumidores de GTFS podem exibir esse valor para ajudar os geradores de conjuntos de dados a determinar qual foi o mais recente conjunto incorporado. |
+|  `feed_version` | Texto | Opcional | Intervalo de texto que indica a versão atual do conjunto de dados do GTFS. Os aplicativos consumidores de GTFS podem exibir esse valor para ajudar os geradores de conjuntos de dados a determinar qual foi o conjunto incorporado mais recentemente. |
 |  `feed_contact_email` | E-mail | Opcional | Endereço de e-mail para comunicação sobre o conjunto de dados GTFS e políticas de divulgação de dados. `feed_contact_email` é um suporte técnico para aplicativos consumidores de GTFS. Fornece informações de contato para atendimento ao cliente por meio do [agency.txt](#agencytxt). |
 |  `feed_contact_url` | URL | Opcional | URL para informações de contato, formulário online, suporte técnico ou outras ferramentas de comunicação relacionadas às políticas de divulgação do conjunto de dados GTFS. `feed_contact_url`é um suporte técnico para aplicativos consumidores de GTFS. Fornece informações de contato para atendimento ao cliente por meio de [agency.txt](#agencytxt). |
