@@ -103,6 +103,7 @@ message FeedEntity {
   optional TripUpdate trip_update = 3;
   optional VehiclePosition vehicle = 4;
   optional Alert alert = 5;
+  optional StationUpdate station_update = 6;
 
   // The extensions namespace allows 3rd-party developers to extend the
   // GTFS Realtime Specification in order to add and evaluate new features and
@@ -716,4 +717,62 @@ message TranslatedString {
 
   // The following extension IDs are reserved for private use by any organization.
   extensions 9000 to 9999;
+}
+
+// Data about the realtime pathways status.
+message StationUpdate {
+    // Descriptor that identifies an instance of a GTFS pathway.
+    message PathwayDescriptor {
+        // Must be the same as in pathways.txt in the corresponding GTFS feed.
+        required string pathway_id = 1;
+
+        // The extensions namespace allows 3rd-party developers to extend the
+        // GTFS Realtime Specification in order to add and evaluate new features
+        // and modifications to the spec.
+        extensions 1000 to 1999;
+
+        // The following extension IDs are reserved for private use by any organization.
+        extensions 9000 to 9999;
+    }
+    enum PathwayStatus {
+      UNKNOWN = 0;
+      // Pathway is fully operational for all users.
+      OPERATIONAL = 1;
+      // Pathway should be used with care, or maybe unusable for some users. See text of alerts for more information (e.g. snow, ice, no light).
+      OPERATIONAL_WITH_LIMITATIONS = 2;
+      // (Allowed only for travelator or escalator) The travelator or escalator is stopped but not closed like a walkway, and the escalator behave like a stair.
+      STOPPED = 3;
+      // Pathway is closed for all users
+      CLOSED = 4;
+    }
+    // Allows to overwrite the is_bidirectional value of the pathway
+    enum PathwayDirection {
+      UNCHANGED = 0;
+      FORWARD = 1;
+      BIDIRECTIONAL = 2;
+      BACKWARD = 3;
+    }
+
+    // The Pathways that this message applies to.
+    repeated PathwayDescriptor pathway = 1;
+
+    // The status of the pathways of this message.
+    required PathwayStatus status = 2 [default = UNKNOWN];
+
+    // Id of the entity of the alert giving information about this downtime.
+    optional string alert_id = 3;
+
+    // Time when the update should be applied to the pathways.
+    repeated TimeRange active_period = 4;
+
+    // The direction field allows to overwrite the is_bidirectional value of the pathways.
+    optional PathwayDirection direction = 5 [default = UNCHANGED];
+
+    // The extensions namespace allows 3rd-party developers to extend the
+    // GTFS Realtime Specification in order to add and evaluate new features
+    // and modifications to the spec.
+    extensions 1000 to 1999;
+
+    // The following extension IDs are reserved for private use by any organization.
+    extensions 9000 to 9999;
 }
