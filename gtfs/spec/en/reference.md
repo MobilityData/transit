@@ -31,15 +31,21 @@ This document defines the format and structure of the files that comprise a GTFS
 
 This section defines terms that are used throughout this document.
 
-
+* **Agency** - An organization that provides transit services. 
 * **Dataset** - A complete set of files defined by this specification reference. Altering the dataset creates a new version of the dataset. Datasets should be published at a public, permanent URL, including the zip file name. (e.g., https://www.agency.org/gtfs/gtfs.zip).
 * **Record** - A basic data structure comprised of a number of different field values describing a single entity (e.g. transit agency, stop, route, etc.). Represented, in a table, as a row.
 * **Field** - A property of an object or entity. Represented, in a table, as a column.
 * **Field Value** - An individual entry in a field. Represented, in a table, as a single cell.
+* **Location** - A stop, platform, boarding area, generic node, station or station entrance.
 * **Required** - The field must be included in the dataset, and a value must be provided in that field for each record. Some required fields permit an empty string as a value (denoted in this specification as empty). To enter an empty string, just omit any text between the commas for that field.
+* **Route** -  A group of trips that share a name.
 * **Optional** - The field may be omitted from the dataset. If an optional column is included, some of the entries in that field may be empty strings. To enter an empty string, just omit any text between the commas for that field. Note that an omitted field is equivalent to a field that is entirely empty.
 * **Conditionally required** - The field or file is required under certain conditions, which are outlined in the field or file description. Outside of these conditions, this field or file is optional.
+* **Trip** - A sequence of two or more stops that are serviced by a vehicle during a specific time period.
 * **Service day** - A service day is a time period used to indicate route scheduling. The exact definition of service day varies from agency to agency but service days often do not correspond with calendar days. A service day may exceed 24:00:00 if service begins on one day and ends on a following day. For example, service that runs from 08:00:00 on Friday to 02:00:00 on Saturday, could be denoted as running from 08:00:00 to 26:00:00 on a single service day.
+* **Shape** - A set of coordinates that describes the path a transit vehicle takes.
+* **Stop** - A location where passengers can board or alight from a transit vehicle. Stop is sometimes used as a shorthand for location.
+
 
 ## Field Types
 
