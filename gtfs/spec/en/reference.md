@@ -25,6 +25,11 @@ This document defines the format and structure of the files that comprise a GTFS
     -   [transfers.txt](#transferstxt)
     -   [pathways.txt](#pathwaystxt)
     -   [levels.txt](#levelstxt)
+    -   [vehicle_categories.txt](#vehicle_categoriestxt)
+    -   [vehicle_couplings.txt](#vehicle_couplingstxt)
+    -   [vehicle_allocations.txt](#vehicle_allocationstxt)
+    -   [vehicle_doors.txt](#vehicle_doorstxt)
+    -   [vehicle_boardings.txt](#vehicle_boardingstxt)
     -   [feed\_info.txt](#feed_infotxt)
 
 ## Term Definitions
@@ -80,6 +85,11 @@ This specification defines the following files:
 |  [transfers.txt](#transferstxt)  | Optional | Rules for making connections at transfer points between routes. |
 |  [pathways.txt](#pathwaystxt)  | Optional | Pathways linking together locations within stations. |
 |  [levels.txt](#levelstxt)  | Optional | Levels within stations. |
+|  [vehicle_categories.txt](#vehicle_categoriestxt)  | Optional | Vehicle categories and their attributes. |
+|  [vehicle_couplings.txt](#vehicle_couplingstxt)  | Optional | Couplings of vehicle categories into composed vehicle categories. |
+|  [vehicle_allocations.txt](#vehicle_allocationstxt)  | Optional | Allocations of vehicle categories to routes. |
+|  [vehicle_doors.txt](#vehicle_doorstxt)  | Optional | Vehicle doors and their attributes. |
+|  [vehicle_boardings.txt](#vehicle_boardingstxt) | Optional | Relationship between vehicle categories and platforms. |
 |  [feed_info.txt](#feed_infotxt)  | Optional | Dataset metadata, including publisher, version, and expiration information. |
 
 ## File Requirements
@@ -154,6 +164,7 @@ File: **Required**
 |  `route_color` | Color | Optional | Route color designation that matches public facing material. Defaults to white (`FFFFFF`) when omitted or left empty. The color difference between `route_color` and `route_text_color` should provide sufficient contrast when viewed on a black and white screen. |
 |  `route_text_color` | Color | Optional | Legible color to use for text drawn against a background of `route_color`. Defaults to black (`000000`) when omitted or left empty. The color difference between `route_color` and `route_text_color` should provide sufficient contrast when viewed on a black and white screen. |
 |  `route_sort_order` | Non-negative integer | Optional | Orders the routes in a way which is ideal for presentation to customers. Routes with smaller `route_sort_order` values should be displayed first. |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | Optional | Assigns a default vehicle for all trips belonging to this route. |
 
 ### trips.txt
 
@@ -171,6 +182,7 @@ File: **Required**
 |  `shape_id` | ID referencing `shapes.shape_id` | Optional | Identifies a geospatial shape describing the vehicle travel path for a trip. |
 |  `wheelchair_accessible` | Enum | Optional | Indicates wheelchair accessibility. Valid options are:<br><br>`0` or empty - No accessibility information for the trip.<br>`1` - Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.<br>`2` - No riders in wheelchairs can be accommodated on this trip. |
 |  `bikes_allowed` | Enum | Optional | Indicates whether bikes are allowed. Valid options are:<br><br>`0` or empty - No bike information for the trip.<br>`1` - Vehicle being used on this particular trip can accommodate at least one bicycle.<br>`2` - No bicycles are allowed on this trip. |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | Optional | Assigns a vehicle for the trip. This field overrides `routes.vehicle_category_id` and `vehicle_allocations.vehicle_category_id`. |
 
 #### Example: Blocks and service day
 
@@ -205,6 +217,7 @@ File: **Required**
 |  `drop_off_type` | Enum | Optional | Indicates drop off method. Valid options are:<br><br>`0` or empty - Regularly scheduled drop off.<br>`1` - No drop off available.<br>`2` - Must phone agency to arrange drop off.<br>`3` - Must coordinate with driver to arrange drop off. |
 |  `shape_dist_traveled` | Non-negative float | Optional | Actual distance traveled along the associated shape, from the first stop to the stop specified in this record. This field specifies how much of the shape to draw between any two stops during a trip. Must be in the same units used in [shapes.txt](#shapestxt). Values used for `shape_dist_traveled` must increase along with `stop_sequence`; they cannot be used to show reverse travel along a route.<hr>*Example: If a bus travels a distance of 5.25 kilometers from the start of the shape to the stop,`shape_dist_traveled`=`5.25`.*|
 |  `timepoint` | Enum | Optional | Indicates if arrival and departure times for a stop are strictly adhered to by the vehicle or if they are instead approximate and/or interpolated times. This field allows a GTFS producer to provide interpolated stop-times, while indicating that the times are approximate. Valid options are:<br><br>`0` - Times are considered approximate.<br>`1` or empty - Times are considered exact. |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | Optional | Assigns a vehicle for the `stop_time`. This field overrides the default `trips.vehicle_category_id` and is mostly useful when the vehicle changes between stops, e.g. when a vehicle coupling occurs within the trip. <br><br>  A `stop_times.vehicle_category_id` value specified for one `stop_time` does not apply to subsequent `stop_time`s in the same trip. If you want to override the `trips.vehicle_category_id` for multiple `stop_time`s in the same trip, the `stop_times.vehicle_category_id` value must be repeated in each `stop_time` row. | |
 
 
 ### calendar.txt
@@ -358,6 +371,77 @@ Describe the different levels of a station. Is mostly useful when used in conjun
 |  `level_index` | Float | **Required** | Numeric index of the level that indicates relative position of this level in relation to other levels (levels with higher indices are assumed to be located above levels with lower indices).<br><br>Ground level should have index 0, with levels above ground indicated by positive indices and levels below ground by negative indices.|
 |  `level_name` | Text | Optional | Optional name of the level (that matches level lettering/numbering used inside the building or the station). Is useful for elevator routing (e.g. “take the elevator to level “Mezzanine” or “Platforms” or “-1”).|
 
+### vehicle_categories.txt
+
+File: **Optional**
+
+The [vehicle_categories.txt](#vehicle_categoriestxt) table provides information about vehicle categories (e.g. bus, ferry, streetcar, cable car, carriage, train set, coupled train, etc.). A vehicle category represents a group of vehicles with the same attributes.
+
+|  Field Name | Type | Required | Description |
+|  ------ | ------ | ------ | ------ |
+|  `vehicle_category_id` | ID | **Required** | Identifies a vehicle category.<br><br> If used along with `vehicle_couplings.txt`, this field can be either a parent vehicle defined in parent_id or a child vehicle defined in child_id. |
+|  `vehicle_category_name` | Text | Optional | Name of the vehicle category. <hr> *Example: `MPM-10` in Montréal, `LRV4` in San Francisco, `TGV Duplex` in France, or `8-car Waratah Train` in Sydney.* |
+|  `seating_capacity` | Non-negative integer | Optional | Number of seats dedicated to riders, excluding folding seats. A seat is considered accommodating only one rider. |
+|  `max_capacity` | Non-negative integer | Optional | Maximum number of passengers that the vehicle can carry. |
+|  `wheelchair_boarding` | Enum | Optional | Indicates the possibility to board the vehicle with a wheelchair. This field overrides `trips.wheelchair_accessible` if contradictory. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that a rider in a wheelchair can board the vehicle.  <br> `2` - indicates that a rider in a wheelchair cannot board the vehicle. <br> `3` - indicates that a rider in a wheelchair can board the vehicle, but assistance is required. |
+|  `ac_availability` | Enum | Optional | Indicates whether air conditioning is available in the vehicle. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that air conditioning is not available. <br> `2` - indicates that all of the vehicle is air conditioned. <br> `3` - indicates that at least a section of the vehicle is air conditioned. |
+|  `wifi_availability` | Enum | Optional | Indicates whether wifi is available in the vehicle. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that wifi is not available. <br> `2` - indicates that all of the vehicle has wifi. <br> `3` - indicates that at least a section of the vehicle have wifi. |
+|  `wifi_fees` | Enum | Optional | Indicates whether wifi requires fee payment. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that wifi is free. <br> `2` - indicates that wifi requires fee payment. <br> `3` - indicates that wifi is free, but optional fee payments are possible. |
+
+### vehicle_couplings.txt
+
+File: **Optional**
+
+The [vehicle_couplings.txt](#vehicle_couplingstxt) table describes the relationship table between individual vehicle categories and composed vehicle categories, i.e. the coupling of vehicle units (like carriages) into vehicle sets (like trains).
+
+**Warning: Only 3 nesting levels are allowed.** As a consequence, a parent vehicle may also be defined as a child vehicle of another parent vehicle. The goal is to represent coupled trains, e.g. a coupled train composed of 2 train sets of 7 carriages each (total of 14 carriages). To distinguish vehicles according to their nesting level, these terms may be employed:
+- A parent vehicle is called a grandparent vehicle when its child vehicles are also defined as parent vehicles.
+- A child vehicle is called a grandchild vehicle when its parent vehicle is also defined as child vehicle.
+
+|  Field Name | Type | Required | Description |
+|  ------ | ------ | ------ | ------ |
+|  `parent_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Defines hierarchy between the different vehicle categories. This field contains the `vehicle_category_id` of the parent vehicle. |
+|  `child_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Defines hierarchy between the different vehicle categories. This field contains the `vehicle_category_id` of the child vehicle. Several child vehicles can be defined per parent vehicle. |
+|  `child_sequence` | Non-negative integer  | **Required** | Order of child vehicles within the parent vehicle. The values must increase from the front to the back of the parent vehicle. If the parent vehicle has no fronts (e.g. double-ended trains), one is arbitrarily decided. <hr> *Example: The `child_sequence` values of a 7-carriages train could be: <br> (←Head) `1`, `2`, `3`, `4`, `5`, `6`, `7` (Tail)* |
+|  `child_label` | Text | Optional | Short text that can be used to easily identify the child vehicle. This text is usually printed or displayed on either the vehicle or the platform. If there is nothing printed or displayed, other ways of identifying the child vehicle, or its location within the parent vehicle, may be provided. <hr> *Examples: The `child_label` values of a 7-carriages train could be: <br> (←Head) `1`, `2`, `3`, `4`, `5`, `6`, `7` (Tail) <br> (←Head) `S1`, `S2`, `S3`, `S4`, `B3`, `B2`, `B1` (Tail) <br> (←Head) `head`, `head`, `middle`, `middle`, `middle`, `tail`, `tail` (Tail)* |
+
+### vehicle_allocations.txt
+
+File: **Optional**
+
+The [vehicle_allocations.txt](#vehicle_allocationstxt) table describes the assignment of vehicle categories to routes. This file is useful when several vehicle categories are operated on the same route, but their dispatching is unknown when data are produced so the fields `trips.vehicle_category_id` or `stop_times.vehicle_category_id` cannot be populated with accurate values. If only one vehicle category is assigned to a route, use `routes.vehicle_category_id` instead.
+
+|  Field Name | Type | Required | Description |
+|  ------ | ------ | ------ | ------ |
+|  `route_id` | ID referencing `routes.route_id` | **Required** | Identifies a route. |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Identifies a vehicle category. This field overrides the default `routes.vehicle_category_id`. |
+
+### vehicle_doors.txt
+
+File: **Optional**
+
+The [vehicle_doors.txt](#vehicle_doorstxt) table provides information about vehicle doors.
+
+|  Field Name | Type | Required | Description |
+|  ------ | ------ | ------ | ------ |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Identifies a vehicle category. |
+|  `door_id` | ID | **Required** | Identifies a door. |
+|  `door_sequence` | Non-negative integer | **Conditionally Required** | Order of doors on the same side of the vehicle category. By convention, for somebody looking at the vehicle from outside, the sequence increases: <br> • from the front to the back of the vehicle, for the doors located on its right and left sides. <br> • from the left to the right of the vehicle, for the doors located on its front and back sides. <br><br> Conditionally Required: <br> • **Required** if multiple doors are on the same side of the vehicle. |
+|  `door_label` | Text | Optional | Short text that can be used to easily identify the vehicle door. <hr> *Examples: <br> `front` and `back` doors for a regular city bus; <br> `side`, `middle`, `side` for a train carriage; <br> `1`, `2`, `3` if doors are numbered.* |
+
+### vehicle_boardings.txt
+
+File: **Optional**
+
+The [vehicle_boardings.txt](#vehicle_boardingstxt) table describes the relationship between platform and vehicle compositions, i.e how to map the vehicle categories with the boarding areas of the platform.
+
+|  Field Name | Type | Required | Description |
+|  ------ | ------ | ------ | ------ |
+|  `boarding_area_id` | ID referencing `stops.stop_id` with `stops.location_type=4` | **Required** | Identifies the boarding area at which the vehicle will stop. |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Identifies the vehicle that will stop at the boarding area. <br><br> If using `vehicle_couplings.txt`, this field must match the `vehicle_category_id` of the grandparent vehicle, or the `vehicle_category_id` of the parent vehicle if a grandparent vehicles is not specified. |
+|  `child_sequence` | Non-negative integer referencing `vehicle_couplings.child_sequence` | **Conditionally Required** | Identifies the child vehicle that will stop at the boarding area. This field is useful when the same child vehicle appears multiple times in its parent vehicle. <br><br> Conditionally Required: <br> • **Required** if using `vehicle_couplings.txt`. |
+|  `grandchild_sequence` | Non-negative integer referencing `vehicle_couplings.child_sequence` | **Conditionally Required** | Identifies the grandchild vehicle that will stop at the boarding area. This field is useful when the same grandchild vehicle appears multiple times in its parent vehicle. <br><br> Conditionally Required: <br> • **Required** if using `vehicle_couplings.txt` and if grandchild vehicles are specified. |
+|  `door_id` | ID referencing `vehicle_doors.door_id` | Optional | Identifies the closest vehicle door to the boarding area when the vehicle has stopped. This `door_id` must be defined as part of this vehicle in `vehicles_doors.txt`.  |
 
 ### feed_info.txt
 
