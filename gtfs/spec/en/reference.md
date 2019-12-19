@@ -28,6 +28,7 @@ This document defines the format and structure of the files that comprise a GTFS
     -   [vehicle_categories.txt](#vehicle_categoriestxt)
     -   [vehicle_couplings.txt](#vehicle_couplingstxt)
     -   [vehicle_allocations.txt](#vehicle_allocationstxt)
+    -   [vehicle_doors.txt](#vehicle_doorstxt)
     -   [vehicle_boardings.txt](#vehicle_boardingstxt)
     -   [feed\_info.txt](#feed_infotxt)
 
@@ -87,6 +88,7 @@ This specification defines the following files:
 |  [vehicle_categories.txt](#vehicle_categoriestxt)  | Optional | Vehicle categories and their attributes. |
 |  [vehicle_couplings.txt](#vehicle_couplingstxt)  | Optional | Couplings of vehicle categories into composed vehicle categories. |
 |  [vehicle_allocations.txt](#vehicle_allocationstxt)  | Optional | Allocations of vehicle categories to routes. |
+|  [vehicle_doors.txt](#vehicle_doorstxt)  | Optional | Vehicle doors and their attributes. |
 |  [vehicle_boardings.txt](#vehicle_boardingstxt) | Optional | Relationship between vehicle categories and platforms. |
 |  [feed_info.txt](#feed_infotxt)  | Optional | Dataset metadata, including publisher, version, and expiration information. |
 
@@ -379,6 +381,12 @@ The [vehicle_categories.txt](#vehicle_categoriestxt) table provides information 
 |  ------ | ------ | ------ | ------ |
 |  `vehicle_category_id` | ID | **Required** | Identifies a vehicle category.<br><br> If used along with `vehicle_couplings.txt`, this field can be either a parent vehicle defined in parent_id or a child vehicle defined in child_id. |
 |  `vehicle_category_name` | Text | Optional | Name of the vehicle category. <hr> *Example: `MPM-10` in Montréal, `LRV4` in San Francisco, `TGV Duplex` in France, or `8-car Waratah Train` in Sydney.* |
+|  `seating_capacity` | Non-negative integer | Optional | Number of seats dedicated to riders, excluding folding seats. A seat is considered accommodating only one rider. |
+|  `max_capacity` | Non-negative integer | Optional | Maximum number of passengers that the vehicle can carry. |
+|  `wheelchair_boarding` | Enum | Optional | Indicates the possibility to board the vehicle with a wheelchair. This field overrides `trips.wheelchair_accessible` if contradictory. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that a rider in a wheelchair can board the vehicle.  <br> `2` - indicates that a rider in a wheelchair cannot board the vehicle. <br> `3` - indicates that a rider in a wheelchair can board the vehicle, but assistance is required. |
+|  `ac_availability` | Enum | Optional | Indicates whether air conditioning is available in the vehicle. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that air conditioning is not available. <br> `2` - indicates that all of the vehicle is air conditioned. <br> `3` - indicates that at least a section of the vehicle is air conditioned. |
+|  `wifi_availability` | Enum | Optional | Indicates whether wifi is available in the vehicle. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that wifi is not available. <br> `2` - indicates that all of the vehicle has wifi. <br> `3` - indicates that at least a section of the vehicle have wifi. |
+|  `wifi_fees` | Enum | Optional | Indicates whether wifi requires fee payment. Valid options are: <br><br> `0` or empty - indicates that information is not available. <br> `1` - indicates that wifi is free. <br> `2` - indicates that wifi requires fee payment. <br> `3` - indicates that wifi is free, but optional fee payments are possible. |
 
 ### vehicle_couplings.txt
 
@@ -408,6 +416,19 @@ The [vehicle_allocations.txt](#vehicle_allocationstxt) table describes the assig
 |  `route_id` | ID referencing `routes.route_id` | **Required** | Identifies a route. |
 |  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Identifies a vehicle category. This field overrides the default `routes.vehicle_category_id`. |
 
+### vehicle_doors.txt
+
+File: **Optional**
+
+The [vehicle_doors.txt](#vehicle_doorstxt) table provides information about vehicle doors.
+
+|  Field Name | Type | Required | Description |
+|  ------ | ------ | ------ | ------ |
+|  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Identifies a vehicle category. |
+|  `door_id` | ID | **Required** | Identifies a door. |
+|  `door_sequence` | Non-negative integer | **Conditionally Required** | Order of doors on the same side of the vehicle category. By convention, for somebody looking at the vehicle from outside, the sequence increases: <br> • from the front to the back of the vehicle, for the doors located on its right and left sides. <br> • from the left to the right of the vehicle, for the doors located on its front and back sides. <br><br> Conditionally Required: <br> • **Required** if multiple doors are on the same side of the vehicle. |
+|  `door_label` | Text | Optional | Short text that can be used to easily identify the vehicle door. <hr> *Examples: <br> `front` and `back` doors for a regular city bus; <br> `side`, `middle`, `side` for a train carriage; <br> `1`, `2`, `3` if doors are numbered.* |
+
 ### vehicle_boardings.txt
 
 File: **Optional**
@@ -420,6 +441,7 @@ The [vehicle_boardings.txt](#vehicle_boardingstxt) table describes the relations
 |  `vehicle_category_id` | ID referencing `vehicle_categories.vehicle_category_id` | **Required** | Identifies the vehicle that will stop at the boarding area. <br><br> If using `vehicle_couplings.txt`, this field must match the `vehicle_category_id` of the grandparent vehicle, or the `vehicle_category_id` of the parent vehicle if a grandparent vehicles is not specified. |
 |  `child_sequence` | Non-negative integer referencing `vehicle_couplings.child_sequence` | **Conditionally Required** | Identifies the child vehicle that will stop at the boarding area. This field is useful when the same child vehicle appears multiple times in its parent vehicle. <br><br> Conditionally Required: <br> • **Required** if using `vehicle_couplings.txt`. |
 |  `grandchild_sequence` | Non-negative integer referencing `vehicle_couplings.child_sequence` | **Conditionally Required** | Identifies the grandchild vehicle that will stop at the boarding area. This field is useful when the same grandchild vehicle appears multiple times in its parent vehicle. <br><br> Conditionally Required: <br> • **Required** if using `vehicle_couplings.txt` and if grandchild vehicles are specified. |
+|  `door_id` | ID referencing `vehicle_doors.door_id` | Optional | Identifies the closest vehicle door to the boarding area when the vehicle has stopped. This `door_id` must be defined as part of this vehicle in `vehicles_doors.txt`.  |
 
 ### feed_info.txt
 
