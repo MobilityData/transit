@@ -26,115 +26,6 @@ syntax = "proto2";
 option java_package = "com.google.transit.realtime";
 package transit_realtime;
 
-message StopTime {
-  required int64 stop_sequence = 1;
-  required uint64 arrival_time = 2;
-  required uint64 departure_time = 3;
-  required string stop_id = 4;
-  optional TranslatedString stop_headsign = 5;
-  optional PickupType pickup_type = 6;
-  optional DropOffType drop_off_type = 7;
-  optional float shape_dist_traveled = 8;
-
-  enum PickupType{
-    REGULAR_PICKUP = 0;
-    NO_PICKUP = 1;
-    MUST_PHONE_AGENCY = 2;
-    MUST_ASK_DRIVER = 3;
-  }
-
-  enum DropOffType{
-    REGULAR_DROP_OFF = 0;
-    NO_DROP_OFF = 1;
-    MUST_PHONE_AGENCY = 2;
-    MUST_ASK_DRIVER = 3;
-  }
-
-}
-
-message StopTimeProperties {
-  optional string platform_id = 1;
-  optional TranslatedString stop_headsign = 2;
-  optional PickupType pickup_type = 3;
-  optional DropOffType drop_off_type = 4;
-  optional float shape_dist_traveled = 5;
-  optional string stop_id = 6;
-
-  enum PickupType {
-    REGULAR_PICKUP = 0;
-    NO_PICKUP = 1;
-    MUST_PHONE_AGENCY = 2;
-    MUST_ASK_DRIVER = 3;
-  }
-
-  enum DropOffType {
-    REGULAR_DROP_OFF = 0;
-    NO_DROP_OFF = 1;
-    MUST_PHONE_AGENCY = 2;
-    MUST_ASK_DRIVER = 3;
-  }
-}
-
-message VehicleProperties {
-  optional WheelchairAccessibleStatus wheelchair_accessible = 1;
-  optional BikesAllowedStatus biked_allowed = 2;
-
-  enum WheelchairAccessibleStatus {
-    UNKNOWN_WHEELCHAIR_ACCESSIBILITY = 0;
-    WHEELCHAIR_ACCESSIBLE = 1;
-    NOT_WHEELCHAIR_ACCESSIBLE = 2;
-  }
-
-  enum BikesAllowedStatus {
-    UNKNOWN_BIKES_ALLOWANCE = 0;
-    BIKES_ALLOWED = 1;
-    BIKES_NOT_ALLOWED = 2;
-  }
-}
-
-message Trip {
-
-  required string trip_id = 1;
-  optional string route_id = 2;
-  required TranslatedString trip_headsign = 3 ;
-  required string trip_short_name = 4;
-  optional int64 direction_id = 5;
-  optional string block_id = 6;
-  optional string shape_id = 7;
-  optional WheelchairAccessibleStatus wheelchair_accessible = 8;
-  optional BikesAllowedStatus biked_allowed = 9;
-  optional string replaces_trip_id = 10;
-
-  enum WheelchairAccessibleStatus {
-    UNKNOWN_WHEELCHAIR_ACCESSIBILITY = 0;
-    WHEELCHAIR_ACCESSIBLE = 1;
-    NOT_WHEELCHAIR_ACCESSIBLE = 2;
-  }
-
-  enum BikesAllowedStatus {
-    UNKNOWN_BIKES_ALLOWANCE = 0;
-    BIKES_ALLOWED = 1;
-    BIKES_NOT_ALLOWED = 2;
-  }
-
-
-
-}
-
-message TripProperties {
-  // Metadata about this feed and feed message.
-  required string id = 1;
-  required string start_date = 2;
-  required string start_time = 3;
-  optional string route_id = 4;
-  optional TranslatedString trip_headsign = 5;
-  optional TranslatedString trip_short_name = 6;
-  optional string block_id = 7;
-  optional string shape_id = 8;
-
-}
-
-
 // The contents of a feed message.
 // A feed is a continuous stream of feed messages. Each message in the stream is
 // obtained as a response to an appropriate HTTP GET request.
@@ -189,63 +80,6 @@ message FeedHeader {
 
   // The following extension IDs are reserved for private use by any organization.
   extensions 9000 to 9999;
-}
-
-message Shape{
-  required string shape_id = 1;
-  required ShapePoint shape_point = 2;
-}
-
-message ShapePoint {
-  required float shape_pt_lat = 1;
-  required float shape_pt_lon = 2;
-  optional float shape_dist_traveled = 3;
-}
-
-message Route {
-  required string route_id = 1;
-  required string agency_id = 2;
-  optional TranslatedString route_short_name = 3;
-  optional TranslatedString route_long_name = 4;
-  optional TranslatedString route_desc = 5;
-  optional RouteType route_type = 6;
-  optional TranslatedString route_url = 7;
-  optional string route_color = 8;
-  optional string route_text_color = 9;
-  optional uint32 route_sort_order = 10;
-
-  enum RouteType {
-    LIGHT_RAIL = 0;
-    SUBWAY = 1;
-    RAIL = 2;
-    BUS = 3;
-    FERRY = 4;
-    CABLE_CAR =5;
-    GONDOLA = 6;
-    FUNICULAR =7;
-  }
-}
-
-message Stop {
-  required string stop_id = 1;
-  optional string stop_code = 2;
-  required TranslatedString stop_name = 3;
-  optional TranslatedString stop_desc = 4;
-  required float stop_lat = 5;
-  required float stop_lon = 6;
-  optional string zone_id = 7;
-  optional TranslatedString stop_url = 8;
-  optional string parent_station = 9;
-  optional string stop_timezone = 10;
-  optional WheelchairBoardingStatus wheelchair_boarding = 11;
-  optional string level_id = 12;
-  optional string platform_code = 13;
-
-  enum WheelchairBoardingStatus{
-    UNKNOWN_WHEELCHAIR_BOARDING = 0;
-    WHEELCHAIR_ACCESSIBLE = 1;
-    NOT_WHEELCHAIR_ACCESSIBLE = 2;
-  }
 }
 
 // A definition (or update) of an entity in the transit feed.
@@ -893,4 +727,163 @@ message TranslatedString {
 
   // The following extension IDs are reserved for private use by any organization.
   extensions 9000 to 9999;
+}
+
+message TripProperties {
+  // Metadata about this feed and feed message.
+  required string id = 1;
+  required string start_date = 2;
+  required string start_time = 3;
+  optional string route_id = 4;
+  optional TranslatedString trip_headsign = 5;
+  optional TranslatedString trip_short_name = 6;
+  optional string block_id = 7;
+  optional string shape_id = 8;
+}
+
+message VehicleProperties {
+  optional WheelchairAccessibleStatus wheelchair_accessible = 1;
+  optional BikesAllowedStatus biked_allowed = 2;
+
+  enum WheelchairAccessibleStatus {
+    UNKNOWN_WHEELCHAIR_ACCESSIBILITY = 0;
+    WHEELCHAIR_ACCESSIBLE = 1;
+    NOT_WHEELCHAIR_ACCESSIBLE = 2;
+  }
+
+  enum BikesAllowedStatus {
+    UNKNOWN_BIKES_ALLOWANCE = 0;
+    BIKES_ALLOWED = 1;
+    BIKES_NOT_ALLOWED = 2;
+  }
+}
+
+message StopTimeProperties {
+  optional string platform_id = 1;
+  optional TranslatedString stop_headsign = 2;
+  optional PickupType pickup_type = 3;
+  optional DropOffType drop_off_type = 4;
+  optional float shape_dist_traveled = 5;
+  optional string stop_id = 6;
+
+  enum PickupType {
+    REGULAR_PICKUP = 0;
+    NO_PICKUP = 1;
+    MUST_PHONE_AGENCY = 2;
+    MUST_ASK_DRIVER = 3;
+  }
+
+  enum DropOffType {
+    REGULAR_DROP_OFF = 0;
+    NO_DROP_OFF = 1;
+    MUST_PHONE_AGENCY = 2;
+    MUST_ASK_DRIVER = 3;
+  }
+}
+
+message Trip {
+
+  required string trip_id = 1;
+  optional string route_id = 2;
+  required TranslatedString trip_headsign = 3 ;
+  required string trip_short_name = 4;
+  optional int64 direction_id = 5;
+  optional string block_id = 6;
+  optional string shape_id = 7;
+  optional WheelchairAccessibleStatus wheelchair_accessible = 8;
+  optional BikesAllowedStatus biked_allowed = 9;
+  optional string replaces_trip_id = 10;
+
+  enum WheelchairAccessibleStatus {
+    UNKNOWN_WHEELCHAIR_ACCESSIBILITY = 0;
+    WHEELCHAIR_ACCESSIBLE = 1;
+    NOT_WHEELCHAIR_ACCESSIBLE = 2;
+  }
+
+  enum BikesAllowedStatus {
+    UNKNOWN_BIKES_ALLOWANCE = 0;
+    BIKES_ALLOWED = 1;
+    BIKES_NOT_ALLOWED = 2;
+  }
+}
+message StopTime {
+  required int64 stop_sequence = 1;
+  required uint64 arrival_time = 2;
+  required uint64 departure_time = 3;
+  required string stop_id = 4;
+  optional TranslatedString stop_headsign = 5;
+  optional PickupType pickup_type = 6;
+  optional DropOffType drop_off_type = 7;
+  optional float shape_dist_traveled = 8;
+
+  enum PickupType{
+    REGULAR_PICKUP = 0;
+    NO_PICKUP = 1;
+    MUST_PHONE_AGENCY = 2;
+    MUST_ASK_DRIVER = 3;
+  }
+
+  enum DropOffType{
+    REGULAR_DROP_OFF = 0;
+    NO_DROP_OFF = 1;
+    MUST_PHONE_AGENCY = 2;
+    MUST_ASK_DRIVER = 3;
+  }
+}
+
+message Shape {
+  required string shape_id = 1;
+  required ShapePoint shape_point = 2;
+}
+
+message ShapePoint {
+  required float shape_pt_lat = 1;
+  required float shape_pt_lon = 2;
+  optional float shape_dist_traveled = 3;
+}
+
+message Route {
+  required string route_id = 1;
+  required string agency_id = 2;
+  optional TranslatedString route_short_name = 3;
+  optional TranslatedString route_long_name = 4;
+  optional TranslatedString route_desc = 5;
+  optional RouteType route_type = 6;
+  optional TranslatedString route_url = 7;
+  optional string route_color = 8;
+  optional string route_text_color = 9;
+  optional uint32 route_sort_order = 10;
+
+  enum RouteType {
+    LIGHT_RAIL = 0;
+    SUBWAY = 1;
+    RAIL = 2;
+    BUS = 3;
+    FERRY = 4;
+    CABLE_CAR =5;
+    GONDOLA = 6;
+    FUNICULAR =7;
+  }
+}
+
+message Stop {
+  required string stop_id = 1;
+  optional string stop_code = 2;
+  required TranslatedString stop_name = 3;
+  optional TranslatedString stop_desc = 4;
+  required float stop_lat = 5;
+  required float stop_lon = 6;
+  optional string zone_id = 7;
+  optional TranslatedString stop_url = 8;
+  optional string parent_station = 9;
+  optional string stop_timezone = 10;
+  optional WheelchairBoardingStatus wheelchair_boarding = 11;
+  optional string level_id = 12;
+  optional string platform_code = 13;
+
+  enum WheelchairBoardingStatus {
+    UNKNOWN_WHEELCHAIR_BOARDING = 0;
+    WHEELCHAIR_ACCESSIBLE = 1;
+    NOT_WHEELCHAIR_ACCESSIBLE = 2;
+  }
 }
