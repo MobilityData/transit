@@ -860,9 +860,9 @@ message Route {
     RAIL = 2;
     BUS = 3;
     FERRY = 4;
-    CABLE_CAR =5;
+    CABLE_CAR = 5;
     GONDOLA = 6;
-    FUNICULAR =7;
+    FUNICULAR = 7;
   }
 }
 
