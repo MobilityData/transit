@@ -188,7 +188,7 @@ message TripUpdate {
     // To specify a completely certain prediction, set its uncertainty to 0.
     optional int32 uncertainty = 3;
 
-    optional int64 scheduled_time = 4;
+    optional int64 schedule_time = 4;
 
     // The extensions namespace allows 3rd-party developers to extend the
     // GTFS Realtime Specification in order to add and evaluate new features
@@ -729,6 +729,7 @@ message TranslatedString {
   extensions 9000 to 9999;
 }
 
+//
 message TripProperties {
   // Metadata about this feed and feed message.
   required string id = 1;
@@ -782,7 +783,6 @@ message StopTimeProperties {
 }
 
 message Trip {
-
   required string trip_id = 1;
   optional string route_id = 2;
   required TranslatedString trip_headsign = 3 ;
@@ -816,14 +816,14 @@ message StopTime {
   optional DropOffType drop_off_type = 7;
   optional float shape_dist_traveled = 8;
 
-  enum PickupType{
+  enum PickupType {
     REGULAR_PICKUP = 0;
     NO_PICKUP = 1;
     MUST_PHONE_AGENCY = 2;
     MUST_ASK_DRIVER = 3;
   }
 
-  enum DropOffType{
+  enum DropOffType {
     REGULAR_DROP_OFF = 0;
     NO_DROP_OFF = 1;
     MUST_PHONE_AGENCY = 2;
