@@ -26,7 +26,7 @@ syntax = "proto2";
 option java_package = "com.google.transit.realtime";
 package transit_realtime;
 
-message StopTime{
+message StopTime {
   required int64 stop_sequence = 1;
   required uint64 arrival_time = 2;
   required uint64 departure_time = 3;
@@ -52,7 +52,7 @@ message StopTime{
 
 }
 
-message StopTimeProperties{
+message StopTimeProperties {
   optional string platform_id = 1;
   optional TranslatedString stop_headsign = 2;
   optional PickupType pickup_type = 3;
@@ -60,14 +60,14 @@ message StopTimeProperties{
   optional float shape_dist_traveled = 5;
   optional string stop_id = 6;
 
-  enum PickupType{
+  enum PickupType {
     REGULAR_PICKUP = 0;
     NO_PICKUP = 1;
     MUST_PHONE_AGENCY = 2;
     MUST_ASK_DRIVER = 3;
   }
 
-  enum DropOffType{
+  enum DropOffType {
     REGULAR_DROP_OFF = 0;
     NO_DROP_OFF = 1;
     MUST_PHONE_AGENCY = 2;
@@ -75,23 +75,22 @@ message StopTimeProperties{
   }
 }
 
-message VehicleProperties{
+message VehicleProperties {
   optional WheelchairAccessibleStatus wheelchair_accessible = 1;
-  optional BikesAllowedSatus biked_allowed = 2;
+  optional BikesAllowedStatus biked_allowed = 2;
 
-  enum WheelchairAccessibleStatus{
+  enum WheelchairAccessibleStatus {
     UNKNOWN_WHEELCHAIR_ACCESSIBILITY = 0;
     WHEELCHAIR_ACCESSIBLE = 1;
     NOT_WHEELCHAIR_ACCESSIBLE = 2;
   }
 
-  enum BikesAllowedSatus{
+  enum BikesAllowedStatus {
     UNKNOWN_BIKES_ALLOWANCE = 0;
     BIKES_ALLOWED = 1;
     BIKES_NOT_ALLOWED = 2;
   }
 }
-
 
 message Trip {
 
@@ -103,16 +102,16 @@ message Trip {
   optional string block_id = 6;
   optional string shape_id = 7;
   optional WheelchairAccessibleStatus wheelchair_accessible = 8;
-  optional BikesAllowedSatus biked_allowed = 9;
+  optional BikesAllowedStatus biked_allowed = 9;
   optional string replaces_trip_id = 10;
 
-  enum WheelchairAccessibleStatus{
+  enum WheelchairAccessibleStatus {
     UNKNOWN_WHEELCHAIR_ACCESSIBILITY = 0;
     WHEELCHAIR_ACCESSIBLE = 1;
     NOT_WHEELCHAIR_ACCESSIBLE = 2;
   }
 
-  enum BikesAllowedSatus{
+  enum BikesAllowedStatus {
     UNKNOWN_BIKES_ALLOWANCE = 0;
     BIKES_ALLOWED = 1;
     BIKES_NOT_ALLOWED = 2;
@@ -197,13 +196,13 @@ message Shape{
   required ShapePoint shape_point = 2;
 }
 
-message ShapePoint{
+message ShapePoint {
   required float shape_pt_lat = 1;
   required float shape_pt_lon = 2;
   optional float shape_dist_traveled = 3;
 }
 
-message Route{
+message Route {
   required string route_id = 1;
   required string agency_id = 2;
   optional TranslatedString route_short_name = 3;
@@ -215,7 +214,7 @@ message Route{
   optional string route_text_color = 9;
   optional uint32 route_sort_order = 10;
 
-  enum RouteType{
+  enum RouteType {
     LIGHT_RAIL = 0;
     SUBWAY = 1;
     RAIL = 2;
@@ -227,7 +226,7 @@ message Route{
   }
 }
 
-message Stop{
+message Stop {
   required string stop_id = 1;
   optional string stop_code = 2;
   required TranslatedString stop_name = 3;
@@ -247,8 +246,6 @@ message Stop{
     WHEELCHAIR_ACCESSIBLE = 1;
     NOT_WHEELCHAIR_ACCESSIBLE = 2;
   }
-
-
 }
 
 // A definition (or update) of an entity in the transit feed.
