@@ -848,7 +848,7 @@ message Route {
   optional TranslatedString route_short_name = 3;
   optional TranslatedString route_long_name = 4;
   optional TranslatedString route_desc = 5;
-  optional RouteType route_type = 6;
+  required RouteType route_type = 6;
   optional TranslatedString route_url = 7;
   optional string route_color = 8;
   optional string route_text_color = 9;
