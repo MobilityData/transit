@@ -868,7 +868,7 @@ message Route {
 
 message Stop {
   required string stop_id = 1;
-  optional string stop_code = 2;
+  optional TranslatedString stop_code = 2;
   required TranslatedString stop_name = 3;
   optional TranslatedString stop_desc = 4;
   required float stop_lat = 5;
