@@ -801,16 +801,16 @@ message StopTimeProperties {
   enum PickupType {
     REGULAR_PICKUP = 0;
     NO_PICKUP = 1;
-    MUST_PHONE_AGENCY = 2;
-    MUST_ASK_DRIVER = 3;
+    MUST_PHONE_AGENCY_PICKUP = 2;
+    MUST_ASK_DRIVER_PICKUP = 3;
   }
 
   // Valid options for drop_off_type:
   enum DropOffType {
     REGULAR_DROP_OFF = 0;
     NO_DROP_OFF = 1;
-//    MUST_PHONE_AGENCY = 2;
-//    MUST_ASK_DRIVER = 3;
+    MUST_PHONE_AGENCY_DROP_OFF = 2;
+    MUST_ASK_DRIVER_DROP_OFF = 3;
   }
 }
 
@@ -885,8 +885,8 @@ message StopTime {
   enum PickupType {
     REGULAR_PICKUP = 0;
     NO_PICKUP = 1;
-    MUST_PHONE_AGENCY = 2;
-    MUST_ASK_DRIVER = 3;
+    MUST_PHONE_AGENCY_PICKUP = 2;
+    MUST_ASK_DRIVER_PICK_UP = 3;
   }
 
   // Valid options for drop_off_type:
@@ -897,8 +897,8 @@ message StopTime {
   enum DropOffType {
     REGULAR_DROP_OFF = 0;
     NO_DROP_OFF = 1;
-//    MUST_PHONE_AGENCY = 2;
-//    MUST_ASK_DRIVER = 3;
+    MUST_PHONE_AGENCY_DROP_OFF = 2;
+    MUST_ASK_DRIVER_DROP_OFF = 3;
   }
 }
 
