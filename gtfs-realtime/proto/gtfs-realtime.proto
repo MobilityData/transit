@@ -762,7 +762,7 @@ message VehicleProperties {
   optional BikesAllowedStatus biked_allowed = 2 [default = UNKNOWN_BIKES_ALLOWANCE];
 
   // Options for wheelchair_accessible:
-  // 0 or empty - No accessibility information for the trip.
+  // 0 - No accessibility information for the trip.
   // 1 - Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.
   // 2 - No riders in wheelchairs can be accommodated on this trip.
   enum WheelchairAccessibleStatus {
@@ -772,9 +772,9 @@ message VehicleProperties {
   }
 
   // Options for biked_allowed:
-  //0 or empty - No bike information for the trip.
-  //1 - Vehicle being used on this particular trip can accommodate at least one bicycle.
-  //2 - No bicycles are allowed on this trip.
+  // 0 - No bike information for the trip.
+  // 1 - Vehicle being used on this particular trip can accommodate at least one bicycle.
+  // 2 - No bicycles are allowed on this trip.
   enum BikesAllowedStatus {
     UNKNOWN_BIKES_ALLOWANCE = 0;
     BIKES_ALLOWED = 1;
@@ -838,7 +838,7 @@ message Trip {
   repeated string replaces_trip_id = 10;
 
   // Options for wheelchair_accessible:
-  // 0 or empty - No accessibility information for the trip.
+  // 0 - No accessibility information for the trip.
   // 1 - Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.
   // 2 - No riders in wheelchairs can be accommodated on this trip.
   enum WheelchairAccessibleStatus {
@@ -848,7 +848,7 @@ message Trip {
   }
 
   // Options for biked_allowed:
-  // 0 or empty - No bike information for the trip.
+  // 0 - No bike information for the trip.
   // 1 - Vehicle being used on this particular trip can accommodate at least one bicycle.
   // 2 - No bicycles are allowed on this trip.
   enum BikesAllowedStatus {
@@ -878,7 +878,7 @@ message StopTime {
   optional float shape_dist_traveled = 8;
 
   // Valid options for pickup_type:
-  // 0 or empty - Regularly scheduled pickup.
+  // 0 - Regularly scheduled pickup.
   // 1 - No pickup available.
   // 2 - Must phone agency to arrange pickup.
   // 3 - Must coordinate with driver to arrange pickup.
@@ -886,11 +886,11 @@ message StopTime {
     REGULAR_PICKUP = 0;
     NO_PICKUP = 1;
     MUST_PHONE_AGENCY_PICKUP = 2;
-    MUST_ASK_DRIVER_PICK_UP = 3;
+    MUST_ASK_DRIVER_PICKUP = 3;
   }
 
   // Valid options for drop_off_type:
-  // 0 or empty - Regularly scheduled drop off.
+  // 0 - Regularly scheduled drop off.
   // 1 - No drop off available.
   // 2 - Must phone agency to arrange drop off.
   // 3 - Must coordinate with driver to arrange drop off.
@@ -907,7 +907,7 @@ message Shape {
   // Identifier of the shape. Must be different than any shape_id defined in the GTFS.
   required string shape_id = 1;
   // Points in the shape. A shape must contain at least two shape points. The shape points order in this field defines their order in the shape.
-  required ShapePoint shape_point = 2;
+  repeated ShapePoint shape_point = 2;
 }
 
 // Defines the geographical representation of a point in a shape.
