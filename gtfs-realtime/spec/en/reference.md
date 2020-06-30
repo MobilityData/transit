@@ -425,7 +425,7 @@ At least one specifier must be given - all fields in an EntitySelector cannot be
 | **route_type** | [int32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | To affect all the trips for a particular route type, use the route_type from the GTFS feed.
 | **direction_id** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | The direction_id from the GTFS feed trips.txt file, used to select all trips in one direction for a route, specified by route_id. If direction_id is provided, route_id must also be provided. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future.<br>|
 | **trip** | [TripDescriptor](#message-tripdescriptor) | Conditionally required | One | To affect a single trip, use the TripDescriptor with values from the GTFS feed. This TripDescriptor must resolve to a single trip instance in the GTFS data (e.g., a producer cannot provide only a trip_id for exact_times=0 trips). If the ScheduleRelationship field is populated within this TripDescriptor it will be ignored by consumers when attempting to identify the GTFS trip.
-| **stop_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | To affect a particular stop, use the stop_id from the GTFS feed.
+| **stop_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Conditionally required | One | To affect a particular stop, use the stop_id from the GTFS feed. If no additional EntitySelector fields are populated, this will affect all trips serving this stop.
 
 ## _message_ TranslatedString
 
