@@ -257,7 +257,7 @@ Congestion level that is affecting this vehicle.
 | **CONGESTION** |
 | **SEVERE_CONGESTION** |
 
-## _enum OccupancyStatus_
+## _enum_ OccupancyStatus
 
 The degree of passenger occupancy for the vehicle.
 
@@ -286,7 +286,7 @@ Coach-specific status, used for vehicles composed of several carriages
 | _**Field Name**_ | _**Type**_ | _**Required**_ | _**Cardinality**_ | _**Description**_ |
 |------------------|------------|----------------|-------------------|-------------------|
 | **coach_sequence** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Required | One |  Identifies the order of this coach with respect to the other coaches in the vehicle's list of `CoachStatus`. This value is required and must be non-negative, and there cannot be duplicate values in the list of `CoachStatus`. The values must be set such that the lowest value corresponds to the first coach in the direction of travel, the second-lowest value corresponds to the second coach in the direction of travel and so forth. For example, the first coach in the direction of travel could have a coach_sequence of 4, the second coach could have a coach_sequence of 10, the third coach could have a coach_sequence of 105, and so forth. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
-| **occupancy_status** | [OccupancyStatus](#enum-occupancystatus)_ | Optional | One | Occupancy status for this coach, in this vehicle. If `OccupancyStatus` is unknown, this field should not be provided. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
+| **occupancy_status** | [OccupancyStatus](#enum-occupancystatus) | Optional | One | Occupancy status for this coach, in this vehicle. If `OccupancyStatus` is unknown, this field should not be provided. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
 | **occupancy_percentage** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | Occupancy percentage for this coach, in this vehicle. Follows the same rules as `VehiclePosition.occupancy_percentage`. If `occupancy_percentage` is unknown, this field should not be provided. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
 
 ## _message_ Alert
