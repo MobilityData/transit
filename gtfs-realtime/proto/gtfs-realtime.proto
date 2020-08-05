@@ -419,11 +419,6 @@ message VehiclePosition {
 
     // The vehicle is not accepting additional passengers.
     NOT_ACCEPTING_PASSENGERS = 6;
-
-    // There is no data available for this car in this vehicle. Used in context of multi car crowding. 
-    // Useful for padding, in case a vehicle composed of several cars has data available only for some of those
-    NO_DATA_AVAILABLE = 7;
-
   }
   optional OccupancyStatus occupancy_status = 9;
 
@@ -436,17 +431,29 @@ message VehiclePosition {
   // This field is still experimental, and subject to change. It may be formally adopted in the future.
   optional uint32 occupancy_percentage = 10;
 
-  // Car specific details, used for vehicles composed of several cars
-  message CarDetails {
+  // Coach-specific status, used for vehicles composed of several carriages
+  // This message is still experimental, and subject to change. It may be formally adopted in the future.
+  message CoachStatus {
+    // Identifies the order of this coach with respect to the other
+    // coaches in the vehicle's list of CoachStatus. This value is required
+    // and must be non-negative, and there cannot be duplicate values in the list of
+    // CoachStatus. The values must be set such that the lowest value
+    // corresponds to the first coach in the direction of travel, the
+    // second-lowest value corresponds to the second coach in the direction
+    // of travel and so forth. For example, the first coach in the direction
+    // of travel could have a coach_sequence of 4, the second coach could
+    // have a coach_sequence of 10, the third coach could have a
+    // coach_sequence of 105, and so forth.
+    optional uint32 coach_sequence = 1;
 
-    // Occupancy status for this given car, in this vehicle
-    optional OccupancyStatus occupancy_status = 1;
+    // Occupancy status for this coach, in this vehicle. If OccupancyStatus is unknown,
+    // this field should not be provided.
+    optional OccupancyStatus occupancy_status = 2;
 
-    // Occupancy percentage for this given car, in this vehicle
+    // Occupancy percentage for this coach, in this vehicle
     // Follows the same rules as "VehiclePosition.occupancy_percentage"
-    // In addition, value -1 will be used to determine that crowding percentage is currently not available for this given car
-    // -1 is useful for padding, in case a vehicle composed of several cars has data available only for some of those
-    optional int32 occupancy_percentage = 2;
+    // If occupancy_percentage is unknown, this field should not be provided.
+    optional uint32 occupancy_percentage = 3;
 
     // The extensions namespace allows 3rd-party developers to extend the
     // GTFS Realtime Specification in order to add and evaluate new features and
@@ -457,10 +464,13 @@ message VehiclePosition {
     extensions 9000 to 9999;
   }
 
-  // Details of the multiple cars of this given vehicle.
-  // The first occurence represents the first car of the vehicle, given the current direction of travel. 
-  // The number of occurrences of the multi_car_details field represents the number of cars of the vehicle.
-  repeated CarDetails multi_car_details = 11;
+  // Status of the multiple coaches/carriages of this vehicle, ordered by CoachStatus.coach_sequence
+  // with the first occurrence represents the first coach of the vehicle, given the current direction of travel.
+  // The number of occurrences of the coach_status field represents the number of coaches of the vehicle.
+  // If a coach has no data, it should still be included in this list with a coach_sequence but without
+  // the remaining fields for which data is lacking.
+  // This field is still experimental, and subject to change. It may be formally adopted in the future.
+  repeated CoachStatus coach_status = 11;
 
   // The extensions namespace allows 3rd-party developers to extend the
   // GTFS Realtime Specification in order to add and evaluate new features and

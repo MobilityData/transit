@@ -228,10 +228,10 @@ Realtime positioning information for a given vehicle.
 | **stop_id** | [string](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | Identifies the current stop. The value must be the same as in stops.txt in the corresponding GTFS feed. |
 | **current_status** | [VehicleStopStatus](#enum-vehiclestopstatus) | Optional | One | The exact status of the vehicle with respect to the current stop. Ignored if current_stop_sequence is missing. |
 | **timestamp** | [uint64](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | Moment at which the vehicle's position was measured. In POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). |
-| **congestion_level** | [CongestionLevel](#enum-congestionlevel) | Optional | One |
-| _**occupancy_status**_ | _[OccupancyStatus](#enum-occupancystatus)_ | _Optional_ | One | The degree of passenger occupancy of the vehicle.<br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future.|
-| **occupancy_percentage** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | A percentage value representing the degree of passenger occupancy of the vehicle. The value 100 should represent total the maximum occupancy the vehicle was designed for, including both seating and standing capacity, and current operating regulations allow. It's not impossible that the value goes over 100 if there are currently more passenger than the vehicle was designed for. The precision of occupancy_percentage should be low enough that you can't track a single person boarding and alighting for privacy reasons.<br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
-
+| **congestion_level** | [CongestionLevel](#enum-congestionlevel) | Optional | One | 
+| **occupancy_status** | [OccupancyStatus](#enum-occupancystatus) | Optional | One | The degree of passenger occupancy of the vehicle. If `coach_status` is populated with per-coach `occupancy_status`, then this field should describe the entire vehicle with all coaches considered. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future.|
+| **occupancy_percentage** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | A percentage value representing the degree of passenger occupancy of the vehicle. The value 100 should represent total the maximum occupancy the vehicle was designed for, including both seating and standing capacity, and current operating regulations allow. It's not impossible that the value goes over 100 if there are currently more passenger than the vehicle was designed for. The precision of occupancy_percentage should be low enough that you can't track a single person boarding and alighting for privacy reasons. If `coach_status` is populated with per-coach `occupancy_percentage`, then this field should describe the entire vehicle with all coaches considered. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
+| **coach_status** | [CoachStatus](#enum-coachstatus) | Optional | Many | Status of the multiple coaches/carriages of this vehicle, ordered by CoachStatus.coach_sequence with the first occurrence represents the first coach of the vehicle, given the current direction of travel. The number of occurrences of the coach_status field represents the number of coaches of the vehicle. If a coach has no data, it should still be included in this list with a coach_sequence but without the remaining fields for which data is lacking. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future.|
 
 ## _enum_ VehicleStopStatus
 
@@ -274,6 +274,20 @@ The degree of passenger occupancy for the vehicle.
 | _**CRUSHED_STANDING_ROOM_ONLY**_ | _The vehicle can currently accommodate only standing passengers and has limited space for them._ |
 | _**FULL**_ | _The vehicle is considered full by most measures, but may still be allowing passengers to board._ |
 | _**NOT_ACCEPTING_PASSENGERS**_ | _The vehicle can not accept passengers._ |
+
+## _message_ CoachStatus
+
+Coach-specific status, used for vehicles composed of several carriages
+
+**Caution:** this message is still **experimental**, and subject to change. It may be formally adopted in the future.<br>.
+
+#### Fields
+
+| _**Field Name**_ | _**Type**_ | _**Required**_ | _**Cardinality**_ | _**Description**_ |
+|------------------|------------|----------------|-------------------|-------------------|
+| **coach_sequence** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Required | One |  Identifies the order of this coach with respect to the other coaches in the vehicle's list of `CoachStatus`. This value is required and must be non-negative, and there cannot be duplicate values in the list of `CoachStatus`. The values must be set such that the lowest value corresponds to the first coach in the direction of travel, the second-lowest value corresponds to the second coach in the direction of travel and so forth. For example, the first coach in the direction of travel could have a coach_sequence of 4, the second coach could have a coach_sequence of 10, the third coach could have a coach_sequence of 105, and so forth. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
+| **occupancy_status** | [OccupancyStatus](#enum-occupancystatus)_ | Optional | One | Occupancy status for this coach, in this vehicle. If `OccupancyStatus` is unknown, this field should not be provided. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
+| **occupancy_percentage** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | Occupancy percentage for this coach, in this vehicle. Follows the same rules as `VehiclePosition.occupancy_percentage`. If `occupancy_percentage` is unknown, this field should not be provided. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
 
 ## _message_ Alert
 
