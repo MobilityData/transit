@@ -229,8 +229,8 @@ Realtime positioning information for a given vehicle.
 | **current_status** | [VehicleStopStatus](#enum-vehiclestopstatus) | Optional | One | The exact status of the vehicle with respect to the current stop. Ignored if current_stop_sequence is missing. |
 | **timestamp** | [uint64](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | Moment at which the vehicle's position was measured. In POSIX time (i.e., number of seconds since January 1st 1970 00:00:00 UTC). |
 | **congestion_level** | [CongestionLevel](#enum-congestionlevel) | Optional | One |
-| _**occupancy_status**_ | _[OccupancyStatus](#enum-occupancystatus)_ | _Optional_ | One | The degree of passenger occupancy of the vehicle.<br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future.|
-| **occupancy_percentage** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | A percentage value representing the degree of passenger occupancy of the vehicle. The value 100 should represent total the maximum occupancy the vehicle was designed for, including both seating and standing capacity, and current operating regulations allow. It's not impossible that the value goes over 100 if there are currently more passenger than the vehicle was designed for. The precision of occupancy_percentage should be low enough that you can't track a single person boarding and alighting for privacy reasons.<br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
+| **occupancy_status** | [OccupancyStatus](#enum-occupancystatus) | Optional | One | The degree of passenger occupancy of the vehicle.<br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future.|
+| **occupancy_percentage** | [uint32](https://developers.google.com/protocol-buffers/docs/proto#scalar) | Optional | One | A percentage value representing the degree of passenger occupancy of the vehicle. The value 100 should represent total the maximum occupancy the vehicle was designed for, including both seating and standing capacity, and current operating regulations allow. It's not impossible that the value goes over 100 if there are currently more passenger than the vehicle was designed for. The precision of occupancy_percentage should be low enough that you can't track a single person boarding and alighting for privacy reasons. A value of -1 indicates that no data is available for this vehicle. <br>**Caution:** this field is still **experimental**, and subject to change. It may be formally adopted in the future. |
 
 
 ## _enum_ VehicleStopStatus
@@ -274,6 +274,7 @@ The degree of passenger occupancy for the vehicle.
 | _**CRUSHED_STANDING_ROOM_ONLY**_ | _The vehicle can currently accommodate only standing passengers and has limited space for them._ |
 | _**FULL**_ | _The vehicle is considered full by most measures, but may still be allowing passengers to board._ |
 | _**NOT_ACCEPTING_PASSENGERS**_ | _The vehicle can not accept passengers._ |
+| _**NO_DATA_AVAILABLE**_ | _The vehicle doesn't have any occupancy data available at this time._ |
 
 ## _message_ Alert
 
