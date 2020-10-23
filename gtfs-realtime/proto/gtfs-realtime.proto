@@ -267,6 +267,8 @@ message TripUpdate {
       // The following extension IDs are reserved for private use by any organization.
       extensions 9000 to 9999;
     }
+
+    // Realtime updates for certain properties defined within GTFS stop_times.txt
     // NOTE: This field is still experimental, and subject to change. It may be formally adopted in the future.
     optional StopTimeProperties stop_time_properties = 6;
 
