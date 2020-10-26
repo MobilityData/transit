@@ -273,7 +273,15 @@ The degree of passenger occupancy for the vehicle.
 | _**STANDING_ROOM_ONLY**_ | _The vehicle can currently accommodate only standing passengers._ |
 | _**CRUSHED_STANDING_ROOM_ONLY**_ | _The vehicle can currently accommodate only standing passengers and has limited space for them._ |
 | _**FULL**_ | _The vehicle is considered full by most measures, but may still be allowing passengers to board._ |
-| _**NOT_ACCEPTING_PASSENGERS**_ | _The vehicle can not accept passengers._ |
+
+As an example, below is the conversion table from percentage of seats taken to OccupancyStatus published by the [Transport for New South Wales](https://opendata.transport.nsw.gov.au/dataset/train-occupancy-nov-2016-feb-2017) (TfNSW). TfNSW estimates the number of seat taken by using carriage weight and the percentage of seats taken can be more than 100%. Normalized percentage of seats taken is also provided in the third column.
+
+OccupancyStatus | Percentage of seats taken (%)
+-- | --
+MANY_SEATS_AVAILABLE | 0-65
+FEW_SEATS_AVAILABLE | 65-105
+STANDING_ROOM_ONLY | >=105
+
 
 ## _message_ Alert
 
