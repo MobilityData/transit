@@ -1,6 +1,7 @@
 ## General Transit Feed Specification Reference
 
-**Revised January 17, 2019. See [Revision History](../../CHANGES.md) for more details.**
+**Revised on latest [commit](https://github.com/google/transit/commits/master
+). See [Revision History](../../CHANGES.md) for more details.**
 
 This document defines the format and structure of the files that comprise a GTFS dataset.
 
