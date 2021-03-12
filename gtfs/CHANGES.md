@@ -49,7 +49,7 @@ When adding features to the specification, we want to avoid making changes that 
 Every new feature adds complexity to the creation and reading of feeds. Therefore, we want to take care to only add features that we know to be useful. Ideally, any proposal will have been tested by generating data for a real transit system that uses the new feature and writing software to read and display it. Note that the GTFS readily allows for extensions to the format through the addition of extra columns and files that are ignored by the official parsers & validators, so proposals can be easily prototyped and tested on existing feeds.
 
 ### Revision History
-Revisions are now tracked on Github at https://github.com/google/transit/commits/master
+Revisions are now tracked on Github at https://github.com/google/transit/commits/master/gtfs/spec/en/reference.md
 
 #### March 16, 2016
 
