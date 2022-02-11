@@ -45,6 +45,7 @@ This section defines terms that are used throughout this document.
 
 ### Presence
 Presence conditions applicable to fields and files:
+
 * **Required** - The field or file must be included in the dataset and contain a valid value for each record.
 * **Optional** - The field or file may be omitted from the dataset.
 * **Conditionally Required** - The field or file must be included under conditions outlined in the field or file description.
@@ -70,6 +71,7 @@ Presence conditions applicable to fields and files:
 
 ### Field Signs
 Signs applicable to Float or Integer field types:
+
 * **Non-negative** - Greater than or equal to 0.
 * **Non-zero** - Not equal to 0.
 * **Positive** - Greater than 0.
@@ -111,7 +113,7 @@ The following requirements apply to the format and contents of the dataset files
 
 * All files must be saved as comma-delimited text.
 * The first line of each file must contain field names. Each subsection of the [Field Definitions](#field-definitions) section corresponds to one of the files in a GTFS dataset and lists the field names that may be used in that file.
-* All field names are case-sensitive.
+* All file and field names are case-sensitive.
 * Field values must not contain tabs, carriage returns or new lines.
 * Field values that contain quotation marks or commas must be enclosed within quotation marks. In addition, each quotation mark in the field value must be preceded with a quotation mark. This is consistent with the manner in which Microsoft Excel outputs comma-delimited (CSV) files. For more information on the CSV file format, see [http://tools.ietf.org/html/rfc4180](http://tools.ietf.org/html/rfc4180).
 The following example demonstrates how a field value would appear in a comma-delimited file:
@@ -363,6 +365,7 @@ Primary key (`from_stop_id`, `to_stop_id`, `from_trip_id`, `to_trip_id`, `from_r
 When calculating an itinerary, GTFS-consuming applications interpolate transfers based on allowable time and stop proximity. [Transfers.txt](#transferstxt) specifies additional rules and overrides for selected transfers.
 
 Fields `from_trip_id`, `to_trip_id`, `from_route_id` and `to_route_id` allow higher orders of specificity for transfer rules. Along with `from_stop_id` and `to_stop_id`, the ranking of specificity is as follows:
+
 1. Both `trip_id`s defined: `from_trip_id` and `to_trip_id`.
 2. One `trip_id` and `route_id` set defined: (`from_trip_id` and `to_route_id`) or (`from_route_id` and `to_trip_id`).
 3. One `trip_id` defined: `from_trip_id` or `to_trip_id`.
@@ -394,6 +397,7 @@ Files [pathways.txt](#pathwaystxt) and [levels.txt](levelstxt) use a graph repre
 To navigate from the station entrance/exit (a node represented as a location with `location_type=2`) to a platform (a node represented as a location with `location_type=0` or empty), the rider will move through walkways, fare gates, stairs, and other edges represented as pathways. Generic nodes (nodes represented with `location_type=3`) can be used to connect pathways throughout a station.
 
 Pathways must be defined exhaustively in a station. If any pathways are defined, it is assumed that all pathways throughout the station are represented. Therefore, the following guidelines apply:
+
 - No dangling locations: If any location within a station has a pathway, then all locations within that station should have pathways, except for platforms that have boarding areas (`location_type=4`, see guideline below).
 - No pathways for a platform with boarding areas: A platform (`location_type=0` or empty) that has boarding areas (`location_type=4`) is treated as a parent object, not a point. In such cases, the platform must not have pathways assigned. All pathways should be assigned for each of the platform's boarding areas.
 - No locked platforms: Each platform (`location_type=0` or empty) or boarding area (`location_type=4`) must be connected to at least one entrance/exit (`location_type=2`) via some chain of pathways. Stations not allowing a pathway to the outside of the station from a given platform are rare.
