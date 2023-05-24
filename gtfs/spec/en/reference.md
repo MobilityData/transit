@@ -319,7 +319,7 @@ There are two modelling options for describing fares. GTFS-Fares V1 is the legac
 |  `currency_type` | Currency code | **Required** | Currency used to pay the fare. |
 |  `payment_method` | Enum | **Required** | Indicates when the fare must be paid. Valid options are:<br><br>`0` - Fare is paid on board.<br>`1` - Fare must be paid before boarding. |
 |  `transfers` | Enum | **Required** | Indicates the number of transfers permitted on this fare. Valid options are:<br><br>`0` - No transfers permitted on this fare.<br>`1` - Riders may transfer once.<br>`2` - Riders may transfer twice.<br>empty - Unlimited transfers are permitted. |
-|  `agency_id` | Foreign ID referencing `agency.agency_id` | **Conditionally Required** | Identifies the relevant agency for a fare. <br><br>Conditionally Required:<br>- **Required** if multiple agencies are defined in `agency.txt`.<br>- Optional otherwise. |
+|  `agency_id` | Foreign ID referencing `agency.agency_id` | **Conditionally Required** | Identifies the relevant agency for a fare. <br><br>Conditionally Required:<br>- **Required** if multiple agencies are defined in `agency.txt`.<br>- Recommended otherwise. |
 |  `transfer_duration` | Non-negative integer | Optional | Length of time in seconds before a transfer expires. When `transfers`=`0` this field may be used to indicate how long a ticket is valid for or it may be left empty. |
 
 ### fare_rules.txt
