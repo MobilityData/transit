@@ -18,7 +18,7 @@ body:
     attributes:
       label: Use cases
       description: >
-        Share examples of the scenarios you want the proposal to address, e.g GTFS-Fares v2 makes it possible to display the cost of a monthly pass.
+        Share examples of the scenarios you want the proposal to address, e.g GTFS-Fares v2 makes it possible to display the cost of a monthly pass. Show visuals of how it will appear to riders where relevant.
     validations:
       required: true
   - type: textarea
