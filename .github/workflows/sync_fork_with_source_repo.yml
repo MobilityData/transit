@@ -1,0 +1,29 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # Runs every Sunday at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Load secrets from 1Password
+        id: onepw_secrets
+        uses: 1password/load-secrets-action@v2.0.0
+        with:
+            export-env: true # Export loaded secrets as environment variables
+        env:
+            OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+            GITHUB_TOKEN: "op://rbiv7rvkkrsdlpcrz3bmv7nmcu/GitHub generic action token for all repos/credential"
+          
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up GitHub CLI
+        run: echo "${{ env.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Sync with upstream
+        run: gh repo sync ${{ github.repository }} -b master
