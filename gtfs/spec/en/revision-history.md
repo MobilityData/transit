@@ -1,5 +1,8 @@
 ### Revision History
 
+#### October 2025
+* Added clarifications for `fare_transfer_rules.txt` and introduced a new `Local Time` field type. See [discussion](https://github.com/google/transit/pull/561).
+
 #### September 2025
 * Added `cemv_support` field in `agency.txt` and `routes.txt`. See [discussion](https://github.com/google/transit/pull/545).
 * Added `stop_access` field in `stops.txt`. See [discussion](https://github.com/google/transit/pull/515).
