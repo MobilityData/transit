@@ -504,8 +504,6 @@ To process the cost of a leg:
 
 <br/>
 
-For network set predicates in `fare_leg_rules.txt` specified below, a leg “travels through a network" if the `route_id` referenced in the trip's `trips.txt` entry belongs to the specified network as defined by [networks.txt](#networkstxt).
-
 
 |  Field Name | Type | Presence | Description |
 |  ------ | ------ | ------ | ------ |
