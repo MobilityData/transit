@@ -95,7 +95,7 @@ Presence conditions applicable to fields and files:
 - **Text** - A string of UTF-8 characters, which is aimed to be displayed and which must therefore be human readable.
 - **Timezone** - TZ timezone from the [https://www.iana.org/time-zones](https://www.iana.org/time-zones). Timezone names never contain the space character but may contain an underscore. Refer to [http://en.wikipedia.org/wiki/List\_of\_tz\_zones](http://en.wikipedia.org/wiki/List\_of\_tz\_zones) for a list of valid values. <br> *Example: `Asia/Tokyo`, `America/Los_Angeles` or `Africa/Cairo`.*
 - **URL** - A fully qualified URL that includes http:// or https://, and any special characters in the URL must be correctly escaped. See the following [http://www.w3.org/Addressing/URL/4\_URI\_Recommentations.html](http://www.w3.org/Addressing/URL/4\_URI\_Recommentations.html) for a description of how to create fully qualified URL values.
-- **SPDX ID**: [SPDX license identifier](https://spdx.dev/learn/handling-license-info/#:~:text=SEE%20LICENSE%20LIST-,SPDX%20License%20IDs,-//%20SPDX%2DLicense%2DIdentifier) which communicates license information in a simple and machine-readable manner. Valid SPDX ID values can be found in the [SPDX License list](https://spdx.org/licenses/#:~:text=Foundation%20Collaborative%20Projects-,SPDX%20License%20List,-The%20SPDX%20License).
+- **SPDX ID**: [SPDX license identifier](https://spdx.dev/learn/handling-license-info/#:~:text=SEE%20LICENSE%20LIST-,SPDX%20License%20IDs,-//%20SPDX%2DLicense%2DIdentifier) which communicates license information in a simple and machine-readable manner. Valid SPDX ID values can be found in the [SPDX License list](https://spdx.org/licenses/).
 
 ### Field Signs
 Signs applicable to Float or Integer field types:
