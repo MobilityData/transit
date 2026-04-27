@@ -1,6 +1,6 @@
 ### Revision History
 
-#### February 2026
+#### April 2026
 
 * Fixed typos in gtfs-realtime.proto. See [discussion](https://github.com/google/transit/pull/541).
 
