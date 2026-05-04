@@ -34,9 +34,9 @@ structured information to help us understand who this service alert affects.
 
 #### Interaction between Trip Updates and Service Alerts
 
-If data consumers use Service Alerts to affect routing results, and both Trip Updates
+If data consumers use Service Alerts to affect routing decisions, and both Trip Updates
 and Service Alerts apply but provide conflicting information, consumers should
-give precedence to Trip Updates for routing results, unless there is clear
+give precedence to Trip Updates for routing decisions, unless there is clear
 evidence that the Trip Updates is incorrect.
 
 [More about Service Alerts...](service-alerts.md)
