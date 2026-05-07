@@ -541,6 +541,19 @@ For a sub-journey of two consecutive legs with a transfer, if the transfer match
 | `to_network_id` | Foreign ID referencing `routes.network_id` or `networks.network_id`| **Required** | Matches a post-transfer leg that uses the specified route network.  If specified, the same `from_network_id` must also be specified. |
 | `from_stop_id` | Foreign ID referencing `stops.stop_id`| **Conditionally Required** | Matches a pre-transfer leg that ends at the specified stop (`location_type=0` or empty) or station (`location_type=1`).<br><br>Conditionally Required:<br> - **Required** if `to_stop_id` is defined.<br> - Optional otherwise. |
 | `to_stop_id` | Foreign ID referencing `stops.stop_id`| **Conditionally Required** | Matches a post-transfer leg that starts at the specified stop (`location_type=0` or empty) or station (`location_type=1`).<br><br>Conditionally Required:<br> - **Required** if `from_stop_id` is defined.<br> - Optional otherwise. |
+| `duration_limit` | Positive integer | **Optional** | Defines the duration limit of the transfer between the legs that constitute the effective leg. <br><br>Must be expressed in integer increments of seconds.<br><br>If there is no duration limit, `fare_leg_join_rules.duration_limit` must be empty. |
+| `duration_limit_type` | Enum | **Conditionally Required** | Defines the relative start and end of `fare_leg_join_rules.duration_limit`.<br><br>Valid options are:<br>`0` - Between the departure fare validation of the first leg in the effective leg and the arrival fare validation of the last leg in the effective leg.<br>`1` - Between the departure fare validation of the first leg in the effective leg and the departure fare validation of the last leg in the effective leg.<br>`2` - Between the arrival fare validation of the first leg in the effective leg and the departure fare validation of the last leg in the effective leg.<br>`3` - Between the arrival fare validation of the first leg in the effective leg and the arrival fare validation of the last leg in the effective leg.<br><br>When an effective leg with the same `from_network_id` and `to_network_id` is matched multiple times consecutively within a multi-leg journey, the `duration_limit` specified by the effective leg should be measured starting from the first matched leg.<br><br>Conditionally Required:<br>- **Required** if `fare_leg_join_rules.duration_limit` is defined.<br>- **Forbidden** if `fare_leg_join_rules.duration_limit` is empty. |
+
+
+#### Using Fare Leg Join Rules or Fare Transfer Rules
+For certain cases, `fare_leg_join_rules.txt` can represent transfers more efficiently than `fare_transfer_rules.txt`.
+
+You can use Fare Leg Join Rules for these cases:
+- When legs are treated as one leg in the real world. For example, when no transfer validation is needed in the transfer station, or for silent transfers in buses that keep the same fare.
+- Where it simplifies transfer rules. E.g. In an origin-destination fare structure with a huge number of zone combinations, it is easier to join the journey legs and look at the first and last stops of the whole journey, instead of pricing leg-by-leg and defining a large number of transfer rules.
+
+You can use Fare Transfer Rules for:
+- Simple fare structures where the main factors to define the fare are the duration of the journey and the number of journey legs taken.
 
 ### fare_transfer_rules.txt
 
