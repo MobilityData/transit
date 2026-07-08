@@ -545,6 +545,15 @@ For a sub-journey of two consecutive legs with a transfer, if the transfer match
 | `duration_limit_type` | Enum | **Conditionally Required** | Defines the relative start and end of `fare_leg_join_rules.duration_limit`.<br><br>Valid options are:<br>`0` - Between the departure fare validation of the first leg in the effective leg and the arrival fare validation of the last leg in the effective leg.<br>`1` - Between the departure fare validation of the first leg in the effective leg and the departure fare validation of the last leg in the effective leg.<br>`2` - Between the arrival fare validation of the first leg in the effective leg and the departure fare validation of the last leg in the effective leg.<br>`3` - Between the arrival fare validation of the first leg in the effective leg and the arrival fare validation of the last leg in the effective leg.<br><br>When an effective leg with the same `from_network_id` and `to_network_id` is matched multiple times consecutively within a multi-leg journey, the `duration_limit` specified by the effective leg should be measured starting from the first matched leg.<br><br>Conditionally Required:<br>- **Required** if `fare_leg_join_rules.duration_limit` is defined.<br>- **Forbidden** if `fare_leg_join_rules.duration_limit` is empty. |
 
 
+#### Calculation of `duration_limit`
+
+As implied by `duration_limit_type`, `duration_limit` starts and ends at fare validation events (e.g. a tap at a fare gate or onboard validator), not at the moment a rider physically boards or alights a vehicle. The `duration_limit` does not account for the time it takes a rider to cross between a fare gate and a platform.
+
+This means `duration_limit` should be set to the same theoretical transfer time limit that the agency publishes to riders (e.g., "transfers must be completed within 90 minutes"), rather than to a measured or estimated travel time.
+
+If the feed contains [pathways.txt](#pathwaystxt), data consumers can estimate this walking time using `pathways.traversal_time`.
+
+
 #### Using Fare Leg Join Rules or Fare Transfer Rules
 For certain cases, `fare_leg_join_rules.txt` can represent transfers more efficiently than `fare_transfer_rules.txt`.
 
