@@ -131,16 +131,16 @@ This specification defines the following files:
 |  [fare_leg_rules.txt](#fare_leg_rulestxt)  | Optional | Fare rules for individual legs of travel.<br><br>File [fare_leg_rules.txt](#fare_leg_rulestxt) provides a more detailed method for modeling fare structures. As such, the use of [fare_leg_rules.txt](#fare_leg_rulestxt) is entirely separate from files [fare_attributes.txt](#fare_attributestxt) and [fare_rules.txt](#fare_rulestxt). |
 |  [fare_leg_join_rules.txt](#fare_leg_join_rulestxt)  | Optional | Rules for defining two or more legs should be considered as a single **effective fare leg** for the purposes of matching against rules in [fare_leg_rules.txt](#fare_leg_rulestxt)|
 |  [fare_transfer_rules.txt](#fare_transfer_rulestxt)  | Optional | Fare rules for transfers between legs of travel.<br><br>Along with [fare_leg_rules.txt](#fare_leg_rulestxt), file [fare_transfer_rules.txt](#fare_transfer_rulestxt) provides a more detailed method for modeling fare structures. As such, the use of [fare_transfer_rules.txt](#fare_transfer_rulestxt) is entirely separate from files [fare_attributes.txt](#fare_attributestxt) and [fare_rules.txt](#fare_rulestxt). |
-|  [areas.txt](#areastxt) | Optional | Area grouping of locations. |
+|  [areas.txt](#areastxt) | **Conditionally Required**  | Area grouping of locations. <br><br>Conditionally Required:<br>- **Required** if `stop_areas.txt` is provided. <br>- Optional otherwise. |
 |  [stop_areas.txt](#stop_areastxt) | Optional | Rules to assign stops to areas. |
-|  [networks.txt](#networkstxt) | **Conditionally Forbidden** | Network grouping of routes.<br><br>Conditionally Forbidden:<br>- **Forbidden** if `network_id` exists in [routes.txt](#routestxt).<br>- Optional otherwise. |
+|  [networks.txt](#networkstxt) | **Conditionally Forbidden** | Network grouping of routes.<br><br>Conditionally Forbidden:<br>- **Forbidden** if `network_id` exists in [routes.txt](#routestxt).<br>- **Required** if `route_networks.txt` is provided. <br>- Optional otherwise. |
 |  [route_networks.txt](#route_networkstxt) | **Conditionally Forbidden** | Rules to assign routes to networks.<br><br>Conditionally Forbidden:<br>- **Forbidden** if `network_id` exists in [routes.txt](#routestxt).<br>- Optional otherwise. |
 |  [shapes.txt](#shapestxt)  | Optional | Rules for mapping vehicle travel paths, sometimes referred to as route alignments. |
 |  [frequencies.txt](#frequenciestxt)  | Optional | Headway (time between trips) for headway-based service or a compressed representation of fixed-schedule service. |
 |  [transfers.txt](#transferstxt)  | Optional | Rules for making connections at transfer points between routes. |
 |  [pathways.txt](#pathwaystxt)  | Optional | Pathways linking together locations within stations. |
 |  [levels.txt](#levelstxt)  | **Conditionally Required** | Levels within stations.<br><br>Conditionally Required:<br>- **Required** when describing pathways with elevators (`pathway_mode=5`).<br>- Optional otherwise. |
-|  [location_groups.txt](#location_groupstxt)  | Optional | A group of stops that together indicate locations where a rider may request pickup or drop off. |
+|  [location_groups.txt](#location_groupstxt)  | **Conditionally Required** | A group of stops that together indicate locations where a rider may request pickup or drop off. <br><br>Conditionally Required:<br>- **Required** if `location_group_stops.txt` is provided. <br>- Optional otherwise. |
 |  [location_group_stops.txt](#location_group_stopstxt)  | Optional | Rules to assign stops to location groups. |
 |  [locations.geojson](#locationsgeojson)  | Optional | Zones for rider pickup or drop-off requests by on-demand services, represented as GeoJSON polygons. |
 |  [booking_rules.txt](#booking_rulestxt)  | Optional | Booking information for rider-requested services. |
@@ -580,7 +580,7 @@ To process the cost of a multi-leg journey:
 
 ### areas.txt
 
-File: **Optional**
+File: **Conditionally Required**
 
 Primary key (`area_id`)
 
@@ -772,7 +772,7 @@ Describes levels in a station. Useful in conjunction with [pathways.txt](#pathwa
 
 ### location_groups.txt
 
-File: **Optional**
+File: **Conditionally Required**
 
 Primary key (`location_group_id`)
 
