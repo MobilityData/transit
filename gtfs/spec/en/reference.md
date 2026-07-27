@@ -553,7 +553,7 @@ This means `duration_limit` should be set to the same theoretical transfer time 
 
 If the feed contains [pathways.txt](#pathwaystxt), data consumers should estimate the crossing time using `pathways.traversal_time`, then add these to wait times and to travel times derived from `stop_times.txt` to calculate the actual journey time for comparison against `duration_limit`.
 
-Alternatively, `pathways.length` or `pathways.stair_count` can be used to estimate crossing time. However, this will result in different estimations based on the assumed crossing speed.
+Alternatively, if `pathways.traversal_time` is not populated, `pathways.length` or `pathways.stair_count` can be used to estimate crossing time.
 
 
 #### Using Fare Leg Join Rules or Fare Transfer Rules
@@ -611,7 +611,7 @@ This means `duration_limit` should be set to the same theoretical transfer time 
 
 If the feed contains [pathways.txt](#pathwaystxt), data consumers should estimate the crossing time using `pathways.traversal_time`, then add these to wait times and to travel times derived from `stop_times.txt` to calculate the actual journey time for comparison against `duration_limit`.
 
-Alternatively, `pathways.length` or `pathways.stair_count` can be used to estimate crossing time. However, this will result in different estimations based on the assumed crossing speed.
+Alternatively, if `pathways.traversal_time` is not populated, `pathways.length` or `pathways.stair_count` can be used to estimate crossing time.
 
 ### areas.txt
 
