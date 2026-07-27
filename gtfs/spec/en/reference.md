@@ -551,7 +551,9 @@ As implied by `duration_limit_type`, `duration_limit` starts and ends at fare va
 
 This means `duration_limit` should be set to the same theoretical transfer time limit that the agency publishes to riders (e.g., "transfers must be completed within 90 minutes"), rather than to a measured or estimated travel time.
 
-If the feed contains [pathways.txt](#pathwaystxt), data consumers can estimate this walking time using `pathways.traversal_time`.
+If the feed contains [pathways.txt](#pathwaystxt), data consumers should estimate the crossing time using `pathways.traversal_time`, then add these to wait times and to travel times derived from `stop_times.txt` to calculate the actual journey time for comparison against `duration_limit`.
+
+Alternatively, `pathways.length` or `pathways.stair_count` can be used to estimate crossing time. However, this will result in different estimations based on the assumed crossing speed.
 
 
 #### Using Fare Leg Join Rules or Fare Transfer Rules
@@ -600,6 +602,16 @@ To process the cost of a multi-leg journey:
 | `fare_transfer_type` | Enum | **Required** | Indicates the cost processing method of transferring between legs in a journey: <br>![](examples/2-leg.svg) <br>Valid options are:<br>`0` - From-leg `fare_leg_rules.fare_product_id` plus `fare_transfer_rules.fare_product_id`; A + AB.<br>`1` - From-leg `fare_leg_rules.fare_product_id` plus `fare_transfer_rules.fare_product_id` plus to-leg `fare_leg_rules.fare_product_id`; A + AB + B.<br>`2` - `fare_transfer_rules.fare_product_id`; AB. <br><br>Cost processing interactions between multiple transfers in a journey:<br>![](examples/3-leg.svg)<br><table><thead><tr><th>`fare_transfer_type`</th><th>Processing A > B</th><th>Processing B > C</th></tr></thead><tbody><tr><td>`0`</td><td>A + AB</td><td>S + BC</td></tr><tr><td>`1`</td><td>A + AB +B</td><td>S + BC + C</td></tr><tr><td>`2`</td><td>AB</td><td>S + BC</td></tr></tbody></table>Where S indicates the total processed cost of the preceding leg(s) and transfer(s). |
 | `fare_product_id` | Foreign ID referencing `fare_products.fare_product_id` | Optional | The fare product required to transfer between two fare legs. If empty, the cost of the transfer rule is 0.|
 
+
+#### Calculation of `duration_limit`
+
+As implied by `duration_limit_type`, `duration_limit` starts and ends at fare validation events (e.g. a tap at a fare gate or onboard validator), not at the moment a rider physically boards or alights a vehicle. The `duration_limit` does not account for the time it takes a rider to cross between a fare gate and a platform.
+
+This means `duration_limit` should be set to the same theoretical transfer time limit that the agency publishes to riders (e.g., "transfers must be completed within 90 minutes"), rather than to a measured or estimated travel time.
+
+If the feed contains [pathways.txt](#pathwaystxt), data consumers should estimate the crossing time using `pathways.traversal_time`, then add these to wait times and to travel times derived from `stop_times.txt` to calculate the actual journey time for comparison against `duration_limit`.
+
+Alternatively, `pathways.length` or `pathways.stair_count` can be used to estimate crossing time. However, this will result in different estimations based on the assumed crossing speed.
 
 ### areas.txt
 
