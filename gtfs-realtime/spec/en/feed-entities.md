@@ -42,9 +42,9 @@ Producers MUST also ensure that there is no conflict between their Trip Updates 
 
 Examples of conflicts include:
 
-* A service alert informing of a stop closure while the trip updates for that stop are not set to \`SKIPPED\`.  
-* A service alert informing of a route closure while the trip updates for the cancelled trips are not set to \`CANCELED\`.  
-* A route closure spanning the whole day, for which the trip updates feed cancels trips over the next 90 minutes while no \`NO\_SERVICE\` alert exists beyond those 90 minutes informing of the route closure.
+* A service alert informing of a stop closure while the trip updates for that stop are not set to `SKIPPED`.  
+* A service alert informing of a route closure while the trip updates for the cancelled trips are not set to `CANCELED`.  
+* A route closure spanning the whole day, for which the trip updates feed cancels trips over the next 90 minutes while no `NO_SERVICE` alert exists beyond those 90 minutes informing of the route closure.
 
 
 Data consumers SHOULD use both Trip Updates and Service Alerts to make routing decisions, such as cancelling a trip or closing a stop. In case there is a conflict between Trip Updates and Service Alerts, consumers SHOULD inform the agency/producer of the issue, and SHOULD exercise caution when applying either feed to affect routing decisions.
