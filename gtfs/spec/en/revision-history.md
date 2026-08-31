@@ -1,5 +1,8 @@
 ### Revision History
 
+#### August 2026
+* Required `min_transfer_time` for timed transfers (transfer_type = 2). See [discussion](https://github.com/google/transit/pull/640).
+
 #### April 2026
 * Added safe duration fields to `trips.txt` to provide better flexible trip time estimates. See [discussion](https://github.com/google/transit/pull/598).
 

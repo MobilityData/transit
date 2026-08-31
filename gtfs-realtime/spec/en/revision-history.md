@@ -1,5 +1,9 @@
 ### Revision History
 
+#### August 2026
+
+* Adopted images in Service Alerts to the spec and removed the "experimental" tag. See [discussion](https://github.com/google/transit/pull/651).
+
 #### June 2026
 
 * Added two new fields into Service Alerts: communication_period and impact_period to better define active_period. See [discussion](https://github.com/google/transit/pull/546)
