@@ -915,6 +915,6 @@ This file defines the licenses that apply to the feed or to specific files.
 
 | Field Name | Type | Presence | Description |
 | :---- | :---- | :---- | :---- |
-| `licensed_table_name` | Text | Optional | Defines the table which the license applies to.<br><br>If empty, the license applies to all tables in the feed not explicitly listed in other records of this file. Otherwise, any GTFS file name may be used as a value, omitting the `.txt` extension.<br><br>_Example: shapes refers to `shapes.txt`_ |
+| `licensed_table_name` | Text | Optional | Defines the table which the license applies to.<br><br>If empty, the license applies to the feed itself and to all tables in the feed not explicitly listed in other records of this file. Otherwise, any GTFS file name may be used as a value, omitting the `.txt` extension.<br><br>_Example: shapes refers to `shapes.txt`_ |
 | `license_spdx_id` | SPDX ID | Conditionally Forbidden | The SPDX identifier of the license. <br><br>**Conditionally Forbidden**: <br>- **Required** if `custom_license_url` is empty.<br> - **Forbidden** otherwise. |
 | `custom_license_url` | URL | Conditionally Forbidden | The URL that contains the terms of the custom license.<br><br>**Conditionally Forbidden:**<br> - **Required** if `license_spdx_id` is empty.<br> - **Forbidden** otherwise. |
