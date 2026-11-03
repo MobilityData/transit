@@ -2,109 +2,109 @@
 
 #### August 2026
 
-* Adopted images in Service Alerts to the spec and removed the "experimental" tag. See [discussion](https://github.com/google/transit/pull/651).
+* Adopted images in Service Alerts to the spec and removed the "experimental" tag. See [discussion](https://github.com/MobilityData/gtfs/pull/651).
 
 #### June 2026
 
-* Added two new fields into Service Alerts: communication_period and impact_period to better define active_period. See [discussion](https://github.com/google/transit/pull/546)
-* Added new SPECIAL_EVENT Cause to Cause list in Service Alerts. See [discussion](https://github.com/google/transit/pull/577)
+* Added two new fields into Service Alerts: communication_period and impact_period to better define active_period. See [discussion](https://github.com/MobilityData/gtfs/pull/546)
+* Added new SPECIAL_EVENT Cause to Cause list in Service Alerts. See [discussion](https://github.com/MobilityData/gtfs/pull/577)
 
 #### April 2026
 
-* Fixed typos in gtfs-realtime.proto. See [discussion](https://github.com/google/transit/pull/541).
+* Fixed typos in gtfs-realtime.proto. See [discussion](https://github.com/MobilityData/gtfs/pull/541).
 
 #### February 2026
 
-* Corrected trip_ids requirement and cardinality for selectedTrips. See [discussion](https://github.com/google/transit/pull/609).
-* Added missing spaces. See [discussion](https://github.com/google/transit/pull/587).
+* Corrected trip_ids requirement and cardinality for selectedTrips. See [discussion](https://github.com/MobilityData/gtfs/pull/609).
+* Added missing spaces. See [discussion](https://github.com/MobilityData/gtfs/pull/587).
 
 #### May 2025
 
-* Deprecates schedule_relationship `ADDED` in favour of `NEW` and adds `REPLACEMENT`. See [discussion](https://github.com/google/transit/pull/504).
-* Further clarifications to trip modifications. See [discussion](https://github.com/google/transit/pull/542).
+* Deprecates schedule_relationship `ADDED` in favour of `NEW` and adds `REPLACEMENT`. See [discussion](https://github.com/MobilityData/gtfs/pull/504).
+* Further clarifications to trip modifications. See [discussion](https://github.com/MobilityData/gtfs/pull/542).
 
 #### December 2024
 
-* Added new string field that matches feed_info.feed_version from the GTFS Schedule feed that the realtime data is based on. See [discussion](https://github.com/google/transit/pull/434).
+* Added new string field that matches feed_info.feed_version from the GTFS Schedule feed that the realtime data is based on. See [discussion](https://github.com/MobilityData/gtfs/pull/434).
 
 #### October 2024
 
-* Clarification and small changes for Trip Modifications. See [discussion](https://github.com/google/transit/pull/497).
+* Clarification and small changes for Trip Modifications. See [discussion](https://github.com/MobilityData/gtfs/pull/497).
 
 #### March 2024
 
-* Adopted Trip-Modifications. See [discussion](https://github.com/google/transit/pull/403).
+* Adopted Trip-Modifications. See [discussion](https://github.com/MobilityData/gtfs/pull/403).
 
 #### November 2022
 
-* Added support for DELETED trips. See [discussion](https://github.com/google/transit/pull/352).
+* Added support for DELETED trips. See [discussion](https://github.com/MobilityData/gtfs/pull/352).
 
 #### July 2022
 
-* Add cause_detail and effect_detail. See [discussion](https://github.com/google/transit/pull/332)
-* Added ability to specify a wheelchair_accessible value in a TripUpdate.VehicleDescriptor. See [discussion](https://github.com/google/transit/pull/340).
+* Add cause_detail and effect_detail. See [discussion](https://github.com/MobilityData/gtfs/pull/332)
+* Added ability to specify a wheelchair_accessible value in a TripUpdate.VehicleDescriptor. See [discussion](https://github.com/MobilityData/gtfs/pull/340).
 
 #### September 2021
 
-* Feature/image in alerts. See [discussion](https://github.com/google/transit/pull/283).
+* Feature/image in alerts. See [discussion](https://github.com/MobilityData/gtfs/pull/283).
 
 #### August 2021
 
-* Add GTFS-NewShapes as experimental. See [discussion](https://github.com/google/transit/pull/272).
+* Add GTFS-NewShapes as experimental. See [discussion](https://github.com/MobilityData/gtfs/pull/272).
 
 #### April 2021
 
-* Add departure_occupancy_status to TripUpdate. See [discussion](https://github.com/google/transit/pull/260).
+* Add departure_occupancy_status to TripUpdate. See [discussion](https://github.com/MobilityData/gtfs/pull/260).
 
 #### February 2021
 
-* Clarification of GTFS Realtime occupancy descriptions. See [discussion](https://github.com/google/transit/pull/259).
+* Clarification of GTFS Realtime occupancy descriptions. See [discussion](https://github.com/MobilityData/gtfs/pull/259).
 
 #### September 2020 
 
-* Support multi-car crowding. See [discussion](https://github.com/google/transit/pull/237).
+* Support multi-car crowding. See [discussion](https://github.com/MobilityData/gtfs/pull/237).
 
 #### April 2020
 
-* Support stop assignments. See [discussion](https://github.com/google/transit/pull/219).
+* Support stop assignments. See [discussion](https://github.com/MobilityData/gtfs/pull/219).
 
 #### July 2020
 
-* Support DUPLICATED trips. See [discussion](https://github.com/google/transit/pull/221).
-* Alert tts_header_text, tts_description_text no longer experimental. See [discussion](https://github.com/google/transit/pull/229).
-* Label GTFS-RT ADDED trips as not fully specified. See [discussion](https://github.com/google/transit/pull/230).
+* Support DUPLICATED trips. See [discussion](https://github.com/MobilityData/gtfs/pull/221).
+* Alert tts_header_text, tts_description_text no longer experimental. See [discussion](https://github.com/MobilityData/gtfs/pull/229).
+* Label GTFS-RT ADDED trips as not fully specified. See [discussion](https://github.com/MobilityData/gtfs/pull/230).
 
 #### April 2020
 
-* Mark SeverityLevel as final. See [discussion](https://github.com/google/transit/pull/214).
-* Add occupancy_percentage. See [discussion](https://github.com/google/transit/pull/213).
+* Mark SeverityLevel as final. See [discussion](https://github.com/MobilityData/gtfs/pull/214).
+* Add occupancy_percentage. See [discussion](https://github.com/MobilityData/gtfs/pull/213).
 
 #### March 12, 2020
 
-* Recommend providing TripUpdate predictions for the next trip in block. See [discussion](https://github.com/google/transit/pull/206).
+* Recommend providing TripUpdate predictions for the next trip in block. See [discussion](https://github.com/MobilityData/gtfs/pull/206).
 
 #### August 2019
 
-* Document that trip_updates are not required to occur in feed in block-order. See [discussion](https://github.com/google/transit/pull/176).
-* Add StopTimeUpdate.ScheduleRelationship UNSCHEDULED value. See [discussion](https://github.com/google/transit/pull/173).
+* Document that trip_updates are not required to occur in feed in block-order. See [discussion](https://github.com/MobilityData/gtfs/pull/176).
+* Add StopTimeUpdate.ScheduleRelationship UNSCHEDULED value. See [discussion](https://github.com/MobilityData/gtfs/pull/173).
 
 #### May 2019
 
-* Add accessibility issue alert effect. See [discussion](https://github.com/google/transit/pull/164).
+* Add accessibility issue alert effect. See [discussion](https://github.com/MobilityData/gtfs/pull/164).
 
 #### February 2019
 
-* Add NO_EFFECT effect option for GTFS-realtime service alert. See [discussion](https://github.com/google/transit/pull/137).
-* Add new optional field SeverityLevel to Service Alerts feed. See [discussion](https://github.com/google/transit/pull/136).
-* Add new optional fields for Text-to-Speech functionality in Service Alerts feed. See [discussion](https://github.com/google/transit/pull/135).
+* Add NO_EFFECT effect option for GTFS-realtime service alert. See [discussion](https://github.com/MobilityData/gtfs/pull/137).
+* Add new optional field SeverityLevel to Service Alerts feed. See [discussion](https://github.com/MobilityData/gtfs/pull/136).
+* Add new optional fields for Text-to-Speech functionality in Service Alerts feed. See [discussion](https://github.com/MobilityData/gtfs/pull/135).
 
 #### April 2018
 
-* Remove requirement for stop_time_update arrival AND departure for SCHEDULED trips. See [discussion](https://github.com/google/transit/pull/165).
+* Remove requirement for stop_time_update arrival AND departure for SCHEDULED trips. See [discussion](https://github.com/MobilityData/gtfs/pull/165).
 
 #### August 2017
 
-* Define semantic cardinality for GTFS-realtime fields. See [discussion](https://github.com/google/transit/pull/64).
+* Define semantic cardinality for GTFS-realtime fields. See [discussion](https://github.com/MobilityData/gtfs/pull/64).
 
 #### January 30, 2015
 

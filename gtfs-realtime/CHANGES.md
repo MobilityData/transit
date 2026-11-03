@@ -4,13 +4,13 @@ The official specification, reference and documentation are written in English. 
 
 ## Adding new fields to GTFS Realtime
 
-When a producer or consumer is interested in adding a new field to the GTFS Realtime specification, they should open a new issue on the [GTFS Realtime GitHub repository](https://github.com/google/transit) describing the proposed field and announce this new field (including a link to the issue) on the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime).
+When a producer or consumer is interested in adding a new field to the GTFS Realtime specification, they should open a new issue on the [GTFS Realtime GitHub repository](https://github.com/MobilityData/gtfs) describing the proposed field and announce this new field (including a link to the issue) on the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime).
 
 ### *Experimental* fields
 
 1. If the community can come to consensus (a) that the proposed field seems useful and (b) on the type of the field (`optional` vs `repeated`, `string` vs `int` vs `bool`), then a field number will be allocated in the GTFS Realtime message and a note will be made in the [.proto file](/gtfs-realtime/proto/gtfs-realtime.proto) and documentation that this is an *experimental* field that may change in the future.
       - Consensus is reached via a discussion and voting process that is the same as the below [Specification amendment process](#specification-amendment-process), but instead of unanimous consent only 80% yes votes are required for approval.
-      - GTFS Realtime producers and consumers that wish to use the new *experimental* field will re-generate their library using the .proto file with the new field (e.g., Google will update the [gtfs-realtime-bindings library](https://github.com/google/gtfs-realtime-bindings)), and start populating and parsing the field with live data.
+      - GTFS Realtime producers and consumers that wish to use the new *experimental* field will re-generate their library using the .proto file with the new field (e.g., MobilityData will update the [gtfs-realtime-bindings library](https://github.com/MobilityData/gtfs-realtime-bindings)), and start populating and parsing the field with live data.
       - Once we are satisfied that the *experimental* field is worthwhile and both producers and consumers are using the field, then we will follow the below [Specification amendment process](#specification-amendment-process) to officially add the field to the spec.
       - If the *experimental* field is not adopted via the [Specification amendment process](#specification-amendment-process) within 2 years of being approved as an *experimental* field, it will be deprecated by adding `[deprecated=true]` next to the field value in the [.proto file](/gtfs-realtime/proto/gtfs-realtime.proto) file.  By using `[deprecated=true]` (instead of `RESERVED`), producers and consumers that have already adopted the field do not have to remove it from use.  Additionally, the field may be "un-deprecated" in the future if it is approved in a subsequent vote following the [Specification amendment process](#specification-amendment-process) (e.g., when additional producers and/or consumers start using the field).
  
@@ -18,7 +18,7 @@ When a producer or consumer is interested in adding a new field to the GTFS Real
 
 ### Specification amendment process
 1. Create a git branch with update of all relevant parts of protocol definition, specification and documentation files (except for translations).
-1. Create pull request on https://github.com/google/transit. Pull request must contain an extended description of the patch. The creator of the pull request becomes the _advocate_.
+1. Create pull request on https://github.com/MobilityData/gtfs. Pull request must contain an extended description of the patch. The creator of the pull request becomes the _advocate_.
 1. Once pull request is registered, it must be announced by its advocate in the [GTFS Realtime mailing list](https://groups.google.com/forum/#!forum/gtfs-realtime). Once announced, the pull request is considered a proposal.
   	- Since the advocate is a contributor, they must sign the [Contributor License Agreement](../CONTRIBUTING.md) before pull request can be accepted.
 1. The discussion of the proposal follows. Pull request comments should be used as the sole discussion forum.
@@ -44,10 +44,10 @@ When a producer or consumer is interested in adding a new field to the GTFS Real
 1. Any pull request remaining inactive for 30 calendar days will be closed. When a pull request is closed, the corresponding proposal is considered abandoned. The advocate may reopen the pull request at any time if they wish to continue or maintain the conversation. 
  	- Note that the advocate may choose to implement the feature as an [custom extension](#extensions) instead of part of the official spec.
 1. If the proposal is accepted:
-  	- Google is committed to merging the voted upon version of the pull request (provided that the contributors have signed the [CLA](../CONTRIBUTING.md)), and performing the pull request within 5 business days.
-  	- Google is committed to timely updating https://github.com/google/gtfs-realtime-bindings repository. Commits to gtfs-realtime-bindigs that are a result of a proposal, should reference the pull request of the proposal.
+  	- MobilityData is committed to merging the voted upon version of the pull request (provided that the contributors have signed the [CLA](../CONTRIBUTING.md)), and performing the pull request within 5 business days.
+  	- MobilityData is committed to timely updating https://github.com/MobilityData/gtfs-realtime-bindings repository. Commits to gtfs-realtime-bindigs that are a result of a proposal, should reference the pull request of the proposal.
   	- Translations must not be included into the original pull request.
-    Google is responsible for eventually updating relevant translations into supported languages, but pure translation pull requests from the community are welcome and will be accepted as soon as all editorial comments are addressed.
+    MobilityData is responsible for eventually updating relevant translations into supported languages, but pure translation pull requests from the community are welcome and will be accepted as soon as all editorial comments are addressed.
 
 ### Guiding Principles
 In order to preserve the original vision of GTFS Realtime, a number of guiding principles have been established to take into consideration when extending the spec:
@@ -116,6 +116,6 @@ message MyTripDescriptorExtension {
 |1007|Transport for NSW|[timetable@transport.nsw.gov.au](mailto:timetable@transport.nsw.gov.au)|[Group discussion](https://groups.google.com/forum/#!msg/gtfs-realtime/WYwIs4Hd_E0/PbkMnELUAwAJ)|
 |1008|SEPTA - Southeastern Pennsylvania Transportation Authority|[Gregory Apessos](mailto:GApessos@septa.org)|https://github.com/septadev|
 |1009|Swiftly|[mike@goswift.ly](mailto:mike@goswift.ly)|[Group Discussion](https://groups.google.com/forum/#!msg/gtfs-realtime/mmnZV6L-2ls/wVWdknhLBwAJ)|
-|1010|IBI Group|[Ritesh Warade](mailto:transitrealtime@ibigroup.com)|[GitHub proposal for new timestamps in Service Alerts](https://github.com/google/transit/pull/134)|
+|1010|IBI Group|[Ritesh Warade](mailto:transitrealtime@ibigroup.com)|[GitHub proposal for new timestamps in Service Alerts](https://github.com/MobilityData/gtfs/pull/134)|
 |1013|MITFAHR\|DE\|ZENTRALE (MFDZ)|[Holger Bruch](mailto:holger.bruch@mfdz.de)|[Group discussion](https://groups.google.com/g/gtfs-realtime/c/IxYh-beoNoo)|
 |9000-9999|RESERVED - INTERNAL USE ONLY|[GTFS Community](https://groups.google.com/forum/#!forum/gtfs-realtime)|[Group discussion](https://groups.google.com/g/gtfs-realtime/c/IxYh-beoNoo)|

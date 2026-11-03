@@ -8,9 +8,9 @@ This migration guide defines how existing producers and consumers that were usin
 
 *If you are a producer or consumer that has **not** used the `ADDED` enumeration, no action is required - you can produce/consume `NEW` and/or `DUPLICATED` trips without producing/consuming any `ADDED` entities.* 
 
-For a full history of the `NEW` enumeration, see the [`NEW` and `REPLACEMENT` proposal on GitHub](https://github.com/google/transit/pull/504).
+For a full history of the `NEW` enumeration, see the [`NEW` and `REPLACEMENT` proposal on GitHub](https://github.com/MobilityData/gtfs/pull/504).
 
-For a full history of the `DUPLICATED` enumeration, see the [`DUPLICATED` proposal on GitHub](https://github.com/google/transit/pull/221).
+For a full history of the `DUPLICATED` enumeration, see the [`DUPLICATED` proposal on GitHub](https://github.com/MobilityData/gtfs/pull/221).
 
 ### Which one to migrate to
 

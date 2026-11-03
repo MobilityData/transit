@@ -15,7 +15,7 @@ The following values are used in the *Required* field:
 *   **Conditionally forbidden**: This field is forbidden under certain conditions, which are outlined in the field *Description*. Outside of these conditions, the field is optional.
 *   **Optional**: This field is optional and is not required to be implemented by producers. However, if the data is available in the underlying automatic vehicle location systems (e.g., VehiclePosition `timestamp`) it is recommended that producers provide these optional fields when possible.
 
-*Note that semantic requirements were not defined in GTFS-realtime version 1.0, and therefore feeds with `gtfs_realtime_version` of `1` may not meet these requirements (see [the proposal for semantic requirements](https://github.com/google/transit/pull/64) for details).*
+*Note that semantic requirements were not defined in GTFS-realtime version 1.0, and therefore feeds with `gtfs_realtime_version` of `1` may not meet these requirements (see [the proposal for semantic requirements](https://github.com/MobilityData/gtfs/pull/64) for details).*
 
 #### Cardinality
 
@@ -24,7 +24,7 @@ The following values are used in the *Required* field:
 * **One** - A single one element may be provided for this field. This maps to the [Protocol Buffer *required* and *optional* cardinalities](https://developers.google.com/protocol-buffers/docs/proto#simple).
 * **Many** - Many elements (0, 1, or more) may be provided for this field. This maps to the [Protocol Buffer *repeated* cardinality](https://developers.google.com/protocol-buffers/docs/proto#simple).
 
-Always reference the *Required* and *Description* fields to see when a field is required, conditionally required, or optional. Please reference [`gtfs-realtime.proto`](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto) for Protocol Buffer cardinality.
+Always reference the *Required* and *Description* fields to see when a field is required, conditionally required, or optional. Please reference [`gtfs-realtime.proto`](https://github.com/MobilityData/gtfs/blob/master/gtfs-realtime/proto/gtfs-realtime.proto) for Protocol Buffer cardinality.
 
 #### Protocol Buffer data types
 
@@ -151,7 +151,7 @@ Depending on the value of ScheduleRelationship, a TripUpdate can specify:
 
 The updates can be for future, predicted arrival/departure events, or for past events that already occurred. In most cases information about past events is a measured value thus its uncertainty value is recommended to be 0\. Although there could be cases when this does not hold so it is allowed to have uncertainty value different from 0 for past events. If an update's uncertainty is not 0, either the update is an approximate prediction for a trip that has not completed or the measurement is not precise or the update was a prediction for the past that has not been verified after the event occurred.
 
-If a vehicle is serving multiple trips within the same block (for more information about trips and blocks, please refer to [GTFS trips.txt](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#tripstxt)):
+If a vehicle is serving multiple trips within the same block (for more information about trips and blocks, please refer to [GTFS trips.txt](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#tripstxt)):
 
 * the feed should include a TripUpdate for the trip currently being served by the vehicle. Producers are encouraged to include TripUpdates for one or more trips after the current trip in this vehicle's block if the producer is confident in the quality of the predictions for these future trip(s). Including multiple TripUpdates for the same vehicle avoids prediction "pop-in" for riders as the vehicle transitions from one trip to another and also gives riders advance notice of delays that impact downstream trips (e.g., when the known delay exceeds planned layover times between trips).
 * the respective TripUpdate entities are not required to be added to the feed in the same order that they are scheduled in the block. For example, if there are trips with `trip_ids` 1, 2, and 3 that all belong to one block, and the vehicle travels trip 1, then trip 2, and then trip 3, the `trip_update` entities may appear in any order - for example, adding trip 2, then trip 1, and then trip 3 is allowed.
@@ -510,7 +510,7 @@ The relation between this trip and the static schedule. If a new trip is done in
 
 ## _message_ ModifiedTripSelector
 
-When a service is affected by a trip modification, `ModifiedTripSelector` is used to select some trip. More detail in the [Trip Modification](https://github.com/google/transit/blob/master/gtfs-realtime/spec/en/trip-modifications.md#linkage-to-tripupdates) specification.
+When a service is affected by a trip modification, `ModifiedTripSelector` is used to select some trip. More detail in the [Trip Modification](https://github.com/MobilityData/gtfs/blob/master/gtfs-realtime/spec/en/trip-modifications.md#linkage-to-tripupdates) specification.
 
 **Values**
 
@@ -627,19 +627,19 @@ Represents a new Stop added to the feed dynamically. All fields are as described
 | _**Field Name**_ | _**Type**_ | _**Required**_ | _**Cardinality**_ | _**Description**_ |
 |------------------|------------|----------------|-------------------|-------------------|
 | **stop_id** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Required | One |  Identifier of the stop. Must be different than any `stop_id` defined in the (CSV) GTFS. |
-| **stop_code** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.stop_code](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **stop_name** | [TranslatedString](#message-translatedstring) | Required | One |  See definition of [stops.stop_name](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **tts_stop_name** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.tts_stop_name](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **stop_desc** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.stop_desc](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **stop_lat** | [float](https://protobuf.dev/programming-guides/proto2/#scalar) | Required | One |  See definition of [stops.stop_lat](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **stop_lon** | [float](https://protobuf.dev/programming-guides/proto2/#scalar) | Required | One |  See definition of [stops.stop_lon](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **zone_id** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.zone_id](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **stop_url** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.stop_url](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **parent_station** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.parent_station](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **stop_timezone** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.stop_timezone](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **wheelchair_boarding** | [WheelchairBoarding](#enum-wheelchairboarding) | Optional | One |  See definition of [stops.wheelchair_boarding](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **level_id** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.level_id](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
-| **platform_code** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.platform_code](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_code** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.stop_code](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_name** | [TranslatedString](#message-translatedstring) | Required | One |  See definition of [stops.stop_name](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **tts_stop_name** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.tts_stop_name](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_desc** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.stop_desc](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_lat** | [float](https://protobuf.dev/programming-guides/proto2/#scalar) | Required | One |  See definition of [stops.stop_lat](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_lon** | [float](https://protobuf.dev/programming-guides/proto2/#scalar) | Required | One |  See definition of [stops.stop_lon](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **zone_id** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.zone_id](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_url** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.stop_url](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **parent_station** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.parent_station](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **stop_timezone** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.stop_timezone](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **wheelchair_boarding** | [WheelchairBoarding](#enum-wheelchairboarding) | Optional | One |  See definition of [stops.wheelchair_boarding](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **level_id** | [string](https://protobuf.dev/programming-guides/proto2/#scalar) | Optional | One |  See definition of [stops.level_id](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
+| **platform_code** | [TranslatedString](#message-translatedstring) | Optional | One |  See definition of [stops.platform_code](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md#stopstxt) in (CSV) GTFS. |
 
 ## _enum_ WheelchairBoarding
 

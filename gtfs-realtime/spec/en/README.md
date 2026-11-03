@@ -43,8 +43,4 @@ This text file is used to generate the necessary libraries in your choice of pro
 
 ## Getting Help
 
-To participate in discussions around GTFS Realtime and suggest changes and additions to the specification, join the [GTFS Realtime mailing list](http://groups.google.com/group/gtfs-realtime) and follow conversations on the [google/transit GitHub repository](https://github.com/google/transit).
-
-## Google Maps and Live Transit Updates
-
-One of the possible applications that uses GTFS Realtime is [Live Transit Updates](https://developers.google.com/transit/google-transit#LiveTransitUpdates), a feature within Google Maps that provides users with realtime transit information. If you are working for a public transportation agency that is interested in providing realtime updates to Google Maps, please visit the [Google Transit Partner Page](http://maps.google.com/help/maps/transit/partners/live-updates.html).
+To participate in discussions around GTFS Realtime and suggest changes and additions to the specification, join and follow conversations on the [MobilityData/gtfs GitHub repository](https://github.com/MobilityData/gtfs).
