@@ -1,7 +1,7 @@
 >**Governance Framework Transition**
 >- **As of July 7, 2025**, all new Pull Requests are subject to the **new GTFS Schedule Governance Framework** outlined in this section.
 >- Pull Requests opened **before July 7, 2025** will continue to follow the **[Former Governance](CHANGES.md)**.
->   - This includes the following PRs: [567](https://github.com/google/transit/pull/567), [561](https://github.com/google/transit/pull/561), [556](https://github.com/google/transit/pull/556), [546](https://github.com/google/transit/pull/546), [545](https://github.com/google/transit/pull/545), [533](https://github.com/google/transit/pull/533), [515](https://github.com/google/transit/pull/515), [502](https://github.com/google/transit/pull/502), [498](https://github.com/google/transit/pull/498), [483](https://github.com/google/transit/pull/483), [423](https://github.com/google/transit/pull/423).
+>   - This includes the following PRs: [567](https://github.com/MobilityData/gtfs/pull/567), [561](https://github.com/MobilityData/gtfs/pull/561), [556](https://github.com/MobilityData/gtfs/pull/556), [546](https://github.com/MobilityData/gtfs/pull/546), [545](https://github.com/MobilityData/gtfs/pull/545), [533](https://github.com/MobilityData/gtfs/pull/533), [515](https://github.com/MobilityData/gtfs/pull/515), [502](https://github.com/MobilityData/gtfs/pull/502), [498](https://github.com/MobilityData/gtfs/pull/498), [483](https://github.com/MobilityData/gtfs/pull/483), [423](https://github.com/MobilityData/gtfs/pull/423).
 >- Once all PRs opened prior to July 7, 2025 are resolved, the **[Former Governance](CHANGES.md)** will be fully deprecated.
 
 # Introduction to GTFS Governance
@@ -23,7 +23,7 @@ Notably, the GTFS Change Process is the procedure by which modifications or addi
 
 ## What is a specification change?
 
-A change refers to any proposed modification to the GTFS documentation hosted in the [Google/transit repository](https://github.com/google/transit). Such changes may include adding new functionalities, updating existing files or fields, clarifying guidelines, or improving examples. **In essence, proposing a change means proposing to change the content of any file associated with the documentation, most notably the Reference.md file, to enhance or expand the specification.**
+A change refers to any proposed modification to the GTFS documentation hosted in the [MobilityData/gtfs repository](https://github.com/MobilityData/gtfs). Such changes may include adding new functionalities, updating existing files or fields, clarifying guidelines, or improving examples. **In essence, proposing a change means proposing to change the content of any file associated with the documentation, most notably the Reference.md file, to enhance or expand the specification.**
 
 ## How can I start participating?
 

@@ -23,7 +23,6 @@ Check with your local transit agency to see if they have a mailing list of their
 * [TransitWiki.org "General Transit Feed Specification" page](http://www.transitwiki.org/TransitWiki/index.php?title=General_Transit_Feed_Specification)
 * Public GTFS feed list - [TransitWiki.org "Publicly-accessible public transportation data" page](http://www.transitwiki.org/TransitWiki/index.php?title=Publicly-accessible_public_transportation_data).
 * Several websites serve as a registry of feeds:
-  * [Gtfs Data Exchange.com](http://www.gtfs-data-exchange.com/)
-  * [TransitFeeds.com](http://transitfeeds.com/)
+  * [Mobility Database](https://mobilitydatabase.org/)
   * [Transit.land](https://transit.land/feed-registry/)
 * [awesome-transit](https://github.com/CUTR-at-USF/awesome-transit) - Community list of transit APIs, apps, datasets, research, and software.
