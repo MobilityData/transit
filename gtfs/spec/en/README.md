@@ -22,13 +22,9 @@ Here are a few ways that interested software developers learn about public feeds
 
 * A list of transit agencies who provide public feeds is available on the [TransitWiki.org "Publicly-accessible public transportation data" page](http://www.transitwiki.org/TransitWiki/index.php?title=Publicly-accessible_public_transportation_data).
 * Several websites allows developers to subscribe to announcements about new and updated feeds, and serve as a registry of feeds:
-  * [Gtfs Data Exchange.com](http://www.gtfs-data-exchange.com/)
-  * [TransitFeeds.com](http://transitfeeds.com/)
+  * [Mobility Database](https://mobilitydatabase.org/)
   * [Transit.land](https://transit.land/feed-registry/)
 
-## Submitting a Transit Feed to Google
-
-If you're at a public agency that oversees public transportation for your city, you can use the GTFS specification to provide schedules and geographic information to Google Maps and other Google applications that show transit information. For full details, please refer to the [Google Transit Partners Program website](http://maps.google.com/help/maps/mapcontent/transit/participate.html).
 
 ## Getting Help
 

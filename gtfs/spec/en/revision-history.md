@@ -1,222 +1,222 @@
 ### Revision History
 
 #### August 2026
-* Required `min_transfer_time` for timed transfers (transfer_type = 2). See [discussion](https://github.com/google/transit/pull/640).
+* Required `min_transfer_time` for timed transfers (transfer_type = 2). See [discussion](https://github.com/MobilityData/gtfs/pull/640).
 
 #### April 2026
-* Added safe duration fields to `trips.txt` to provide better flexible trip time estimates. See [discussion](https://github.com/google/transit/pull/598).
+* Added safe duration fields to `trips.txt` to provide better flexible trip time estimates. See [discussion](https://github.com/MobilityData/gtfs/pull/598).
 
 #### February 2026
-* Required `from_stop_id` and `to_stop_id` when transfer_type = 0 or is empty (recommended transfer point). See [discussion](https://github.com/google/transit/pull/591).
-* Improved currency amount description. See [discussion](https://github.com/google/transit/pull/615).
-* Clarified that fare transfer rules are directional. See [discussion](https://github.com/google/transit/pull/602).
-* Added links to references of `fare_leg_rules.txt`. See [discussion](https://github.com/google/transit/pull/601).
-* Added missing spaces. See [discussion](https://github.com/google/transit/pull/587).
+* Required `from_stop_id` and `to_stop_id` when transfer_type = 0 or is empty (recommended transfer point). See [discussion](https://github.com/MobilityData/gtfs/pull/591).
+* Improved currency amount description. See [discussion](https://github.com/MobilityData/gtfs/pull/615).
+* Clarified that fare transfer rules are directional. See [discussion](https://github.com/MobilityData/gtfs/pull/602).
+* Added links to references of `fare_leg_rules.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/601).
+* Added missing spaces. See [discussion](https://github.com/MobilityData/gtfs/pull/587).
 
 #### October 2025
-* Added clarifications for `fare_transfer_rules.txt` and introduced a new `Local Time` field type. See [discussion](https://github.com/google/transit/pull/561).
+* Added clarifications for `fare_transfer_rules.txt` and introduced a new `Local Time` field type. See [discussion](https://github.com/MobilityData/gtfs/pull/561).
 
 #### September 2025
-* Added `cemv_support` field in `agency.txt` and `routes.txt`. See [discussion](https://github.com/google/transit/pull/545).
-* Added `stop_access` field in `stops.txt`. See [discussion](https://github.com/google/transit/pull/515).
+* Added `cemv_support` field in `agency.txt` and `routes.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/545).
+* Added `stop_access` field in `stops.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/515).
 
 #### June 2025
-* Added cars_allowed field to trips.txt. See [discussion](https://github.com/google/transit/pull/547).
+* Added cars_allowed field to trips.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/547).
 
 #### April 2025
-* Added clarification to allow value 1 for continuous_pickup/continuous_drop_off for DRT services. See [discussion](https://github.com/google/transit/pull/558).
+* Added clarification to allow value 1 for continuous_pickup/continuous_drop_off for DRT services. See [discussion](https://github.com/MobilityData/gtfs/pull/558).
 
 #### February 2025
-* Added rider_categories.txt. See [discussion](https://github.com/google/transit/pull/511).
+* Added rider_categories.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/511).
 
 #### January 2025
-* Update agency_fare_url to expand its description and include fare information only. See [discussion](https://github.com/google/transit/pull/524).
+* Update agency_fare_url to expand its description and include fare information only. See [discussion](https://github.com/MobilityData/gtfs/pull/524).
 
 #### December 2024
-* Added `fare_leg_join_rules.txt` and introduced the concept of Effective Fare Leg. See [discussion](https://github.com/google/transit/pull/439).
+* Added `fare_leg_join_rules.txt` and introduced the concept of Effective Fare Leg. See [discussion](https://github.com/MobilityData/gtfs/pull/439).
 
 #### September 2024
-* Clarify presence and use of from/to_stop_id & from/to_trip_id fields in transfers.txt. See [discussion](https://github.com/google/transit/pull/455).
-* Added validity rules for polygons in GeoJSON files. See [discussion](https://github.com/google/transit/pull/476).
+* Clarify presence and use of from/to_stop_id & from/to_trip_id fields in transfers.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/455).
+* Added validity rules for polygons in GeoJSON files. See [discussion](https://github.com/MobilityData/gtfs/pull/476).
 
 #### August 2024
-* Change stops.txt presence because of demand responsive services. See [discussion](https://github.com/google/transit/pull/472).
-* Clarify intended use for timepoint in stop_times.txt. See [discussion](https://github.com/google/transit/pull/474).
-* Add that headsigns are recommended. See [discussion](https://github.com/google/transit/pull/485).
+* Change stops.txt presence because of demand responsive services. See [discussion](https://github.com/MobilityData/gtfs/pull/472).
+* Clarify intended use for timepoint in stop_times.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/474).
+* Add that headsigns are recommended. See [discussion](https://github.com/MobilityData/gtfs/pull/485).
 
 #### July 2024
-* Update requirement for feed_info.txt. See [discussion](https://github.com/google/transit/pull/460).
-* Add that shapes should be included. See [discussion](https://github.com/google/transit/pull/470).
+* Update requirement for feed_info.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/460).
+* Add that shapes should be included. See [discussion](https://github.com/MobilityData/gtfs/pull/470).
 
 #### May 2024
-* Added `rule_priority` field in `fare_leg_rules.txt`. See [discussion](https://github.com/google/transit/pull/418).
-* Clarify presence of `stops.zone_id`. See [discussion](https://github.com/google/transit/pull/432).
+* Added `rule_priority` field in `fare_leg_rules.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/418).
+* Clarify presence of `stops.zone_id`. See [discussion](https://github.com/MobilityData/gtfs/pull/432).
 
 #### April 2024
-* Clarify fare product definition. See [discussion](https://github.com/google/transit/pull/426). 
+* Clarify fare product definition. See [discussion](https://github.com/MobilityData/gtfs/pull/426). 
 
 #### March 2024
-* Added GTFS Flex. See [discussion](https://github.com/google/transit/pull/433).
+* Added GTFS Flex. See [discussion](https://github.com/MobilityData/gtfs/pull/433).
 
 #### November 2023
-* Best practices: add Dataset Publishing guidelines and Practice Recommendations for all files. See [discussion](https://github.com/google/transit/pull/406).
-* Add networks.txt & route_networks.txt. See [discussion](https://github.com/google/transit/pull/405).
+* Best practices: add Dataset Publishing guidelines and Practice Recommendations for all files. See [discussion](https://github.com/MobilityData/gtfs/pull/406).
+* Add networks.txt & route_networks.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/405).
 
 #### August 2023
-* Add fare_media_type=1. See [discussion](https://github.com/google/transit/pull/385).
+* Add fare_media_type=1. See [discussion](https://github.com/MobilityData/gtfs/pull/385).
 
 #### July 2023
-* Forbid subfolders in GTFS files. See [discussion](https://github.com/google/transit/pull/379).
-* Added variable fares by time or day. See [discussion](https://github.com/google/transit/pull/357).
-* Clarify implied timezone in stop_times.txt. See [discussion](https://github.com/google/transit/pull/378).
-* Specify stop times shape_dist_traveled must not exceed the trip shape's maximum distance. See [discussion](https://github.com/google/transit/pull/380).
-* Best practices: add recommended presence. See [discussion](https://github.com/google/transit/pull/386).
+* Forbid subfolders in GTFS files. See [discussion](https://github.com/MobilityData/gtfs/pull/379).
+* Added variable fares by time or day. See [discussion](https://github.com/MobilityData/gtfs/pull/357).
+* Clarify implied timezone in stop_times.txt. See [discussion](https://github.com/MobilityData/gtfs/pull/378).
+* Specify stop times shape_dist_traveled must not exceed the trip shape's maximum distance. See [discussion](https://github.com/MobilityData/gtfs/pull/380).
+* Best practices: add recommended presence. See [discussion](https://github.com/MobilityData/gtfs/pull/386).
 
 #### March 14, 2023
 
-* Added fare media. See [discussion](https://github.com/google/transit/pull/355).
+* Added fare media. See [discussion](https://github.com/MobilityData/gtfs/pull/355).
 
 #### July 26, 2022
 
-* Added trip-to-trip transfers with in-seat option. See [discussion](https://github.com/google/transit/pull/303).
+* Added trip-to-trip transfers with in-seat option. See [discussion](https://github.com/MobilityData/gtfs/pull/303).
 
 #### May 17, 2022
 
-* GTFS-Fares v2 base implementation. See [discussion](https://github.com/google/transit/pull/286).
+* GTFS-Fares v2 base implementation. See [discussion](https://github.com/MobilityData/gtfs/pull/286).
 
 #### Oct 22, 2021
 
-* Added Primary and Foreign ID fields. See [discussion](https://github.com/google/transit/pull/278).
+* Added Primary and Foreign ID fields. See [discussion](https://github.com/MobilityData/gtfs/pull/278).
 
 #### Oct 05, 2021
 
-* Added Trip-to-trip and route-to-route transfers. See [discussion](https://github.com/google/transit/pull/284).
+* Added Trip-to-trip and route-to-route transfers. See [discussion](https://github.com/MobilityData/gtfs/pull/284).
 
 #### September 15, 2021
 
-* Allowed fare gates (pathway_mode=6) to be bidirectional. See [discussion](https://github.com/google/transit/pull/276).
+* Allowed fare gates (pathway_mode=6) to be bidirectional. See [discussion](https://github.com/MobilityData/gtfs/pull/276).
 
 #### September 13, 2021
 
-* Updated `stop_name` best practices. See [discussion](https://github.com/google/transit/pull/282).
+* Updated `stop_name` best practices. See [discussion](https://github.com/MobilityData/gtfs/pull/282).
 
 #### August 27, 2021
 
-* Updated GTFS Schedule to [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119). See [discussion](https://github.com/google/transit/pull/277).
+* Updated GTFS Schedule to [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119). See [discussion](https://github.com/MobilityData/gtfs/pull/277).
 
 #### January 4, 2021
 
-* Clarified description of `stop_times.stop_id`. See [discussion](https://github.com/google/transit/pull/258).
-* Defined positive and non-zero field signs. See [discussion](https://github.com/google/transit/pull/251).
+* Clarified description of `stop_times.stop_id`. See [discussion](https://github.com/MobilityData/gtfs/pull/258).
+* Defined positive and non-zero field signs. See [discussion](https://github.com/MobilityData/gtfs/pull/251).
 
 #### October 2, 2020
 
-* Changed field type of `frequencies.headway_secs` from non-negative to positive integer. See [discussion](https://github.com/google/transit/pull/249).
+* Changed field type of `frequencies.headway_secs` from non-negative to positive integer. See [discussion](https://github.com/MobilityData/gtfs/pull/249).
 
 #### May 25, 2020
 
-* Defined `pathways.txt`, `levels.txt` and `attributions.txt` as translatable tables. Added recommendations for translating multilingual `signposted_as` values. See [discussion](https://github.com/google/transit/pull/220).
+* Defined `pathways.txt`, `levels.txt` and `attributions.txt` as translatable tables. Added recommendations for translating multilingual `signposted_as` values. See [discussion](https://github.com/MobilityData/gtfs/pull/220).
 
 #### May 13, 2020
 
-* Added `continuous_pickup` and `continuous_drop_off` to `routes.txt` and `stop_times.txt`. Changed `shape_id` from "Optional" to "Conditionally required". See [discussion](https://github.com/google/transit/pull/208).
+* Added `continuous_pickup` and `continuous_drop_off` to `routes.txt` and `stop_times.txt`. Changed `shape_id` from "Optional" to "Conditionally required". See [discussion](https://github.com/MobilityData/gtfs/pull/208).
 
 #### March 24, 2020
 
-* Defined text-to-speech field and added `tts_stop_name` to `stops.txt`. See [discussion](https://github.com/google/transit/pull/49).
+* Defined text-to-speech field and added `tts_stop_name` to `stops.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/49).
 
 #### February 5, 2020
 
-* Added trolleybus and monorail `route_types`. See [discussion](https://github.com/google/transit/pull/174).
+* Added trolleybus and monorail `route_types`. See [discussion](https://github.com/MobilityData/gtfs/pull/174).
 
 #### January 9, 2020
 
-* Added `translations.txt`. See [discussion](https://github.com/google/transit/pull/180).
+* Added `translations.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/180).
 
 #### December 26, 2019
 
-* Updated definitions for cable tram and aerial lift in `route_type`. See [discussion](https://github.com/google/transit/pull/186).
+* Updated definitions for cable tram and aerial lift in `route_type`. See [discussion](https://github.com/MobilityData/gtfs/pull/186).
 
 #### December 20, 2019
 
-* Added `attributions.txt`. See [discussion](https://github.com/google/transit/pull/192).
+* Added `attributions.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/192).
 
 #### August 26, 2019
 
-* Specified that `stop_lat` and `stop_lon` be positioned where passengers wait to board the vehicle. See [discussion](https://github.com/google/transit/pull/179).
+* Specified that `stop_lat` and `stop_lon` be positioned where passengers wait to board the vehicle. See [discussion](https://github.com/MobilityData/gtfs/pull/179).
 
 #### July 9, 2019
 
-* Added arrival and departure time best practices. See [discussion](https://github.com/google/transit/pull/165).
-* Added headsign best practices. See [discussion](https://github.com/google/transit/pull/167).
-* Added `stop_id` best practices. See [discussion](https://github.com/google/transit/pull/169).
+* Added arrival and departure time best practices. See [discussion](https://github.com/MobilityData/gtfs/pull/165).
+* Added headsign best practices. See [discussion](https://github.com/MobilityData/gtfs/pull/167).
+* Added `stop_id` best practices. See [discussion](https://github.com/MobilityData/gtfs/pull/169).
 
 #### June 25, 2019
 
-* Clarified relationship of shape points and stops. See [discussion](https://github.com/google/transit/pull/39).
+* Clarified relationship of shape points and stops. See [discussion](https://github.com/MobilityData/gtfs/pull/39).
 
 #### April 4, 2019
 
-* Added `platform_code` field in `stops.txt`. See [discussion](https://github.com/google/transit/pull/146).
+* Added `platform_code` field in `stops.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/146).
 
 #### March 27, 2019
 
-* Added `pathways.txt` and `levels.txt`. See [discussion](https://github.com/google/transit/pull/143).
+* Added `pathways.txt` and `levels.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/143).
 
 #### February 6, 2019
 
-* Editorial and formatting changes for clarity.  See [discussion](https://github.com/google/transit/pull/120).
+* Editorial and formatting changes for clarity.  See [discussion](https://github.com/MobilityData/gtfs/pull/120).
 
 #### October 2, 2018
 
-* Factorized field types. See [discussion](https://github.com/google/transit/pull/104).
+* Factorized field types. See [discussion](https://github.com/MobilityData/gtfs/pull/104).
 
 #### September 14, 2018
 
-* Added "Conditionally required" concept. See [discussion](https://github.com/google/transit/pull/100).
+* Added "Conditionally required" concept. See [discussion](https://github.com/MobilityData/gtfs/pull/100).
 
 #### September 4, 2018
 
-* Unified the definitions of `agency_lang` and `feed_lang`. See [discussion](https://github.com/google/transit/pull/98).
+* Unified the definitions of `agency_lang` and `feed_lang`. See [discussion](https://github.com/MobilityData/gtfs/pull/98).
 
 #### August 27, 2018
 
-* Updated `CHANGES.md` and last revised date. See [discussion](https://github.com/google/transit/pull/99).
+* Updated `CHANGES.md` and last revised date. See [discussion](https://github.com/MobilityData/gtfs/pull/99).
 
 #### August 22, 2018
 
-* Added `feed_contact_email` and `feed_contact_url` fields in the `feed_info.txt` file. See [discussion](https://github.com/google/transit/pull/31).
+* Added `feed_contact_email` and `feed_contact_url` fields in the `feed_info.txt` file. See [discussion](https://github.com/MobilityData/gtfs/pull/31).
 
 #### December 11, 2017
 
-* Added `route_sort_order` to `routes.txt`. See [discussion](https://github.com/google/transit/pull/83).
+* Added `route_sort_order` to `routes.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/83).
 
 #### March 15, 2017
 
-* Clarified that a proposer's vote does not count towards total. See [discussion](https://github.com/google/transit/pull/50).
-* Specified that at before calling a vote, at least one GTFS producer and one GTFS consumer should implement the proposed change. See [discussion](https://github.com/google/transit/pull/46).
+* Clarified that a proposer's vote does not count towards total. See [discussion](https://github.com/MobilityData/gtfs/pull/50).
+* Specified that at before calling a vote, at least one GTFS producer and one GTFS consumer should implement the proposed change. See [discussion](https://github.com/MobilityData/gtfs/pull/46).
 
 #### February 7, 2017
 
-* Clarified relationship of `block_id` and `service_id`. See [discussion](https://github.com/google/transit/pull/44).
-* Clarified that frequency-based service begins at vehicle departure. See [discussion](https://github.com/google/transit/pull/42).
-* Clarified descriptions of `stop_id` and `stop_code`. See [discussion](https://github.com/google/transit/pull/40).
+* Clarified relationship of `block_id` and `service_id`. See [discussion](https://github.com/MobilityData/gtfs/pull/44).
+* Clarified that frequency-based service begins at vehicle departure. See [discussion](https://github.com/MobilityData/gtfs/pull/42).
+* Clarified descriptions of `stop_id` and `stop_code`. See [discussion](https://github.com/MobilityData/gtfs/pull/40).
 
 #### December 11, 2017
 
-* Added `route_sort_order` field in the `routes.txt` file. See [discussion](https://github.com/google/transit/pull/83).
+* Added `route_sort_order` field in the `routes.txt` file. See [discussion](https://github.com/MobilityData/gtfs/pull/83).
 
 #### November 27, 2016
 
-* Added station entrance as a `stops.location_type`. See [discussion](https://github.com/google/transit/pull/30).
+* Added station entrance as a `stops.location_type`. See [discussion](https://github.com/MobilityData/gtfs/pull/30).
 
 #### September 2, 2016
 
-* Updated documentation to add `agency_id` under `fare_attributes.txt`. See [discussion](https://github.com/google/transit/pull/27).
+* Updated documentation to add `agency_id` under `fare_attributes.txt`. See [discussion](https://github.com/MobilityData/gtfs/pull/27).
 
 #### March 16, 2016
 
-* Transition of GTFS documentation to Github at https://github.com/google/transit
+* Transition of GTFS documentation to Github at https://github.com/MobilityData/gtfs
 
 #### February 3, 2016
 

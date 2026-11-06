@@ -5,10 +5,10 @@ These are recommended practices for describing public transportation services in
 These practices have been synthesized from the experience of the [GTFS Best Practices working group members](https://gtfs.org/schedule/best-practices/#gtfs-best-practices-working-group) and application-specific GTFS practice recommendations. See the [FAQ](https://gtfs.org/schedule/best-practices/#frequently-asked-questions-faq) for more information.
 
 ---
-⚠️ **NOTE: The GTFS Schedule Best Practices are in the process of being merged into the [GTFS Schedule Reference](../spec/en/reference.md) (see [issue #396](https://github.com/google/transit/issues/396) and [issue #451](https://github.com/google/transit/issues/451) for more information).**
+⚠️ **NOTE: The GTFS Schedule Best Practices are in the process of being merged into the [GTFS Schedule Reference](../spec/en/reference.md) (see [issue #396](https://github.com/MobilityData/gtfs/issues/396) and [issue #451](https://github.com/MobilityData/gtfs/issues/451) for more information).**
 **New Best Practices will be added directly to the GTFS Realtime Reference. If you'd like to suggest a new Best practice, you can:**
-- **look at the existing [list of outstanding issues and PRs](https://github.com/google/transit/issues/421). If your new Best Practice idea is referenced on this list, comment on the issue**
-- **[open a new issue](https://github.com/google/transit/issues/new/choose)**
+- **look at the existing [list of outstanding issues and PRs](https://github.com/MobilityData/gtfs/issues/421). If your new Best Practice idea is referenced on this list, comment on the issue**
+- **[open a new issue](https://github.com/MobilityData/gtfs/issues/new/choose)**
 - **open a Pull Request following the [GTFS Schedule Spec Amendment Process](https://gtfs.org/schedule/process/).**
 ---
 

@@ -15,7 +15,7 @@ Practices are organized into two primary sections:
 
 ## Practice Recommendations Organized by File
 
-This section shows practices organized by file and field, aligning with the [GTFS reference](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md).
+This section shows practices organized by file and field, aligning with the [GTFS reference](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md).
 
 ### agency.txt
 
@@ -124,7 +124,7 @@ Loop routes: Loop routes require special `stop_times` considerations. (See: [Loo
 
 ### transfers.txt
 
-`transfers.transfer_type` can be one of four values [defined in the GTFS](https://github.com/google/transit/blob/master/gtfs/spec/en/reference.md/#transferstxt). These `transfer_type` definitions are quoted from the GTFS Specification below, _in italics_, with additional practice recommendations.
+`transfers.transfer_type` can be one of four values [defined in the GTFS](https://github.com/MobilityData/gtfs/blob/master/gtfs/spec/en/reference.md/#transferstxt). These `transfer_type` definitions are quoted from the GTFS Specification below, _in italics_, with additional practice recommendations.
 
 | Field Name | Recommendation |
 | --- | --- |
@@ -239,7 +239,7 @@ Good question!
 The process of examining the Specification, data usage and needs did indeed trigger some changes to the Specification. 
 The Best Practices were created to bring everyone's understanding of the spec into harmony with the intention for some to be added into the spec and undergo the larger governance process, and others to be moved into a "how-to" guide. 
 Since then, some Best Practices have been added into the spec based on their level of adoption and community consensus. 
-To contribute to this effort, please go to the [GTFS Reference GitHub repository](https://github.com/google/transit/), or contact [specifications@mobilitydata.org](mailto:specifications@mobilitydata.org).
+To contribute to this effort, please go to the [GTFS Reference GitHub repository](https://github.com/MobilityData/gtfs/), or contact [specifications@mobilitydata.org](mailto:specifications@mobilitydata.org).
 
 ### How to check for conformance with these Best Practices?
 
@@ -257,7 +257,7 @@ Identify the contact for the feed, using the `feed_contact_email` or `feed_conta
 ### How to propose new Best Practices?
 
 New Best Practices are now being added directly into the [spec](https://gtfs.org/schedule/reference/) in order to gradually consolidate both documents. 
-If you'd like to suggest a new best practice, please go to the [GTFS Reference GitHub repository](https://github.com/google/transit/), [open an issue](https://github.com/google/transit/issues/new/choose) or create a Pull Request, or contact [specifications@mobilitydata.org](mailto:specifications@mobilitydata.org).
+If you'd like to suggest a new best practice, please go to the [GTFS Reference GitHub repository](https://github.com/MobilityData/gtfs/), [open an issue](https://github.com/MobilityData/gtfs/issues/new/choose) or create a Pull Request, or contact [specifications@mobilitydata.org](mailto:specifications@mobilitydata.org).
 
 ## About This Document
 

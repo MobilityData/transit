@@ -2,7 +2,7 @@
 
 ## Overview
 
-The specification Change Process guides how the community proposes, reviews, and adopts changes to the specification in the [GTFS Repository](https://github.com/google/transit/pulls). 
+The specification Change Process guides how the community proposes, reviews, and adopts changes to the specification in the [GTFS Repository](https://github.com/MobilityData/gtfs/pulls). 
 
 The specification Change Process is divided into **2 main stages** and categorized into **3 tracks** according to the three [change types](change-types.md): [functional changes](change-types.md/#functional-changes), [non-functional changes](change-types.md/#non-functional-changes), and [documentation maintenance](change-types.md/#documentation-maintenance). 
 
@@ -18,7 +18,7 @@ It’s recommended to start at the Issue stage to build consensus around new ide
 
 The Pull Request Stage is where ideas from the Issue Stage are developed and implemented into the specification. This stage is divided into 3 tracks depending on the change type. 
 
-The entire process happens within the [GitHub google/transit repository](https://github.com/google/transit/pulls) and ensures that all changes are thoroughly evaluated before being adopted.
+The entire process happens within the [GitHub MobilityData/gtfs repository](https://github.com/MobilityData/gtfs/pulls) and ensures that all changes are thoroughly evaluated before being adopted.
 
 ## Process Tracks
 
@@ -28,7 +28,7 @@ Depending on the type of the proposed change, different tracks apply to the Chan
 
 ![](assets/governance-process-functional.svg)
 
-This process guides how the community proposes, reviews, and adopts [Functional changes](change-types.md/#functional-changes) to the specification in the [GTFS Repository](https://github.com/google/transit/pulls). 
+This process guides how the community proposes, reviews, and adopts [Functional changes](change-types.md/#functional-changes) to the specification in the [GTFS Repository](https://github.com/MobilityData/gtfs/pulls). 
 
 * A proposal is submitted by opening a Pull Request in the GTFS Repository.   
 * The community engages in discussions to refine the proposal. This period must last at least 7 days.
@@ -42,7 +42,7 @@ This process guides how the community proposes, reviews, and adopts [Functional 
 
 ![](assets/governance-process-non-functional.svg)
 
-This process guides how the community proposes, reviews, and adopts [Non-Functional changes](change-types.md/#non-functional-changes) to the specification in the [GTFS Repository](https://github.com/google/transit/pulls).
+This process guides how the community proposes, reviews, and adopts [Non-Functional changes](change-types.md/#non-functional-changes) to the specification in the [GTFS Repository](https://github.com/MobilityData/gtfs/pulls).
 
 * A proposal is submitted by opening a Pull Request in the GTFS Repository.   
 * The community engages in discussions to refine the proposal. This period must last at least 7 days.
@@ -54,7 +54,7 @@ This process guides how the community proposes, reviews, and adopts [Non-Functio
 
 ![](assets/governance-process-documentation.svg)
 
-This process guides how the community proposes, reviews, and adopts [changes to maintain the documentation](change-types.md/#documentation-maintenance) in the [GTFS Repository](https://github.com/google/transit/pulls).
+This process guides how the community proposes, reviews, and adopts [changes to maintain the documentation](change-types.md/#documentation-maintenance) in the [GTFS Repository](https://github.com/MobilityData/gtfs/pulls).
 
 * A proposal is submitted by opening a Pull Request in the GTFS Repository.   
 * The community engages in discussions to refine the proposal. This period must last at least 7 days.
@@ -81,7 +81,7 @@ All of the steps in the Issue and Pull Request Stages are highlighted below. Con
 
 ![](assets/governance-process-step-1.1.svg)
 
-A [Contributor](roles.md/#contributors) shares their idea to improve the specification by opening an Issue in [the GTFS Repository](https://github.com/google/transit/pulls). 
+A [Contributor](roles.md/#contributors) shares their idea to improve the specification by opening an Issue in [the GTFS Repository](https://github.com/MobilityData/gtfs/pulls). 
 
 * Anyone can open an Issue to start a discussion.
 
@@ -95,7 +95,7 @@ A [Contributor](roles.md/#contributors) shares their idea to improve the specifi
 
 | Suggestion | Details |
 | :---- | :---- |
-| **Use the Specification Change Template** | Fill in the fields with high-level descriptions using [the provided template](https://github.com/google/transit/issues/new?assignees=&labels=spec-change&projects=&template=spec_change.yml). |
+| **Use the Specification Change Template** | Fill in the fields with high-level descriptions using [the provided template](https://github.com/MobilityData/gtfs/issues/new?assignees=&labels=spec-change&projects=&template=spec_change.yml). |
 | **Encourage Discussion** | The content doesn't have to be perfect; it should stimulate discussion and change as the conversation moves forward. |
 | **Tag Interested Contributors** | Tag other contributors who might be interested in the discussion and share the issue on relevant platforms. |
 
@@ -133,18 +133,18 @@ The community engages in discussions to help develop a proposal for modifying th
 
 > Note: Applicable to all Tracks 
 
-A proposal to change the specification is published by opening a Pull Request in [the GTFS Repository](https://github.com/google/transit/pulls). The [Advocate](roles.md/#advocate) who publishes the proposal must focus on a single change; anyone is welcome to propose a modification.
+A proposal to change the specification is published by opening a Pull Request in [the GTFS Repository](https://github.com/MobilityData/gtfs/pulls). The [Advocate](roles.md/#advocate) who publishes the proposal must focus on a single change; anyone is welcome to propose a modification.
 
 **<ins>Actions</ins>** 
 
 1. **Applying the Changes**
 
-    * The [Advocate](roles.md/#advocate) creates a [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository) of the original [GTFS Repository](https://github.com/google/transit/pulls) to either their personal or their organization’s account.  
+    * The [Advocate](roles.md/#advocate) creates a [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository) of the original [GTFS Repository](https://github.com/MobilityData/gtfs/pulls) to either their personal or their organization’s account.  
     * The [Advocate](roles.md/#advocate) creates a branch in their fork and applies the proposed changes. 
 
 2. **Pull Request Submission**
 
-    * The [Advocate](roles.md/#advocate) creates a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) in the [GTFS Repository](https://github.com/google/transit/pulls) from their fork. 
+    * The [Advocate](roles.md/#advocate) creates a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) in the [GTFS Repository](https://github.com/MobilityData/gtfs/pulls) from their fork. 
 
 **<ins>Requirements</ins>**
 
@@ -185,7 +185,7 @@ The community engages in conversations to help refine and develop the proposal.
 | Requirement | Details |
 | :---- | :---- |
 | **Minimum Discussion Period**  | The discussion lasts for as long as the Advocate deems necessary, but must be at least 7 full calendar days. |
-| **Contributor License Agreement** | All contributors, including the Advocate, who make edits to the proposal must sign the [Contributor License Agreement](https://github.com/google/transit/blob/master/CONTRIBUTING.md#before-you-contribute). |
+| **Contributor License Agreement** | All contributors, including the Advocate, who make edits to the proposal must sign the [Contributor License Agreement](https://github.com/MobilityData/gtfs/blob/master/CONTRIBUTING.md#before-you-contribute). |
 
 ### Step 2.3: Pull Request Review
 
