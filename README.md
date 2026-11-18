@@ -3,12 +3,12 @@ The General Transit Feed Specification (GTFS) is an [Open Standard](https://www.
 
 [Read more about GTFS](https://gtfs.org/)
 
-## Get Monthly Updates on GTFS Developments
-The GTFS Digest is a monthly newsletter by [MobilityData](https://mobilitydata.org/) providing an overview of GTFS developments, discussions within our community, and ways you can get involved in shaping the future of GTFS.
+## Stay Up-to-Date on GTFS Developments
+Follow the discussions on [Github](https://github.com/MobilityData/transit/issues) and [Slack](https://share.mobilitydata.org/slack) for the latest developments on GTFS. 
 
-### **🔔 [Subscribe to the GTFS Digest](https://groups.google.com/g/gtfs-updates)**
+For updates on GTFS datasets from around the world, join our Mobility Database mailing list by signing up for a free account on  [MobilityDatabase.org](https://mobilitydatabase.org/)
 
-GTFS relies on community contributions. Please help us capture GTFS developments by sharing your updates for our next digest to: [specifications@mobiltydata.org](mailto:specifications@mobiltydata.org)
+GTFS relies on community contributions. If there are updates and news you want to share to a broader audience, message us at: [specifications@mobiltydata.org](mailto:specifications@mobiltydata.org)
 
 ## Useful Resources
 ### Getting Started with GTFS
@@ -18,7 +18,7 @@ GTFS relies on community contributions. Please help us capture GTFS developments
 
 ### Contribute to GTFS and join the Community
 
-- [Learn how you can contribute to GTFS Development](https://github.com/google/transit/blob/master/CONTRIBUTING.md)
+- [Learn how you can contribute to GTFS Development](https://github.com/MobilityData/transit/blob/master/CONTRIBUTING.md)
 - Join [__Slack__](https://share.mobilitydata.org/slack) and introduce yourself to the community.
 - Join [__GTFS Changes__](https://groups.google.com/g/gtfs-changes) and [__GTFS Realtime__](https://groups.google.com/g/gtfs-realtime) Google Groups to stay informed on development.
 
